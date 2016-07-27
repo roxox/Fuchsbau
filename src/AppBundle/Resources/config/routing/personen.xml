@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+
+
+    <route id="display_current_person" path="/display" methods="GET">
+        <default key="_controller">AppBundle:Personen:displayCurrentPerson</default>
+    </route>
+    <route id="update_user_by_current_person" path="/update_user" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:updateCurrentUser</default>
+    </route>
+    <route id="update_person_by_current_person" path="/update_person" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:updateCurrentPerson</default>
+    </route>
+    <route id="add_phone_by_current_person" path="/add_phone" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addPhone</default>
+    </route>
+    <route id="edit_phone_by_current_person" path="/{phoneNumberId}/edit_phone" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editPhone</default>
+    </route>
+    <route id="remove_phone_by_current_person" path="/{phoneNumberId}/remove_phone" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:removePhone</default>
+    </route>
+    <route id="add_address_by_current_person" path="/add_address" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addAddress</default>
+    </route>
+    <route id="edit_address_by_current_person" path="/{addressId}/edit_address" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editAddress</default>
+    </route>
+    <route id="remove_address_by_current_person" path="/{addressId}/remove_address" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:removeAddress</default>
+    </route>
+    <route id="add_email_by_current_person" path="/add_email" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addEmail</default>
+    </route>
+    <route id="edit_email_by_current_person" path="/{emailId}/edit_email" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editEmail</default>
+    </route>
+    <route id="remove_email_by_current_person" path="/{emailId}/remove_email" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:removeEmail</default>
+    </route>
+
+</routes>

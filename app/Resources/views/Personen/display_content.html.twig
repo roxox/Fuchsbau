@@ -1,0 +1,236 @@
+<div>
+    <!-- Three columns of text below the carousel -->
+    <div class="container">
+        {#<h2>Personendaten anzeigen</h2>#}
+        {#<hr>#}
+        <div class="row">
+            {# RECHTE SEITE#}
+            <div class="col-lg-4">
+                <br>
+                <div>
+                    <h4>User</h4>
+                    <div class="text">
+                        <p>Jeder hat einen Usernamen und manchmal findet man genau diesen Usernamen nicht mehr so toll.
+                            Für
+                            den
+                            Fall, dass es soweit kommt, kannst du hier deinen Usernamen und dein Passwort ändern.</p>
+                    </div>
+                    <table>
+                        <tr style="height: 50px">
+                            <td style="width: 300px;">
+                                <b>{{ user.getUsername() }}</b><br>
+                                <span style="font-size: x-small">{{ user.getEmail() }}</span>
+                            </td>
+                            <td style="width: 120px;">
+                            </td>
+                            <td style="width: 120px;">
+                                <a class="btn btn-default btn-sm" href="{{ path('update_user_by_current_person') }}"
+                                   role="button">bearbeiten</a>
+                            </td>
+                            <td style="width: 120px; vert-align: bottom">
+                                <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 300px;">
+                                Kennwort
+                            </td>
+                            <td style="width: 120px;">
+                            </td>
+                            <td style="width: 120px;">
+                                <a class="btn btn-default btn-sm" href="{{ path('update_user_by_current_person') }}"
+                                   role="button">ändern</a>
+                            </td>
+                            <td style="width: 120px; vert-align: bottom">
+                            </td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <h4>Name</h4>
+                    <div class="text">
+                        <p>Dein Name sollte sich nicht nach belieben anpassen, aber sollte mal eine Hochzeit dazwischen
+                            kommen, du konntest dich nicht durchsetzen und dein Nachname ändert sich tatsächlich, dann
+                            kannst du das hier ändern.</p>
+                    </div>
+                    <br>
+                    <table>
+                        {#<table class="table">#}
+                        <tr>
+                            <td style="width: 300px;">
+                                <span style="font-size: x-small">{{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}
+                                    {{ person.getTitel() == null ? '' : person.getTitel().getName() }}</span>
+                                <p><b>{{ person.getVorname() }} {{ person.getNachname() }}</b></p>
+                            </td>
+                            <td style="width: 120px;">
+                            </td>
+                            <td style="width: 120px;">
+                                <a class="btn btn-default btn-sm" href="{{ path('update_person_by_current_person') }}"
+                                   role="button">bearbeiten</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                </div>
+            </div><!-- /.col-lg-4 -->
+            {# MITTELTEIL #}
+            <div class="col-lg-4">
+                <br>
+                <div>
+                    <h4>Adressen</h4>
+                    <div class="text">
+                        <p>Eine Adresse hast du mit Sicherheit schon, eine neue wird bald hinzukommen, hier kannst du
+                            deine
+                            aktuellen Adressen (egal ob privat, geschäftlich hinterlegen.</p><br>
+                    </div>
+                    <table class="table table-condensed">
+                        {% for adresse in adressen %}
+                            <div align="right">
+                                <tr>
+                                    <td style="width: 300px;">
+                                        <p>{{ adresse.getStrasse() }} {{ adresse.getHausnummer() }}<br>
+                                            {{ adresse.getPostleitzahl() }} {{ adresse.getOrt() }}</p>
+                                        <p style="font-size: small">{{ adresse.getPrivatGeschaeft().getName() }}</p>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <a class="btn btn-default btn-sm"
+                                           href="{{ path('edit_address_by_current_person', {'addressId': adresse.getId()}) }}"
+                                           role="button">bearbeiten</a>
+                                    </td>
+                                    <td style="width: 120px; vert-align: bottom">
+                                        <a class="btn btn-danger btn-sm"
+                                           href="{{ path('remove_address_by_current_person', {'addressId': adresse.getId()}) }}"
+                                           role="button">löschen</a>
+                                    </td>
+                                </tr>
+                            </div>
+                        {% endfor %}
+                    </table>
+                    <div>
+                        <a class="btn btn-default btn-sm" href="{{ path('add_address_by_current_person') }}"
+                           role="button">neue Adresse</a>
+                    </div>
+                </div>
+            </div><!-- /.col-lg-4 -->
+            {# RECHTER TEIL#}
+            <div class="col-lg-4">
+                <br>
+                <div>
+                    {# Telefon #}
+                    <h4>Telefonnummern</h4>
+                    <div class="text">
+                        <p>Ähnlich wie bei den Adressen, wirst du sicherlich die ein oder andere Telefonnummer haben,
+                            die du
+                            hier verwalten kannst.</p><br>
+                    </div>
+                    <table class="table table-condensed">
+                        {% for telefonnummer in person.getTelefonnummern() %}
+                            <div align="right">
+                                {#<table>#}
+                                <tr>
+                                    <td style="width: 400px;">
+                                        <p> {{ telefonnummer.getTelefonTyp().getKurzname() }}
+                                            : {{ telefonnummer.getVorwahl() }}
+                                            /{{ telefonnummer.getTelefonnummer() }}{{ telefonnummer.getDurchwahl() ? '-' : '' }}{{ telefonnummer.getDurchwahl() }}</p>
+                                        <p style="font-size: small">{{ telefonnummer.getPrivatGeschaeft().getName() }}</p>
+                                    </td>
+                                    <td style="width: 90px;">
+                                        <a class="btn btn-default btn-sm"
+                                           href="{{ path('edit_phone_by_current_person', {'phoneNumberId': telefonnummer.getId()}) }}"
+                                           role="button">bearbeiten</a>
+                                    </td>
+                                    <td style="width: 90px; vert-align: bottom">
+                                        <a class="btn btn-danger btn-sm"
+                                           href="{{ path('remove_phone_by_current_person', {'phoneNumberId': telefonnummer.getId()}) }}"
+                                           role="button">löschen</a>
+                                    </td>
+                                </tr>
+
+                            </div>
+                        {% endfor %}
+                    </table>
+                    <div>
+                        <a class="btn btn-default btn-sm" href="{{ path('add_phone_by_current_person') }}"
+                           role="button">neue Telefonnummer</a>
+                    </div>
+                    <br>
+                    <br>
+                    {# Email #}
+                    <h4>Emailadressen</h4>
+                    <div class="text">
+                        <p>Mindestens genauso wichtig wie die Telefonnummern, sind doch die Emailadressen. Die
+                            Emailadressen, die du hast, kannst du hier verwalten.</p><br>
+                    </div>
+                    <table class="table table-condensed">
+                        {% for email in emails %}
+                            <div align="right">
+                                <tr>
+                                    <td style="width: 400px;">
+                                        <p>{{ email.getEmailadresse() }}</p>
+                                        {% if email.getEmailadresse == user.getEmail %}
+                                            <p style="font-size: x-small">Dies ist die Registrierungsemailadresse, bitte
+                                                ändere diese über deinen User.</p>
+                                        {% else %}
+                                            <p style="font-size: small">{{ email.getPrivatGeschaeft().getName() }}</p>
+                                        {% endif %}
+                                    </td>
+
+                                    {% if email.getEmailadresse != user.getEmail %}
+                                        <td style="width: 90px;">
+                                            <a class="btn btn-default btn-sm"
+                                               href="{{ path('edit_email_by_current_person', {'emailId': email.getId()}) }}"
+                                               role="button">bearbeiten</a>
+                                        </td>
+                                        <td style="width: 60px; vert-align: bottom">
+                                            <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                                        </td>
+                                    {% else %}
+
+                                        <td style="width: 600px;">
+
+                                        </td>
+
+                                        <td style="width: 600px;">
+
+                                        </td>
+
+                                    {% endif %}
+                                </tr>
+
+                            </div>
+                        {% endfor %}
+                    </table>
+                    <div>
+                        <a class="btn btn-default btn-sm" href="{{ path('add_email_by_current_person') }}"
+                           role="button">neue Emailadresse</a>
+                    </div>
+                    <div class="container">
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Some text in the modal.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+    </div>
+</div>

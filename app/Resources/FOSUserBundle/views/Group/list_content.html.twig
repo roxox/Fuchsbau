@@ -1,0 +1,19 @@
+<div class="fos_user_group_list">
+
+    <ul>
+        {% for group in groups %}
+            <div>
+                <table>
+                    <tr>
+                        <th style="width: 300px;">
+                            <a href="{{ path('fos_user_group_show', {'groupName': group.getName()} ) }}">{{ group.getName() }}</a>
+                        </th>
+                        <th>
+                            <a class="btn btn-default" href="#" role="button">View details &raquo;</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,0 +1,42 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{# TEST #}
+<div class="container">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Personendaten</h2>
+            {{ form_start(form, { 'action': path('update_user_by_current_person'), 'attr': { 'class': 'update_user_by_current_person' } }) }}
+            {{ form_widget(form) }}
+            {#{{ form_row(form.username) }}#}
+            <div>
+                <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+            </div>
+            {{ form_end(form) }}
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <h2>Adressen</h2>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <h2>Telefonnummern</h2>
+            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+</div>
+{# TEST ENDE #}
+
+
+
+
+{#{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}#}
+    {#{{ form_widget(form) }}#}
+    {#&#123;&#35;{{ form_row(form.username) }}&#35;&#125;#}
+{#<div>#}
+    {#<input type="submit" value="{{ 'profile.edit.submit'|trans }}" />#}
+{#</div>#}
+{#{{ form_end(form) }}#}
