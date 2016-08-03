@@ -129,11 +129,13 @@ class LoadUserData implements FixtureInterface
         ###########
 
         $adressePrivat = new Adresse('Baumschulenweg', '1a', '25373', 'Ellerhoop', true);
-        $adressePrivat->setPrivatGeschaeft($privat);
-        $adresseArbeit = new Adresse('Weg beim Jäger', '193', '22335', 'Hamburg', false);
-        $adresseArbeit->setPrivatGeschaeft($geschaeft);
+        $adressePrivat->setStrasse('Baumschulenweg');
+        $adressePrivat->setHausnummer('1a');
+        $adressePrivat->setHausnummer('1a');
+        $adressePrivat->setPostleitzahl('25373');
+        $adressePrivat->setOrt('Ellerhoop');
+        $adressePrivat->setHauptadresse(true);
         $bauherr->addAdresse($adressePrivat);
-        $bauherr->addAdresse($adresseArbeit);
 
         #################
         # TELEFONNUMMER #
@@ -167,7 +169,8 @@ class LoadUserData implements FixtureInterface
         # EMAIL #
         #########
 
-        $emailPrivat = new Email('mira@me.com');
+        $emailPrivat = new Email();
+        $emailPrivat->setEmailadresse('mira@me.com');
         $emailPrivat->setPrivatGeschaeft($privat);
 
         $bauherr->addEmailadresse($emailPrivat);

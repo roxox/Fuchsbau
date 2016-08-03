@@ -4,9 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-
-
-    <route id="display_current_person" path="/display" methods="GET">
+    <route id="display_current_person" path="/display" methods="GET POST">
         <default key="_controller">AppBundle:Personen:displayCurrentPerson</default>
     </route>
     <route id="update_user_by_current_person" path="/update_user" methods="GET POST">
@@ -42,5 +40,36 @@
     <route id="remove_email_by_current_person" path="/{emailId}/remove_email" methods="GET POST">
         <default key="_controller">AppBundle:Personen:removeEmail</default>
     </route>
+
+    <!-- MODAL -->
+
+    <route id="add_address_by_current_person_modal" path="/add_address_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addAddressModal</default>
+    </route>
+    <route id="edit_address_by_current_person_modal" path="/{addressId}/edit_address_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editAddressModal</default>
+    </route>
+    <route id="add_email_by_current_person_modal" path="/add_email_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addEmailModal</default>
+    </route>
+    <route id="edit_email_by_current_person_modal" path="/{emailId}/edit_email_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editEmailModal</default>
+    </route>
+    <route id="add_phone_by_current_person_modal" path="/add_phone_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addPhoneModal</default>
+    </route>
+    <route id="edit_phone_by_current_person_modal" path="/{phoneNumberId}/edit_phone_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:editPhoneModal</default>
+    </route>
+    <route id="update_user_by_current_person_modal" path="/update_user_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:updateCurrentUserModal</default>
+    </route>
+    <route id="update_person_by_current_person_modal" path="/update_person_modal" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:updateCurrentPersonModal</default>
+    </route>
+    <route id="add_email_porno_by_current_person_modal" path="/add_email_porno_modal/{emailAdress}" methods="GET POST">
+        <default key="_controller">AppBundle:Personen:addEmailModal</default>
+    </route>
+
 
 </routes>

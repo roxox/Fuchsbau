@@ -206,6 +206,7 @@ class Projekt extends AbstractBasicEntity
     public function addRolle(Rolle $rolle)
     {
         $this->rollen->add($rolle);
+        $rolle->setProjekt($this);
 
         return $this;
     }

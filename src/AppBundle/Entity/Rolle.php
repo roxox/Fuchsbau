@@ -25,7 +25,7 @@ class Rolle extends AbstractBasicEntity
      * @var Firma
      *
      * @ORM\ManyToOne(targetEntity="Firma", inversedBy="rollen", cascade={"remove", "persist"})
-     * @ORM\JoinColumn(name="projekt_id", referencedColumnName="id", onDelete="set null")
+     * @ORM\JoinColumn(name="firma_id", referencedColumnName="id", onDelete="set null")
      */
     private $firma;
 
@@ -117,6 +117,9 @@ class Rolle extends AbstractBasicEntity
     public function setFirma($firma)
     {
         $this->firma = $firma;
+        if (!$firma->hasRolle($this)){
+            $firma->addRolle($this);
+        }
     }
 
     /**
@@ -133,6 +136,9 @@ class Rolle extends AbstractBasicEntity
     public function setProjekt($projekt)
     {
         $this->projekt = $projekt;
+        if (!$projekt->hasRolle($this)){
+            $projekt->addRolle($this);
+        }
     }
 
 

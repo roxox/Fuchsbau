@@ -7,24 +7,26 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\Telefonnummer;
 use AppBundle\Entity\User;
 use AppBundle\Form\AdresseType;
+use AppBundle\Form\EmailCompanyType;
 use AppBundle\Form\EmailType;
 use AppBundle\Form\PersonType;
 use AppBundle\Form\ProfileFormType;
 use AppBundle\Form\TelefonnummerType;
+use AppBundle\PlainClasses\EmailCompany;
 use AppBundle\Repository\EmailRepository;
-use AppBundle\Repository\TelefonnummerRepository;
 use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
-use AppBundle\Entity\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 
 class PersonenController extends Controller
 {
+    private $save = false;
     const FORM_NAMESPACE = 'AppBundle\Form\\';
+
 
     public function displayCurrentPersonAction(Request $request)
     {
@@ -358,9 +360,10 @@ class PersonenController extends Controller
 
 
     // EMAIL
-
     public function addEmailAction(Request $request)
     {
+
+        // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -369,7 +372,7 @@ class PersonenController extends Controller
         $person = $user->getPerson();
         $email = new Email();
         $form = $this->createForm(EmailType::class, $email);
-
+//
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -395,7 +398,52 @@ class PersonenController extends Controller
         );
     }
 
-    public function editEmailAction(Request $request, $emailId)
+    // MODAL POPUPS
+
+    public function addEmailModalAction(Request $request)
+    {
+
+        // 1) build the form
+        $user = $this->getUser();
+//        if (!is_object($user) || !$user instanceof UserInterface) {
+//            throw new AccessDeniedException('This user does not have access to this section.');
+//        }
+        /** @var Person $person */
+        $person = $user->getPerson();
+        $email = new Email();
+        $form = $this->createForm(EmailType::class, $email);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $person->addEmailadresse($email);
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+            return $this->redirectToRoute("display_current_person");
+        }
+        return $this->render(
+            'Personen/new_email_content_modal.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'user' => $user)
+        );
+    }
+    public function saveMe(){
+        echo 'abc';
+    }
+
+
+
+    // ADRESSEN
+    public function addAddressModalAction(Request $request)
     {
 
         // 1) build the form
@@ -403,20 +451,19 @@ class PersonenController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email');
         /** @var Person $person */
         $person = $user->getPerson();
-        /** @var Adresse $adress */
-        $email = $emailRepo->find($emailId);
-        $form = $this->createForm(EmailType::class, $email);
+        $adresse = new Adresse();
+        $form = $this->createForm(AdresseType::class, $adresse);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $person->addAdresse($adresse);
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
-            $em->persist($email);
+            $em->persist($person);
             $em->flush();
 
 
@@ -424,7 +471,88 @@ class PersonenController extends Controller
         }
 
         return $this->render(
-            'Personen/update_email.html.twig',
+            'Personen/new_address_content_modal.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'user' => $user)
+        );
+    }
+
+    public function editAddressModalAction(Request $request, $addressId)
+    {
+
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $addressRepo = $this->getDoctrine()->getRepository('AppBundle:Adresse');
+        /** @var Person $person */
+        $person = $user->getPerson();
+        /** @var Adresse $adress */
+        $address = $addressRepo->find($addressId);
+        $form = $this->createForm(AdresseType::class, $address);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($address);
+            $em->flush();
+
+
+            return $this->redirectToRoute("display_current_person");
+        }
+
+        return $this->render(
+            'Personen/update_address_content_modal.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'adresse' => $address,
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'user' => $user)
+        );
+    }
+
+    public function addEmailPornoModalAction(Request $request, string $emailaddress = null)
+    {
+
+        // 1) build the form
+        $user = $this->getUser();
+//        if (!is_object($user) || !$user instanceof UserInterface) {
+//            throw new AccessDeniedException('This user does not have access to this section.');
+//        }
+        /** @var Person $person */
+        $person = $user->getPerson();
+        $email = new EmailCompany();
+        $email->setEmailadresse($emailaddress);
+        $form = $this->createForm(EmailCompanyType::class, $email);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+//            $mail = new Email();
+//            $mail->setEmailadresse($emailaddress);
+
+//            $person->addEmailadresse($email);
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+            return $this->redirectToRoute("display_current_person");
+        }
+        return $this->render(
+            'Personen/new_email_content_modal.html.twig',
             array('adressen' => $person->getAdressen(),
                 'form' => $form->createView(),
                 'telefonnummern' => $person->getTelefonnummern(),

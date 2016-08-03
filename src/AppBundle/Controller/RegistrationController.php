@@ -69,7 +69,8 @@ class RegistrationController extends Controller
         if ($form->isValid()) {
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
-            $email = new Email($user->getEmail());
+            $email = new Email();
+            $email->setEmailadresse($user->getEmail());
             $privatGeschaeft = $privatGeschaftRepo->findOneByName('Privat');
             $email->setPrivatGeschaeft($privatGeschaeft);
             $person->addEmailadresse($email);
@@ -219,6 +220,71 @@ class RegistrationController extends Controller
         if ($this->get('session')->has($key)) {
             return $this->get('session')->get($key);
         }
+    }
+
+
+    /**
+     * MODAL ELEMENTS
+     */
+
+
+    public function registerModalAction(Request $request)
+    {
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.registration.form.factory');
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->get('fos_user.user_manager');
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->get('event_dispatcher');
+
+        $privatGeschaftRepo = $this->getDoctrine()->getRepository('AppBundle:PrivatGeschaeft');
+
+        $user = $userManager->createUser();
+        $user->setEnabled(true);
+        $person = new Person($user);
+        $user->setPerson($person);
+
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_INITIALIZE, $event);
+
+        if (null !== $event->getResponse()) {
+            return $event->getResponse();
+        }
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->setData($user);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $event = new FormEvent($form, $request);
+            $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
+            $email = new Email();
+            $email->setEmailadresse($user->getEmail());
+            $privatGeschaeft = $privatGeschaftRepo->findOneByName('Privat');
+            $email->setPrivatGeschaeft($privatGeschaeft);
+            $person->addEmailadresse($email);
+            $userManager->updateUser($user);
+
+            if (null === $response = $event->getResponse()) {
+                $url = $this->generateUrl('display_current_person');
+                $response = new RedirectResponse($url);
+            }
+
+            $dispatcher->dispatch(
+                FOSUserEvents::REGISTRATION_COMPLETED,
+                new FilterUserResponseEvent($user, $request, $response)
+            );
+
+            return $response;
+        }
+
+        return $this->render(
+            'FOSUserBundle:Registration:registerModal.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
     }
 
 }

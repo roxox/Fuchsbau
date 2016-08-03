@@ -11,5 +11,8 @@
     <route id="registration_register_person" path="/person" methods="GET POST">
         <default key="_controller">AppBundle:Registration:registerPerson</default>
     </route>
+    <route id="registration_register_user_modal" path="/meModal" methods="GET POST">
+        <default key="_controller">AppBundle:Registration:registerModal</default>
+    </route>
 
 </routes>

@@ -59,7 +59,7 @@ class Telefonnummer extends AbstractBasicEntity
     /**
      * @var TelefonTyp
      *
-     * @ORM\ManyToOne(targetEntity="TelefonTyp")
+     * @ORM\ManyToOne(targetEntity="TelefonTyp", cascade={"remove", "persist"})
      * @ORM\JoinColumn(name="telefon_typ_id", referencedColumnName="id", onDelete="set null")
      */
     private $telefonTyp;

@@ -16,4 +16,7 @@
     <import
             resource="@AppBundle/Resources/config/routing/projekte.xml"
             prefix="/projekte" />
+    <import
+            resource="@AppBundle/Resources/config/routing/about.xml"
+            prefix="/about" />
 </routes>

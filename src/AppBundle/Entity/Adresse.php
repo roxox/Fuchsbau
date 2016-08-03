@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Adresses
+ * Adresse
  *
  * @ORM\Table(name="adresse")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AdresseRepository")

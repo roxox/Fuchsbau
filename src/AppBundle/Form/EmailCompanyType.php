@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class EmailType extends AbstractType
+class EmailCompanyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -32,13 +32,13 @@ class EmailType extends AbstractType
                 array(
                     'label' => 'Email')
             )
-//            ->add(
-//                'porno',
-//                TextType::class,
-//                array(
-//                    'label' => 'Porno')
-//
-//            )
+            ->add(
+                'porno',
+                TextType::class,
+                array(
+                    'label' => 'Porno')
+
+            )
         ;
     }
 
@@ -46,7 +46,7 @@ class EmailType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'AppBundle\Entity\Email',
+                'data_class' => 'AppBundle\PlainClasses\EmailCompany',
             )
         );
     }

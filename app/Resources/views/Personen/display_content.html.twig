@@ -1,8 +1,10 @@
+{#{% form_theme form 'bootstrap_3_layout.html.twig' %}#}
 <div>
     <!-- Three columns of text below the carousel -->
     <div class="container">
-        {#<h2>Personendaten anzeigen</h2>#}
-        {#<hr>#}
+                <span style="font-size: small; color: #61625d">
+        <h2>Personendaten anzeigen</h2>
+        <hr>
         <div class="row">
             {# RECHTE SEITE#}
             <div class="col-lg-4">
@@ -19,16 +21,16 @@
                         <tr style="height: 50px">
                             <td style="width: 300px;">
                                 <b>{{ user.getUsername() }}</b><br>
-                                <span style="font-size: x-small">{{ user.getEmail() }}</span>
+                                <span style="font-size: small">{{ user.getEmail() }}</span>
                             </td>
                             <td style="width: 120px;">
                             </td>
                             <td style="width: 120px;">
-                                <a class="btn btn-default btn-sm" href="{{ path('update_user_by_current_person') }}"
+                                <a class="btn btn-default btn-xs" href="{{ path('update_user_by_current_person') }}"
                                    role="button">bearbeiten</a>
                             </td>
                             <td style="width: 120px; vert-align: bottom">
-                                <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                                <a class="btn btn-danger btn-xs" href="#" role="button">löschen</a>
                             </td>
                         </tr>
                         <tr>
@@ -38,7 +40,7 @@
                             <td style="width: 120px;">
                             </td>
                             <td style="width: 120px;">
-                                <a class="btn btn-default btn-sm" href="{{ path('update_user_by_current_person') }}"
+                                <a class="btn btn-default btn-xs" href="{{ path('update_user_by_current_person') }}"
                                    role="button">ändern</a>
                             </td>
                             <td style="width: 120px; vert-align: bottom">
@@ -57,14 +59,14 @@
                         {#<table class="table">#}
                         <tr>
                             <td style="width: 300px;">
-                                <span style="font-size: x-small">{{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}
+                                <span style="font-size: small">{{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}
                                     {{ person.getTitel() == null ? '' : person.getTitel().getName() }}</span>
                                 <p><b>{{ person.getVorname() }} {{ person.getNachname() }}</b></p>
                             </td>
                             <td style="width: 120px;">
                             </td>
                             <td style="width: 120px;">
-                                <a class="btn btn-default btn-sm" href="{{ path('update_person_by_current_person') }}"
+                                <a class="btn btn-default btn-xs" href="{{ path('update_person_by_current_person') }}"
                                    role="button">bearbeiten</a>
                             </td>
                         </tr>
@@ -92,22 +94,70 @@
                                         <p style="font-size: small">{{ adresse.getPrivatGeschaeft().getName() }}</p>
                                     </td>
                                     <td style="width: 120px;">
-                                        <a class="btn btn-default btn-sm"
-                                           href="{{ path('edit_address_by_current_person', {'addressId': adresse.getId()}) }}"
-                                           role="button">bearbeiten</a>
+                                        <!-- Trigger the modal with a button -->
+                                        <button type="button" class="btn btn-default btn-xs"
+                                                href="{{ path('edit_address_by_current_person_modal', {'addressId': adresse.getId()}) }}"
+                                                data-toggle="modal"
+                                                data-target="#editAddressPopup">Adresse ändern
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="editAddressPopup" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                                data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Adresse ändern</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text">
+                                                            Lade Formular
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td style="width: 120px; vert-align: bottom">
-                                        <a class="btn btn-danger btn-sm"
+                                        <a class="btn btn-danger btn-xs"
                                            href="{{ path('remove_address_by_current_person', {'addressId': adresse.getId()}) }}"
                                            role="button">löschen</a>
                                     </td>
                                 </tr>
                             </div>
                         {% endfor %}
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
                     </table>
                     <div>
-                        <a class="btn btn-default btn-sm" href="{{ path('add_address_by_current_person') }}"
-                           role="button">neue Adresse</a>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-default btn-xs"
+                                href="{{ path('add_address_by_current_person_modal') }}" data-toggle="modal"
+                                data-target="#addAddressPopup">Adresse Hinzufügen
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addAddressPopup" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Adresse hinzufügen</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text">
+                                            Lade Formular
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.col-lg-4 -->
@@ -134,12 +184,12 @@
                                         <p style="font-size: small">{{ telefonnummer.getPrivatGeschaeft().getName() }}</p>
                                     </td>
                                     <td style="width: 90px;">
-                                        <a class="btn btn-default btn-sm"
+                                        <a class="btn btn-default btn-xs"
                                            href="{{ path('edit_phone_by_current_person', {'phoneNumberId': telefonnummer.getId()}) }}"
                                            role="button">bearbeiten</a>
                                     </td>
                                     <td style="width: 90px; vert-align: bottom">
-                                        <a class="btn btn-danger btn-sm"
+                                        <a class="btn btn-danger btn-xs"
                                            href="{{ path('remove_phone_by_current_person', {'phoneNumberId': telefonnummer.getId()}) }}"
                                            role="button">löschen</a>
                                     </td>
@@ -147,10 +197,37 @@
 
                             </div>
                         {% endfor %}
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
                     </table>
                     <div>
-                        <a class="btn btn-default btn-sm" href="{{ path('add_phone_by_current_person') }}"
-                           role="button">neue Telefonnummer</a>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-default btn-xs"
+                                href="{{ path('add_address_by_current_person_modal') }}" data-toggle="modal"
+                                data-target="#addAddressPopup">neue Adresse
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addAddressPopup" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Adresse hinzufügen</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text">
+                                            Lade Formular
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                     <br>
                     <br>
@@ -176,12 +253,12 @@
 
                                     {% if email.getEmailadresse != user.getEmail %}
                                         <td style="width: 90px;">
-                                            <a class="btn btn-default btn-sm"
+                                            <a class="btn btn-default btn-xs"
                                                href="{{ path('edit_email_by_current_person', {'emailId': email.getId()}) }}"
                                                role="button">bearbeiten</a>
                                         </td>
                                         <td style="width: 60px; vert-align: bottom">
-                                            <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                                            <a class="btn btn-danger btn-xs" href="#" role="button">löschen</a>
                                         </td>
                                     {% else %}
 
@@ -198,30 +275,52 @@
 
                             </div>
                         {% endfor %}
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
                     </table>
+
                     <div>
-                        <a class="btn btn-default btn-sm" href="{{ path('add_email_by_current_person') }}"
-                           role="button">neue Emailadresse</a>
-                    </div>
-                    <div class="container">
                         <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                        <button type="button" class="btn btn-default btn-xs"
+                                href="{{ path('add_email_by_current_person_modal') }}" data-toggle="modal"
+                                data-target="#addMailPopup">Emailadresse hinzufügen
+                        </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal fade" id="addMailPopup" role="dialog">
                             <div class="modal-dialog">
 
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Modal Header</h4>
+                                        <h4 class="modal-title">Email Adresse hinzufügen</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Some text in the modal.</p>
+                                        <div class="text">
+                                            Lade Formular
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="addMailPornoPopup" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Email Adresse hinzufügen</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="text">
+                                            Lade Formular
+                                        </div>
                                     </div>
                                 </div>
 
@@ -232,5 +331,6 @@
                 </div>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
+                    </span>
     </div>
 </div>

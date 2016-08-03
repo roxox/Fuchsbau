@@ -11,67 +11,32 @@
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse">
-                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                <div class="col-lg-6">
-                    <h2 style="color: #7f7f7f">{{ headline }}</h2></div>
-                <div class="col-lg-6">
-                    <ul class="nav navbar-nav pull-right">
-                        <li><a href="{{ path('homepage') }}"> Übersicht</a></li>
-                        <li><a href="{{ path('display_current_projects') }}">Projekte</a></li>
-                        <li><a href="#"> Terminkalender</a></li>
-                        <li><a href="{{ path('display_current_person') }}"> Benutzerprofil</a></li>
-                        <li><a href="#"> </a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"> Log-Out</a></li>
-                        {% else %}
-                            <li><a href="{{ path('fos_user_security_login') }}"> Log-In</a></li>
-                            <li><a href="{{ path('registration_register_user') }}">Registrieren</a></li>
-                        {% endif %}
-                    </ul>
+                    {#<h2 style="color: #7f7f7f">{{ headline }}</h2></div>#}
+                        <ul class="nav navbar-nav pull-right">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li><a href="{{ path('homepage') }}">Übersicht</a></li>
+                                <li><a href="{{ path('display_current_projects') }}">Projekte</a></li>
+                                {#<li><a href="#"> Terminkalender</a></li>#}
+                                {#<li><a href="#"> Notizen</a></li>#}
+                                {#<li><a href="#"> </a></li>#}
+                                <li><a href="#"> Nachrichten</a></li>
+                                <li><a href="{{ path('display_current_person') }}">Mein Profil</a></li>
+                                <li><a href="#"> </a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Log-Out</a></li>
+                            {% else %}
+                                <li><a href="{{ path('fos_user_security_login') }}">Log-In alt</a></li>
+                                <li><a href="{{ path('fos_user_security_login') }}" data-toggle="modal"
+                                        data-target="#registerPopup">Log-In</a></li>
+                                <li><a href="{{ path('registration_register_user') }}">Registrieren alt</a></li>
+                                <li><a href="{{ path('registration_register_user_modal') }}" data-toggle="modal"
+                                       data-target="#registerPopup">Registrieren</a></li>
+
+                            {% endif %}
+                        </ul>
                 </div>
+                <!--/.nav-collapse -->
             </div>
-            <!--/.nav-collapse -->
-        </div>
     </nav>
 </section>
 <!-- /.NAVIGATION -->
 
-{#<!-- Begin Navbar -->#}
-{#<div id="navtop">#}
-    {#<div class="navbar navbar-inverse navbar-fixed-top">#}
-        {#<div class="container">#}
-
-            {#<ul class="nav navbar-nav pull-right">#}
-                {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}#}
-                    {#<li><a href="{{ path('homepage') }}"> Übersicht</a></li>#}
-                    {#<li><a href="#">Projekte</a></li>#}
-                    {#<li><a href="#"> Terminkalender</a></li>#}
-                    {#<li><a href="{{ path('display_current_person') }}"> Benutzerprofil</a></li>#}
-                    {#<li><a href="#"> </a></li>#}
-                    {#<li><a href="{{ path('fos_user_security_logout') }}"> Log-Out</a></li>#}
-                {#{% else %}#}
-                    {#<li><a href="{{ path('fos_user_security_login') }}"> Log-In</a></li>#}
-                    {#<li><a href="{{ path('registration_register_user') }}">Registrieren</a></li>#}
-                {#{% endif %}#}
-            {#</ul>#}
-        {#</div>#}
-    {#</div><!-- /.navbar -->#}
-{#</div>#}
-
-
-{#<!-- subnav here -->#}
-{#<div class="navbar subnav" role="navigation">#}
-    {#<div class="navbar-inner">#}
-        {#<div class="container">#}
-            {#<ul class="pager subnav-pager">#}
-                {#<div class="btn-group-wrap">#}
-                    {#<button type="button" class="btn btn-success">sub 1</button>#}
-                    {#<button type="button" class="btn btn-success">sub 2</button>#}
-                    {#<button type="button" class="btn btn-success">sub 3</button>#}
-                    {#<button type="button" class="btn btn-success">sub 4</button>#}
-                    {#<button type="button" class="btn btn-success">sub 5</button>#}
-                    {#<button type="button" class="btn btn-success">sub 6</button>#}
-                {#</div>#}
-            {#</ul>#}
-        {#</div>#}
-    {#</div>#}
-{#</div>#}

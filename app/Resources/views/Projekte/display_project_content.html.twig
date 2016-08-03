@@ -1,6 +1,538 @@
 <div>
+    <span style="font-size: small; color: #61625d">
     <!-- Three columns of text below the carousel -->
     <div class="container">
-        <h2>Hier entsteht der Bereich <b>Projekte</b></h2>
+        {#<h2>Projekt</h2>#}
+        {#<hr>#}
+        <div class="row">
+            {# RECHTE SEITE#}
+
+            <div class="col-lg-12">
+                {# ÜBERSICHT BEGINN #}
+
+                {#<div>#}
+                {#<h3>Übersicht</h3>#}
+                {#</div>#}
+                <div>
+                    <h3>Projektinfos:</h3>
+                </div>
+                Zunächsteinmal eine kleine Zusammenfassung des Projekts, besthend aus: <b>Arbeitstitel</b> (sofern
+                vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden), <b> der aktuell
+                    kalkulierte Preis</b>.<br><br>
+                <table class="table table-condensed">
+                    <tr>
+                        <th>
+                            Projekttitel
+                        </th>
+                        <th>
+                            Bauort
+                        </th>
+                        <th>
+                            Haustyp
+                        </th>
+                        <th>
+                            Bauträger
+                        </th>
+                        <th>
+                            Gesamtkosten
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Fuchsbau
+                        </td>
+                        <td>
+                            Baumschulenweg 1a 25373 Ellerhoop
+                        </td>
+                        <td>
+                            Friesenhaus
+                        </td>
+                        <td>
+                            Team Massivhaus
+                        </td>
+                        <td>
+                            <b>365.432,98 Euro (inkl MwSt.)</b><br>
+                    <span style="font-size: x-small">Grundstück 99.980,00 Euro (inkl MwSt.)<br>
+                            + Haus 128.132,98 Euro (inkl MwSt.)<br>
+                            + Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>
+                            - Gutschriften 3.412,17 Euro (inkl MwSt.)<br>
+                            + Außenanlagen 33.632,42 Euro (inkl MwSt.)<br>
+                            + Inneneinrichtung 16.242,00 Euro (inkl MwSt.)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"></td>
+                    </tr>
+                </table>
+
+                <table style="border: hidden">
+                    <tr>
+                        <td>
+                            Als Projektbesitzer kannst du das Projekt löschen, aber wenn es einmal weg ist, ist es weg
+                            und kommt von
+                            alleine nicht wieder! Die bisherigen Daten werden gelöscht. Das Projekt ist dann auch für
+                            andere
+                            Teilnehmer nicht mehr erreichbar. Alternativ kannst du den Besitz des Projekts an einen
+                            anderen
+                            Teilnehmer übertragen und das Projekt.
+                        </td>
+                        <td style="width: 12%" valign="top" align="right">
+                            <a class="btn btn-danger btn-xs" href="{{ path('update_person_by_current_person') }}"
+                               role="button">Projekt löschen</a>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <hr>
+                <div>
+                    <h3>
+                        Projektbeteiligte:
+                    </h3>
+                </div>
+                <div>Hier kannst du dir alle Teilnehmer des Projekts ansehen und den beteiligten von hier aus
+                    Nachrichten schicken. Als Teilnehmer, der nicht gleichzeitiig Besitzer des Projekts ist,
+                    kann man das Projekt nicht löschen, es jedoch jederzeit verlassen.<br><br>
+                    Der Projektbesitzer hat die meisten Rechte, er kann weitere Personen zum Projekt einladen, die je
+                    nach
+                    Rolle die Möglichkeit haben das Projekt anzusehen oder zu bearbeiten, er kann den Besitz des
+                    Projekts an
+                    einen anderen User übertragen, und er kann das gesamte Projekt löschen.<br><br>
+                    {#<button type="button" class="btn btn-default btn-xs" data-toggle="collapse"#}
+                    {#data-target="#collapseProjektBeteiligte">#}
+                    {#Einträge ein-/ausblenden#}
+                    {#</button>#}
+                    {#<br><br>#}
+                    <div>
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Username</th>
+                                <th>Nachname, Vorname</th>
+                                <th colspan="2">Rollen im Projekt</th>
+                            </tr>
+                            <tr>
+                                <td><i>Basti</i></td>
+                                <td><i>Fox, Sebastian</i></td>
+                                <td><i>Projektbesitzer, Bauherr</i></td>
+                                <td style="width: 25%"></td>
+                            </tr>
+                            <tr>
+                                <td>Katha</td>
+                                <td>Fox, Katharina</td>
+                                <td>Bauherrin</td>
+                                <td style="width: 25%" align="right">
+                                    <a class="btn btn-default btn-xs"
+                                       href="{{ path('update_person_by_current_person') }}"
+                                       role="button">Projekt übertragen</a>
+                                    <a class="btn btn-default btn-xs"
+                                       href="{{ path('update_person_by_current_person') }}"
+                                       role="button">Nachricht senden</a>
+                                    <a class="btn btn-danger btn-xs"
+                                       href="{{ path('update_person_by_current_person') }}"
+                                       role="button">Entfernen</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"></td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default btn-xs" href="#">
+                            Einladung verschicken
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                {# ÜBERSICHT ENDE#}
+
+                <div class="alert alert-warning fade in">
+                    {#<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>#}
+                    <center><strong>Info bevor wir über die Kosten reden:</strong> Sofern tatsächliche Kosten
+                        angegeben wurden, werden diese zur Kalkulation verwendet. Sollten noch keine tatsächlichen
+                        Kosten, sondern lediglich geplante Kosten angegeben sein, werden diese in der Kalkulation
+                        berücksichtigt. Im Falle, dass das gar keine Kosten angegeben sind, werden auch keien Kosten
+                        zur Kalkulation rangeführt!
+                    </center>
+                </div>
+                <br>
+                {# GRUNDSTÜCK BEGINN#}
+                <div>
+                    <h3>Grundstück</h3>
+                </div>
+                <div>
+                    <table class="table table-condensed">
+                        <tr>
+                            <th>
+                                Adresse
+                            </th>
+                            <th>
+                                Bundesland
+                            </th>
+                            <th>
+                                Grunderbssteuer
+                            </th>
+                            <th>
+                                Größe in m²
+                            </th>
+                            <th>
+                                Preis je m² <span
+                                        style="font-size: x-small">(Kaufpreis / Erschließungskostenanteil)</span>
+                            </th>
+                            <th>
+                                Gesamtpreis
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Baumschulenweg 1a <br>
+                                25373 Ellerhoop
+                            </td>
+                            <td>
+                                Schleswig Holstein
+                            </td>
+                            <td>
+                                6,5%
+                            </td>
+                            <td>
+                                707
+                            </td>
+                            <td>
+                                140 Euro <span style="font-size: x-small">(99,35 Euro / 40,65 Euro)</span>
+                            </td>
+                            <td>
+                                <b>99.890,00 Euro (inkl MwSt.)</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                {# GRUNDSTÜCK ENDE#}
+
+                <div>
+                    <h3>Haus</h3>
+                </div>
+                Hier gibt es nun die nötigten Infos wie <b>Haustyp, Größe, Preis, etc.</b> zu dem Traumhaus. Desweiteren
+                wird
+                hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den
+                jeweiligen
+                Detailansichten können Elemente hinzugefügt werden, dort habe ich auch praktische Beispiele aufgelistet,
+                so
+                dass
+                sich die Nutzung von selbst erklären sollte.
+
+                {# Button zum toggeln der Collapse Funktion #}
+                <br><br>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                        data-target="#collapseHaus">
+                    Einträge ein-/ausblenden
+                </button>
+                <br><br>
+
+                {# Collapsable div #}
+                <div class="collapse in" id="collapseHaus">
+                    <table class="table table-condensed">
+                        <tr>
+                            <th style="width: 12%">
+                                Haustyp
+                            </th>
+                            <th style="width: 10%">
+                                Größe
+                            </th>
+                            <th style="width: 26%">
+                                Hausname (aus dem Katalog, wenn vorhaden)
+                            </th>
+                            <th style="width: 16%">
+                                Bauträger
+                            </th>
+                            <th style="width: 24%" colspan="1">
+                                Hauspreis <span style="font-size: x-small">(Grundpreis + interne Extras)</span>
+                            </th>
+                            <th style="width: 24%" colspan="2">
+                                weitere Hauskosten
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Friesenhaus
+                            </td>
+                            <td>
+                                157m²
+                            </td>
+                            <td>
+                                FH155
+                            </td>
+                            <td>
+                                Team Massivhaus
+                            </td>
+                            <td>
+                                128.132,98 Euro (inkl MwSt.)<br>
+                    <span style="font-size: x-small">Grundpreis 128.132,98 Euro (inkl MwSt.)<br>
+                    + interne Extras 128.132,98 Euro (inkl MwSt.)</span>
+                            </td>
+                            <td>55.000,00 Euro (inkl. MwSt.)</td>
+                            <td style="font-size: small" align="right">
+                                <a class="btn btn-default btn-xs"
+                                   href="{{ path('update_person_by_current_person') }}"
+                                   role="button">Bearbeiten</a>
+                            </td>
+                        </tr>
+                        <tr>
+
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="font-size: small" align="center"><b>Aufgegliedert in den
+                                    Hauspreis,
+                                    Kosten für Extras die der Bauträger direkt mit verkauft, Kosten für Extras und
+                                    Leistungen von weiteren Dienstleistern und die Auszuführenden Arbeiten, die dazu
+                                    notwendig sind, um das Haus fertig zu stellen.</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="font-size: small">
+                                <table class="table table-condensed" style="border: hidden">
+                                    <tr>
+                                        <th colspan="7">Haus</th>
+                                    </tr>
+                                    <tr style="border: hidden">
+                                        <td style="width: 20%">Grundpreis Friesenhaus:</td>
+                                        <td colspan="3" style="width: 50%">Team Massivhaus</td>
+                                        <td style="font-size: small">+128.500,00 Euro (inkl. MwSt.)</td>
+                                        <td style="font-size: small" align="right">
+                                            <a class="btn btn-default btn-xs"
+                                               href="{{ path('update_person_by_current_person') }}"
+                                               role="button">Bearbeiten</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="font-size: small">
+                                <table class="table table-condensed" style="border: hidden">
+                                    <tr>
+                                        <th colspan="4">interne Extrakosten</th>
+                                    </tr>
+
+                                    <tr style="border: hidden">
+                                        <td style="width: 20%">
+                                            - Massive Innenwände im OG
+                                        </td>
+                                        <td style="width: 15%">
+                                            Team Massivhaus
+                                        </td>
+                                        <td style="width: 20%">
+                                        </td>
+                                        <td style="width: 15%">
+                                            +2500,00 Euro (inkl MwSt.)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%">
+                                            - Fugefarbe beige
+                                        </td>
+                                        <td style="width: 15%">
+                                            Team Massivhaus
+                                        </td>
+                                        <td style="width: 20%">
+                                        </td>
+                                        <td style="width: 15%">
+                                            +3000,00 Euro (inkl MwSt.)
+                                        </td>
+                                    </tr>
+                                    <tr style="border: hidden">
+                                        <td colspan="4">Summe zzgl. Extrakosten:</td>
+                                        <td style="font-size: small">+5.500,00 Euro (inkl. MwSt.)</td>
+                                        <td style="font-size: small" align="right">
+                                            <a class="btn btn-info btn-xs"
+                                               href="{{ path('update_person_by_current_person') }}"
+                                               role="button">Detailansicht</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="font-size: small">
+                                <table class="table table-condensed" style="border: hidden">
+                                    <tr>
+                                        <th colspan="6">Weitere Hauskosten:</th>
+                                    </tr>
+                                    <tr style="border: hidden">
+                                        <td style="width: 20%">
+                                            - Massive Innenwände im OG
+                                        </td>
+                                        <td style="width: 15%">
+                                            Friederichs Baugeschäft
+                                        </td>
+                                        <td style="width: 20%">
+                                        </td>
+                                        <td style="width: 15%">
+                                            +2500,00 Euro (inkl MwSt.)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%">
+                                            - Fugefarbe beige
+                                        </td>
+                                        <td style="width: 15%">
+                                            Friederichs Baugeschäft
+                                        </td>
+                                        <td style="width: 20%">
+                                        </td>
+                                        <td style="width: 15%">
+                                            +3000,00 Euro (inkl MwSt.)
+                                        </td>
+                                    </tr>
+                                    <tr style="border: hidden">
+                                        <td colspan="4">Summe zzgl. Hauskosten:</td>
+                                        <td style="font-size: small">+5.500,00 Euro (inkl. MwSt.)</td>
+                                        <td style="font-size: small" align="right">
+                                            <a class="btn btn-info btn-xs"
+                                               href="{{ path('update_person_by_current_person') }}"
+                                               role="button">Detailansicht</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" style="font-size: small">
+                                <table class="table table-condensed" style="border: hidden">
+                                    <th colspan="6">Auszuführende Arbeiten:</th>
+                                    <tr style="border: hidden">
+                                        <td style="width: 20%">
+                                            - Fundament / Sohle
+                                        </td>
+                                        <td style="width: 15%">
+                                            Friederichs Baugeschäft
+                                        </td>
+                                        <td style="width: 20%">
+                                            gepl. Termin 01.08.2016 - 15.08.2016
+                                        </td>
+                                        <td style="width: 15%">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%">
+                                            - Elektro Vorinstallation (Teil1)
+                                        </td>
+                                        <td style="width: 15%">
+                                            Wendland
+                                        </td>
+                                        <td style="width: 20%">
+                                            gepl. Termin: 16.08.2016 - 29.08.2016
+                                        </td>
+                                        <td style="width: 15%">
+                                        </td>
+                                    </tr>
+                                    <tr style="border: hidden">
+                                        <td colspan="4">Summe zzgl. Handwerker Kosten:</td>
+                                        <td style="font-size: small">Es sind keine weiteren Kosten angefallen</td>
+                                        <td style="font-size: small" align="right">
+                                            <a class="btn btn-info btn-xs"
+                                               href="{{ path('update_person_by_current_person') }}"
+                                               role="button">Detailansicht</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <b>Gesamtkosten</b> <span style="font-size: small">(Haus + interne und externe Extras + Tätigkeiten):</span>
+                            </td>
+                            <td colspan="2" align="right">
+                                <b>123.456,70 Euro (inkl. MwSt.) </b>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <b></b>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                            data-target="#collapseProjektBeteiligte">
+                        Einträge ein-/ausblenden
+                    </button>
+
+                </div>
+                <hr>
+
+                {# HAUS ENDE#}
+
+                {# NEBENKOSTEN BEGINN#}
+
+                <div>
+                    <h3>Nebenkosten</h3>
+                </div>
+                Neben den Kosten für das Haus und das Grundstück fallen noch jede Menge weitere Kosten (die sogenannte
+                Nebenkosten) an. Das können zum Beispiel Notarkosten oder Genehmigungen sein.
+                Auch die Nebenkosten können über die Detailansicht hinzugefügt werden, und genauso wie bei Extras und
+                Tätigkeiten gibt es in der Detailansicht dazu ein paar Beispiele zur Veranschaulichung.
+                <br><br>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                        data-target="#collapseProjektBeteiligte">
+                    Einträge ein-/ausblenden
+                </button>
+                <br><br>
+                <div>
+                    <h3>Gutschriften</h3>
+                </div>
+                Eher selten, aber trotzdem vorhanden, es gibt auch mal Gutschiften. Bestellt man ein Haus aus dem
+                Katalog
+                und
+                nimmt Leistungen, die eigentlich dazugehören, aus dem Leistungsspektrum heraus, so kann man auch mal
+                etwas
+                Geld
+                zurück bekommen. Ein gutes Beispiel ist eine nicht genutzte Fliesenfläche, werden weniger Fliesen
+                benötigt,
+                als
+                das KAtalogbeispiel es vorsieht, gibt es eine Gutschrift. In der Detailansicht gibt es weitere Infos und
+                die
+                Möglichkeit solche Objekte anzulegen.
+                <br><br>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                        data-target="#collapseProjektBeteiligte">
+                    Einträge ein-/ausblenden
+                </button>
+                <br><br>
+                <div>
+                    <h3>Außenanagen</h3>
+                </div>
+                Ein Haus auf dem Grundstück ist ja gut und schön, aber damit man nicht ständig den Sand aus der Bauphase
+                mit
+                den
+                Schuhen ins Haus trägt, ost es ganz sinnvoll ein paar Tätigkeiten auf dem Grundstück durchzuführen. <b>Auffahrt,
+                    Wege, Terrasse, Rasen, Beete und Bäume</b> fallen mir spontan dazu ein. Mehr dazu in der
+                Detailansicht.
+                <br><br>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                        data-target="#collapseProjektBeteiligte">
+                    Einträge ein-/ausblenden
+                </button>
+                <br><br>
+                <div>
+                    <h3>Inneneinrichtung</h3>
+                </div>
+                Ist das Haus erst mal gebaut, ist es von Außen meist schön anzusehen. Von Innen ist es da noch etwas
+                anderes,
+                denn wenn nichts alles gefliest wird, könnte es gut sein, dass noch ein paar <b>Bodenbeläge, Tapete und
+                    Farbe</b> an der Wand und vor allem eine <b>Küche</b> fehlen,
+                <br><br>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                        data-target="#collapseProjektBeteiligte">
+                    Einträge ein-/ausblenden
+                </button>
+                <br><br>
+            </div>
+        </div>
     </div>
+    </span>
 </div>

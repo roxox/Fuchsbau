@@ -1,45 +1,47 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\PlainClasses;
 
+use AppBundle\Entity\Firma;
+use AppBundle\Entity\Person;
+use AppBundle\Entity\PrivatGeschaeft;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Email
  *
- * @ORM\Table(name="email")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TelefonnummerRepository")
  */
-class Email extends AbstractBasicEntity
+class EmailCompany
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="emailadresse", type="string", length=255)
      */
     private $emailadresse;
+
+    /**
+     * @var string
+     *
+     */
+    private $porno;
 
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Person", mappedBy="emailadressen")
      */
     private $personen;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Firma", mappedBy="emailadressen")
      */
     private $firmen;
 
     /**
      * @var PrivatGeschaeft
      *
-     * @ORM\ManyToOne(targetEntity="PrivatGeschaeft")
-     * @ORM\JoinColumn(name="privat_geschaeft_id", referencedColumnName="id", onDelete="set null")
      */
     private $privatGeschaeft;
 
@@ -78,20 +80,20 @@ class Email extends AbstractBasicEntity
         return $this->personen->toArray();
     }
 
-    /**
-     * @param Person $person
-     * @return self
-     */
-    public function addPerson(Person $person)
-    {
-        $this->personen->add($person);
-
-        if (!$person->hasEmailadresse($this)) {
-            $person->addEmailadresse($this);
-        }
-
-        return $this;
-    }
+//    /**
+//     * @param Person $person
+//     * @return self
+//     */
+//    public function addPerson(Person $person)
+//    {
+//        $this->personen->add($person);
+//
+//        if (!$person->hasEmailadresse($this)) {
+//            $person->addEmailadresse($this);
+//        }
+//
+//        return $this;
+//    }
 
     /**
      * @param Person $person
@@ -109,21 +111,21 @@ class Email extends AbstractBasicEntity
     {
         return $this->firmen->toArray();
     }
-
-    /**
-     * @param Firma $firma
-     * @return self
-     */
-    public function addFirma(Firma $firma)
-    {
-        $this->firmen->add($firma);
-
-        if (!$firma->hasEmailadresse($this)) {
-            $firma->addEmailadresse($this);
-        }
-
-        return $this;
-    }
+//
+//    /**
+//     * @param Firma $firma
+//     * @return self
+//     */
+//    public function addFirma(Firma $firma)
+//    {
+//        $this->firmen->add($firma);
+//
+//        if (!$firma->hasEmailadresse($this)) {
+//            $firma->addEmailadresse($this);
+//        }
+//
+//        return $this;
+//    }
 
     /**
      * @param Firma $firma
@@ -148,6 +150,22 @@ class Email extends AbstractBasicEntity
     public function setPrivatGeschaeft($privatGeschaeft)
     {
         $this->privatGeschaeft = $privatGeschaeft;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPorno()
+    {
+        return $this->porno;
+    }
+
+    /**
+     * @param string $porno
+     */
+    public function setPorno($porno)
+    {
+        $this->porno = $porno;
     }
 
 

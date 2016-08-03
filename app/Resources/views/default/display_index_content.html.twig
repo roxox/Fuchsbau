@@ -1,33 +1,10 @@
-
 <div>
-
-    {#<section id="navigation2">#}
-        {#<nav class="navbar subnav" role="navigation">#}
-            {#<div class="container">#}
-                {#<div class="navbar-header">#}
-                    {#<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span#}
-                                {#class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span#}
-                                {#class="icon-bar"></span> <span class="icon-bar"></span></button>#}
-                {#</div>#}
-                {#<div class="collapse navbar-collapse">#}
-                    {#<ul class="nav navbar-nav">#}
-                        {#<li><a href="{{ path('homepage') }}"> Grundstück</a></li>#}
-                        {#<li><a href="#">Haus</a></li>#}
-                        {#<li><a href="#"> Extras</a></li>#}
-                        {#<li><a href="{{ path('display_current_person') }}"> Nebenkosten</a></li>#}
-                        {#<li><a href="{{ path('fos_user_security_logout') }}">Außenanlagen</a></li>#}
-                        {#<li><a href="{{ path('fos_user_security_login') }}"> Inneneinrichtung</a></li>#}
-                    {#</ul>#}
-                {#</div>#}
-                {#<!--/.nav-collapse -->#}
-            {#</div>#}
-        {#</nav>#}
-    {#</section>#}
+                <span style="font-size: small; color: #61625d">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
             <div class="container">
-                {#<h2>Willkommen (zurück) {{ person.getVorname() }}!</h2>#}
-                {#<hr>#}
+                <h2>Willkommen (zurück) {{ person.getVorname() }}!</h2>
+                <hr>
                 <br>
                 <div class="row">
                     <div class="col-md-6">
@@ -36,7 +13,7 @@
                                 Friesenhaus - Team Massivhaus</b> ausgewählt, unten oder unter dem Menüpunkt <b><i>Meine
                                     Projekte</i></b> siehst du eine Liste all deiner
                             Projekte, von dort aus, kannst du auch diese Projekte bearbeiten.</p>
-                        <p><a class="btn btn-default" href="{{ path('display_current_person') }}" role="button">zum
+                        <p><a class="btn btn-default btn-xs" href="{{ path('display_current_person') }}" role="button">zum
                                 Projekt</a></p>
                     </div>
                     <div class="col-md-2"></div>
@@ -45,7 +22,7 @@
                         <p>Wenn du nicht mehr zufrieden mit dem Benutzernamen bist, durch eine Hochzeit deinen Nachnamen
                             ändern musst, dein Passwort ändern or Adressen, Telefonnummern, EMails hinzufügen (oder auch
                             löschen) möchtest, dann solltest du zu deinem Profil</p>
-                        <p><a class="btn btn-default" href="{{ path('display_current_person') }}" role="button">Zum
+                        <p><a class="btn btn-default btn-xs" href="{{ path('display_current_person') }}" role="button">Zum
                                 Benutzerprofil</a></p>
                     </div>
                 </div>
@@ -95,10 +72,10 @@
                         </td>
                         <td style="width: 90px; alignment: center">
 
-                            <a class="btn btn-default btn-sm" href="#" role="button">bearbeiten</a>
+                            <a class="btn btn-default btn-xs" href="#" role="button">bearbeiten</a>
                         </td>
                         <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                            <a class="btn btn-danger btn-xs" href="#" role="button">löschen</a>
                         </td>
                     </tr>
                 </table>
@@ -137,10 +114,11 @@
                         </td>
                         <td style="width: 90px; alignment: center">
 
-                            <a class="btn btn-default btn-sm" href="#" role="button">zum Projekt</a>
+                            <a class="btn btn-default btn-xs" href="{{ path('display_current_projects') }}"
+                               role="button">zum Projekt</a>
                         </td>
                         <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>
+                            <a class="btn btn-danger btn-xs" href="" role="button">löschen</a>
                         </td>
                     </tr>
                     <tr style="height: 30px">
@@ -153,10 +131,11 @@
                         </td>
                         <td style="width: 90px; alignment: center">
 
-                            <a class="btn btn-default btn-sm" href="#" role="button">zum Projekt</a>
+                            <a class="btn btn-default btn-xs" href="{{ path('display_current_projects') }}"
+                               role="button">zum Projekt</a>
                         </td>
                         <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-default btn-sm" href="#" role="button">verlassen</a>
+                            <a class="btn btn-default btn-xs" href="#" role="button">verlassen</a>
                         </td>
                     </tr>
                 </table>
@@ -185,7 +164,7 @@
                         tortor
                         mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
                         magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Heading</h2>
@@ -193,7 +172,7 @@
                         tortor
                         mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
                         magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Heading</h2>
@@ -201,9 +180,10 @@
                         id
                         ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
                         condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>
             </div>
         </div> <!-- /container -->
     {% endif %}
+                    </span>
 </div>

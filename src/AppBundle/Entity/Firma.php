@@ -97,9 +97,7 @@ class Firma extends AbstractBasicEntity
     {
         $this->rollen->add($rolle);
 
-        if (!$rolle->hasFirma($this)) {
-            $rolle->addFirma($this);
-        }
+            $rolle->setFirma($this);
 
         return $this;
     }
