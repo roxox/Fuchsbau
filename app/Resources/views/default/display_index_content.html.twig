@@ -1,156 +1,31 @@
 <div>
-                <span style="font-size: small; color: #61625d">
+    <span style="font-size: small; color: #61625d">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
-            <div class="container">
-                <h2>Willkommen (zurück) {{ person.getVorname() }}!</h2>
-                <hr>
-                <br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Aktuelles Projekt</h4>
-                        <p>Zuletzt wurde das Projekt <b>Baumschulenweg 1a 25373 Ellerhoop -
-                                Friesenhaus - Team Massivhaus</b> ausgewählt, unten oder unter dem Menüpunkt <b><i>Meine
-                                    Projekte</i></b> siehst du eine Liste all deiner
-                            Projekte, von dort aus, kannst du auch diese Projekte bearbeiten.</p>
-                        <p><a class="btn btn-default btn-xs" href="{{ path('display_current_person') }}" role="button">zum
-                                Projekt</a></p>
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-4">
-                        <h4>Benutzerdaten bearbeiten</h4>
-                        <p>Wenn du nicht mehr zufrieden mit dem Benutzernamen bist, durch eine Hochzeit deinen Nachnamen
-                            ändern musst, dein Passwort ändern or Adressen, Telefonnummern, EMails hinzufügen (oder auch
-                            löschen) möchtest, dann solltest du zu deinem Profil</p>
-                        <p><a class="btn btn-default btn-xs" href="{{ path('display_current_person') }}" role="button">Zum
-                                Benutzerprofil</a></p>
-                    </div>
-                </div>
-            </div> <!-- /container -->
-            <div class="container">
-                <h3>Kurzübersicht</h3>
-            </div>
-            <div class="container">
-                <hr>
-                <h4>Projektübergreifend die Termine für die nächsten drei Wochen</h4>
-                <br>
-                <p>Für die nächsten 3 Wochen liegt dir <b>1 Termin(start)</b> vor. Wenn du alle Termine ansehen
-                    möchtest,
-                    schaue in deinen Terminkalender, dort kannst du natürlich auch weitere Termine hinzufügen.</p>
-                <br>
-                <table class="table table-striped">
-                    <tr>
-                        <th>
-                            Termin
-                        </th>
-                        <th>
-                            Uhrzeit
-                        </th>
-                        <th>
-                            Anlass
-                        </th>
-                        <th>
-                            Priorität
-                        </th>
-                        <th colspan="2">
-                            Aktion
-                        </th>
-                    </tr>
+            <!-- <div class="container">
+                <h3>Willkommen (zurück) {{ person.getVorname() }}!</h3>
+            </div>  /container -->
 
-                    <tr style="height: 30px">
-                        <td style="width: 120px">
-                            12.12.2016
-                        </td>
-                        <td style="width: 120px">
-                            9:30 Uhr
-                        </td>
-                        <td style="width: 800px">
-                            Bauanlaufgespräch
-                        </td>
-                        <td style="width: 120px">
-                            sehr wichtig
-                        </td>
-                        <td style="width: 90px; alignment: center">
+            {# Termine #}
+            {#{% include "default/default_termine.html.twig" %}#}
 
-                            <a class="btn btn-default btn-xs" href="#" role="button">bearbeiten</a>
-                        </td>
-                        <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-danger btn-xs" href="#" role="button">löschen</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="container">
-                <hr>
-                {#<br>#}
-                <h4>Meine Projekte</h4>
-                <br>
-                <p>Du bist bei <b>2 Projekten</b> beteiligt, egal ob als Bauherr(in), Bauleiter, Handwerker oder nur als
-                    Beobachter. Durch einen Klick auf <b><i>zum Projekt</i></b> des
-                    jeweiligen Projekts, wird das dann ausgewählte Projekt auch als aktuelles Projekt markiert. </p>
-                <p><b style="color: #a41e22">Achtung!</b><b> Nur der Projektersteller kann ein Projekt auch löschen,
-                        alle anderen können das Projekt lediglich verlassen.</b></p>
-                <br>
-                <table class="table table-striped">
-                    <tr>
-                        <th>
-                            Projekt
-                        </th>
-                        <th>
-                            Meine Rolle(n)
-                        </th>
-                        <th colspan="2">
-                            Aktion
-                        </th>
-                    </tr>
+            {# Grundstück #}
+            {% include "default/default_projekte.html.twig" %}
 
-                    <tr style="height: 30px">
-                        <td style="width: 800px">
-                            Hamborner Steig 12 22419 Hamburg - Stadtvilla - Team Massivhaus - aktuelle Gesamtkoste
-                            367.455 Euro (inkl. MwSt)
-                        </td>
-                        <td style="width: 120px">
-                            Ersteller, Bauherr
-                        </td>
-                        <td style="width: 90px; alignment: center">
 
-                            <a class="btn btn-default btn-xs" href="{{ path('display_current_projects') }}"
-                               role="button">zum Projekt</a>
-                        </td>
-                        <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-danger btn-xs" href="" role="button">löschen</a>
-                        </td>
-                    </tr>
-                    <tr style="height: 30px">
-                        <td style="width: 800px">
-                            Baumschulenweg 1a 25373 Ellerhoop - Friesenhaus - Team Massivhaus - aktuelle Gesamtkoste
-                            367.455 Euro (inkl. MwSt)
-                        </td>
-                        <td style="width: 120px">
-                            Beobachter
-                        </td>
-                        <td style="width: 90px; alignment: center">
-
-                            <a class="btn btn-default btn-xs" href="{{ path('display_current_projects') }}"
-                               role="button">zum Projekt</a>
-                        </td>
-                        <td style="width: 90px; vert-align: bottom">
-                            <a class="btn btn-default btn-xs" href="#" role="button">verlassen</a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
 
 
-    {% else %}
+                {% else %}
         {# AUGELOGGT #}
         <div class="jumbotron">
             {#<div>#}
             <div class="container">
                 <h1>You are not logged In</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout
-                    called a jumbotron and three supporting pieces of content. Use it as a starting point to create
+                <p>This is a template for a simple marketing or informational website. It includes a large
+                    callout
+                    called a jumbotron and three supporting pieces of content. Use it as a starting point to
+                    create
                     something more unique.</p>
                 <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more &raquo;</a></p>
             </div>
@@ -160,25 +35,31 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
+                        commodo,
                         tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                        malesuada
                         magna mollis euismod. Donec sed odio dui. </p>
                     <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
+                        commodo,
                         tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
+                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                        malesuada
                         magna mollis euismod. Donec sed odio dui. </p>
                     <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <div class="col-md-4">
                     <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum
+                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+                        Vestibulum
                         id
-                        ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+                        ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor
+                        mauris
                         condimentum nibh, ut fermentum massa justo sit amet risus.</p>
                     <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
                 </div>

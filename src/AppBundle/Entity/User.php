@@ -78,12 +78,35 @@ class User extends BaseUser
      */
     private $projekte;
 
+
+    /**
+     * User constructor.
+     */
+
     public function __construct()
     {
         parent::__construct();
         $this->userGroups = new ArrayCollection();
         $this->projekte = new ArrayCollection();
     }
+
+    /**
+     * Functions
+     */
+
+    public function getLastOpenedProject(){
+        foreach ($this->projekte as $projekt){
+            /** @var Projekt $projekt */
+            if ($projekt->isLastOpened()) {
+                return $projekt;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Getter and Setter
+     */
 
     /**
      * addUserGroup - adds a group with one or more roles to an user.

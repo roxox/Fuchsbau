@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Builder
  *
  * @ORM\Table(name="firma")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\HouseBuilderRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FirmaRepository")
  */
 class Firma extends AbstractBasicEntity
 
@@ -19,12 +19,12 @@ class Firma extends AbstractBasicEntity
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $firmenName;
+    private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Rolle", mappedBy="firma")
+     * @ORM\ManyToMany(targetEntity="Rolle", inversedBy="firmen")
      */
     private $rollen;
 
@@ -32,7 +32,6 @@ class Firma extends AbstractBasicEntity
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Adresse", inversedBy="firmen")
-     * @ORM\JoinTable(name="adressen_firmen")
      */
     private $adressen;
 
@@ -53,32 +52,79 @@ class Firma extends AbstractBasicEntity
     private $telefonnummern;
 
     /**
-     * Address constructor.
-     * @param string $firmenName
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Person", mappedBy="firmen")
      */
-    public function __construct(string $firmenName)
+    private $personen;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $noCompany = false;
+
+    /**
+     * Address constructor.
+     * @param string $name
+     */
+    public function __construct(string $name)
     {
-        $this->firmenName = $firmenName;
+        $this->name = $name;
         $this->rollen = new ArrayCollection();
         $this->adressen = new ArrayCollection();
         $this->telefonnummern = new ArrayCollection();
         $this->emailadressen = new ArrayCollection();
+        $this->personen = new ArrayCollection();
     }
 
     /**
      * @return string
      */
-    public function getFirmenName()
+    public function getName()
     {
-        return $this->firmenName;
+        return $this->name;
     }
 
     /**
-     * @param string $firmenName
+     * @param string $name
      */
-    public function setFirmenName($firmenName)
+    public function setName($name)
     {
-        $this->firmenName = $firmenName;
+        $this->name = $name;
+    }
+
+    /**
+     * @return array|Person[]
+     */
+    public function getPersonen()
+    {
+        return $this->personen->toArray();
+    }
+
+    /**
+     * @param Person $person
+     * @return self
+     */
+    public function addPerson(Person $person)
+    {
+        $this->personen->add($person);
+
+        if (!$person->hasFirma($this)) {
+            $person->addFirma($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Person $person
+     * @return bool
+     */
+    public function hasPerson(Person $person)
+    {
+        return $this->personen->contains($person);
     }
 
     /**
@@ -97,7 +143,9 @@ class Firma extends AbstractBasicEntity
     {
         $this->rollen->add($rolle);
 
-            $rolle->setFirma($this);
+        if (!$rolle->hasFirma($this)) {
+            $rolle->addFirma($this);
+        }
 
         return $this;
     }
@@ -146,9 +194,9 @@ class Firma extends AbstractBasicEntity
     /**
      * @return array|Telefonnummer[]
      */
-    public function getTelefonnummer()
+    public function getTelefonnummern()
     {
-        return $this->adressen->toArray();
+        return $this->telefonnummern->toArray();
     }
 
     /**
@@ -206,5 +254,23 @@ class Firma extends AbstractBasicEntity
     {
         return $this->emailadressen->contains($emailadresse);
     }
+
+    /**
+     * @return boolean
+     */
+    public function isNoCompany()
+    {
+        return $this->noCompany;
+    }
+
+    /**
+     * @param boolean $noCompany
+     */
+    public function setNoCompany($noCompany)
+    {
+        $this->noCompany = $noCompany;
+    }
+
+
 }
 

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Email
  *
  * @ORM\Table(name="email")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TelefonnummerRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EmailRepository")
  */
 class Email extends AbstractBasicEntity
 {

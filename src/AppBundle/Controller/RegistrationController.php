@@ -13,6 +13,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\AbstractBasicEntity;
 use AppBundle\Entity\Email;
+use AppBundle\Entity\Firma;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\User;
 use AppBundle\Form\PersonType;
@@ -104,13 +105,16 @@ class RegistrationController extends Controller
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+        /** @var Person $person */
         $person = $user->getPerson();
         $form = $this->createForm(PersonType::class, $person);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $noCompany = new Firma('NoCompnay_' . $person->getId());
+            $noCompany->setNoCompany(true);
+            $person->addFirma($noCompany);
 
 
             // 4) save the User!

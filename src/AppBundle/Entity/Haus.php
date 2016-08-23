@@ -7,26 +7,32 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class Haus  extends AbstractBasicEntity
+class Haus extends AbstractBasicEntity
 {
-
     /**
-     * var string
-     * @ORM\Column(type="string")
-     */
-    private $name;
-
-    /**
-     * var integer
-     * @ORM\Column(type="integer")
+     * var float
+     * @ORM\Column(type="float")
      */
     private $wohnflaecheDin;
 
     /**
-     * var integer
-     * @ORM\Column(type="integer")
+     * var float
+     * @ORM\Column(type="float")
      */
     private $wohnflaecheWoFiv;
+
+    /**
+     * var float
+     * @ORM\Column(type="float")
+     */
+    private $kaufpreis;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $preisInklMwSt = true;
 
     /**
      * @var Haustyp
@@ -43,25 +49,50 @@ class Haus  extends AbstractBasicEntity
     private $kataloghaus;
 
     /**
-     * @return string
+     * @var Projekt
+     *
+     * @ORM\OneToOne(targetEntity="Projekt", inversedBy="haus", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="projekt_id", referencedColumnName="id")
      */
-    public function getName()
+    private $projekt;
+
+    /**
+     * Funktionen
+     */
+
+    /**
+     * @return mixed
+     */
+    public function getKaufpreisInklMwst()
     {
-        return $this->name;
+        if ($this->preisInklMwSt === true) {
+            return $this->kaufpreis;
+        } else {
+            return $this->kaufpreis * 1.19;
+        }
     }
 
     /**
-     * @param string $name
+     * @return mixed
      */
-    public function setName($name)
+    public function getKaufpreisExklMwst()
     {
-        $this->name = $name;
+        if ($this->preisInklMwSt === true) {
+            return $this->kaufpreis / 1.19;
+        } else {
+            return $this->kaufpreis;
+        }
     }
+
+    /**
+     * Getter und Setter
+     */
 
     /**
      * @return Haustyp
      */
-    public function getHaustyp()
+    public
+    function getHaustyp()
     {
         return $this->haustyp;
     }
@@ -72,8 +103,10 @@ class Haus  extends AbstractBasicEntity
      * @param Haustyp $haustyp
      * @return Haus
      */
-    public function setHaustyp(Haustyp $haustyp = null)
-    {
+    public
+    function setHaustyp(
+        Haustyp $haustyp = null
+    ) {
         $this->haustyp = $haustyp;
         return $this;
     }
@@ -81,7 +114,8 @@ class Haus  extends AbstractBasicEntity
     /**
      * @return integer
      */
-    public function getWohnflaecheDin()
+    public
+    function getWohnflaecheDin()
     {
         return $this->wohnflaecheDin;
     }
@@ -89,15 +123,18 @@ class Haus  extends AbstractBasicEntity
     /**
      * @param integer $wohnflaecheDin
      */
-    public function setWohnflaecheDin($wohnflaecheDin)
-    {
+    public
+    function setWohnflaecheDin(
+        $wohnflaecheDin
+    ) {
         $this->wohnflaecheDin = $wohnflaecheDin;
     }
 
     /**
      * @return integer
      */
-    public function getWohnflaecheWoFiv()
+    public
+    function getWohnflaecheWoFiv()
     {
         return $this->wohnflaecheWoFiv;
     }
@@ -105,9 +142,90 @@ class Haus  extends AbstractBasicEntity
     /**
      * @param integer $wohnflaecheWoFiv
      */
-    public function setWohnflaecheWoFiv($wohnflaecheWoFiv)
-    {
+    public
+    function setWohnflaecheWoFiv(
+        $wohnflaecheWoFiv
+    ) {
         $this->wohnflaecheWoFiv = $wohnflaecheWoFiv;
+    }
+
+    /**
+     * @return Haustyp
+     */
+    public
+    function getKataloghaus()
+    {
+        return $this->kataloghaus;
+    }
+
+    /**
+     * @param Haustyp $kataloghaus
+     */
+    public
+    function setKataloghaus(
+        $kataloghaus
+    ) {
+        $this->kataloghaus = $kataloghaus;
+    }
+
+    /**
+     * @return Projekt
+     */
+    public
+    function getProjekt()
+    {
+        return $this->projekt;
+    }
+
+    /**
+     * @param Projekt $projekt
+     */
+    public
+    function setProjekt(
+        $projekt
+    ) {
+        $this->projekt = $projekt;
+        if (!$projekt->getHaus()) {
+            $projekt->setHaus($this);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public
+    function getKaufpreis()
+    {
+        return $this->kaufpreis;
+    }
+
+    /**
+     * @param mixed $kaufpreis
+     */
+    public
+    function setKaufpreis(
+        $kaufpreis
+    ) {
+        $this->kaufpreis = $kaufpreis;
+    }
+
+    /**
+     * @return boolean
+     */
+    public
+    function isPreisInklMwSt()
+    {
+        return $this->preisInklMwSt;
+    }
+
+    /**
+     * @param boolean $preisInklMwSt
+     */
+    public
+    function setPreisInklMwSt(
+        $preisInklMwSt
+    ) {
+        $this->preisInklMwSt = $preisInklMwSt;
     }
 
 }

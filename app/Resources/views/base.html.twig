@@ -12,7 +12,7 @@
     {#<link rel="icon" href="favicon.ico">#}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2" />
     <!-- Latest compiled and minified CSS -->
-    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">#}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {#{% block stylesheets %}#}
         {#{% stylesheets#}
         {#'css/*' %}#}
@@ -21,6 +21,8 @@
     {#{% endblock %}#}
 
     <link href="/Fuchsbau/web/css/all-stylesheet.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    {#<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">#}
 
     <title>{% block title %}Fuchsbau - Planung!{% endblock %}</title>
     <![endif]-->
@@ -75,38 +77,158 @@
             color: #fff;
             background-color: transparent;
         }
-        /*.subnav .navbar-nav > .active > a,*/
-        /*.subnav .navbar-nav > .active > a:hover,*/
-        /*.subnav .navbar-nav > .active > a:focus {*/
-            /*color: #fff;*/
-            /*background-color: #080808;*/
-        /*}*/
-        /*.subnav .navbar-nav > .disabled > a,*/
-        /*.subnav .navbar-nav > .disabled > a:hover,*/
-        /*.subnav .navbar-nav > .disabled > a:focus {*/
-            /*color: #444;*/
-            /*background-color: transparent;*/
-        /*}*/
-        /*.subnav .navbar-toggle {*/
-            /*border-color: #333;*/
-        /*}*/
-        /*.subnav .navbar-toggle:hover,*/
-        /*.subnav .navbar-toggle:focus {*/
-            /*background-color: #333;*/
-        /*}*/
-        /*.subnav .navbar-toggle .icon-bar {*/
-            /*background-color: #fff;*/
-        /*}*/
-        /*.subnav .navbar-collapse,*/
-        /*.subnav .navbar-form {*/
-            /*border-color: #101010;*/
-        /*}*/
-        /*.subnav .navbar-nav > .open > a,*/
-        /*.subnav .navbar-nav > .open > a:hover,*/
-        /*.subnav .navbar-nav > .open > a:focus {*/
-            /*color: #fff;*/
-            /*background-color: #080808;*/
-        /*}*/
+
+        /* LINK FX */
+        .btn-linkfx {
+            font-weight: normal;
+            color: #61625d;
+            cursor: pointer;
+            border-radius: 0;
+        }
+        .btn-linkfx,
+        .btn-linkfx:active,
+        .btn-linkfx[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .btn-linkfx,
+        .btn-linkfx:hover,
+        .btn-linkfx:focus,
+        .btn-linkfx:active {
+            border-color: transparent;
+        }
+        .btn-linkfx:hover,
+        .btn-linkfx:focus {
+            color: #4e4f4b;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: transparent;
+        }
+        .btn-linkfx[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-linkfx[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
+        /* LINK FX RED*/
+        .btn-linkfxred {
+            font-weight: normal;
+            color: #d0171f;
+            cursor: pointer;
+            border-radius: 0;
+        }
+        .btn-linkfxred,
+        .btn-linkfxred:active,
+        .btn-linkfxred[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .btn-linkfxred,
+        .btn-linkfxred:hover,
+        .btn-linkfxred:focus,
+        .btn-linkfxred:active {
+            border-color: transparent;
+        }
+        .btn-linkfxred:hover,
+        .btn-linkfxred:focus {
+            color: #b6141b;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: transparent;
+        }
+        .btn-linkfxred[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-linkfxred[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
+        /* LINK FX BRIGHTBLUR*/
+        .btn-link-fx-brightblue {
+            font-weight: normal;
+            color: #6aa2c3;
+            cursor: pointer;
+            border-radius: 0;
+        }
+        .btn-fx-link-fx-brightblue,
+        .btn-fx-link-fx-brightblue:active,
+        .btn-fx-link-fx-brightblue[disabled],
+        fieldset[disabled] .btn-link-fx-brightblue {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .btn-fx-link-fx-brightblue,
+        .btn-fx-link-fx-brightblue:hover,
+        .btn-link-fx-brightblue:focus,
+        .btn-link-fx-brightblue:active {
+            border-color: transparent;
+        }
+        .btn-link-fx-brightblue:hover,
+        .btn-link-fx-brightblue:focus {
+            color: #55829d;
+            text-decoration: none;
+            background-color: transparent;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .btn-link-fx-brightblue[disabled]:hover,
+        fieldset[disabled] .btn-link-fx-brightblue:hover,
+        .link-fx-brightblue-linkfxred[disabled]:focus,
+        fieldset[disabled] .link-fx-brightblue-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
+        /* BTN DEFAULT RED*/
+        .btn-foxy {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        .btn-foxy:hover,
+        .btn-foxy:focus,
+        .btn-foxy:active,
+        .btn-foxy.active,
+        .open .dropdown-toggle.btn-foxy {
+            color: #333;
+            background-color: #ebebeb;
+            border-color: #adadad;
+        }
+        .btn-foxy:active,
+        .btn-foxy.active,
+        .open .dropdown-toggle.btn-foxy {
+            background-image: none;
+        }
+        .btn-foxy.disabled,
+        .btn-foxy[disabled],
+        fieldset[disabled] .btn-foxy,
+        .btn-foxy.disabled:hover,
+        .btn-foxy[disabled]:hover,
+        fieldset[disabled] .btn-foxy:hover,
+        .btn-foxy.disabled:focus,
+        .btn-foxy[disabled]:focus,
+        fieldset[disabled] .btn-foxy:focus,
+        .btn-foxy.disabled:active,
+        .btn-foxy[disabled]:active,
+        fieldset[disabled] .btn-foxy:active,
+        .btn-foxy.disabled.active,
+        .btn-foxy[disabled].active,
+        fieldset[disabled] .btn-foxy.active {
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        .btn-foxy .badge {
+            color: #fff;
+            background-color: #333;
+        }
 
         .subnav .navbar-link {
             color: #999;
@@ -129,11 +251,15 @@
 <div class="container">
     <div>
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {#{% block content %}{% endblock %}#}
+
             {#{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |#}
             {#<a href="{{ path('fos_user_security_logout') }}">#}
             {#{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}#}
             {#</a>#}
         {% else %}
+
+            {#{% include "ausgeloggt.html.twig" %}#}
             {#<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>#}
         {% endif %}
     </div>

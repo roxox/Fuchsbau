@@ -1,0 +1,95 @@
+<div>
+    <h3>Projektinfos:</h3>
+</div>
+Zunächsteinmal eine kleine Zusammenfassung des Projekts, besthend aus: <b>Arbeitstitel</b> (sofern
+vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden), <b> der aktuell
+    kalkulierte Preis</b>.<br><br>
+<table class="table table-condensed">
+    <tr>
+        <th>
+            Projekttitel
+        </th>
+        <th>
+            Bauort
+        </th>
+        <th>
+            Haustyp
+        </th>
+        <th>
+            Bauträger
+        </th>
+        <th>
+            Meine Rollen
+        </th>
+        <th colspan="2">
+            Gesamtkosten
+        </th>
+    </tr>
+    <tr>
+        <td style="width: 12%">
+            <p>{{ projekt.getName() }}</p>
+        </td>
+        <td style="width: 15%">
+            {% if projekt.getGrundstueck != null %}
+                {{ projekt.getGrundstueck.getStrasse() }} {{ projekt.getGrundstueck.getHausnummer() }}
+                {% if  projekt.getGrundstueck.getZusatz != null %}
+                    <br>{{ projekt.getGrundstueck.getZusatz }}
+                {% endif %}
+                <br>{{ projekt.getGrundstueck.getPostleitzahl }} {{ projekt.getGrundstueck.getOrt }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td style="width: 15%">
+            {% if projekt.getHaus != null %}
+                {{ projekt.getHaus.getHausTyp.getName }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td style="width: 16%">
+            {#{% if projekt.Haus != null %}#}
+            {#{% if projekt.Haus.getBautraeger != null %}#}
+            {#{{ projekt.getHaus.getBautraeger.getName }}#}
+            {#{% else %}#}
+            {#-#}
+            {#{% endif %}#}
+            {#{{ projekt.getHaus.getHausTyp }}#}
+            {#{% else %}#}
+            {#-#}
+            {#{% endif %}#}
+            -
+        </td>
+        <td style="width: 10%">
+            {% for rolle in meineRollen %}
+                {{ rolle.getName }}
+            {% endfor %}
+        </td>
+        <td style="width: 20%">
+
+            <b>365.432,98 Euro (inkl MwSt.)</b><br>
+            <span style="font-size: x-small">
+            {% if projekt.getGrundstueck %}
+                Grundstück {{ projekt.getGrundstueck.getGroesse * (projekt.getGrundstueck.getKaufpreis + projekt.getGrundstueck.getErschiessungskostenanteil) }}
+                Euro (inkl MwSt.)<br>+
+            {% endif %}
+                 Haus 128.132,98 Euro (inkl MwSt.)<br> +
+                             Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>
+                            - Gutschriften 3.412,17 Euro (inkl MwSt.)<br>
+                            + Außenanlagen 33.632,42 Euro (inkl MwSt.)<br>
+                            + Inneneinrichtung 16.242,00 Euro (inkl MwSt.)</span>
+        </td>
+        <td style="width: 25%" align="right">
+            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+            </button>
+            <br>
+            <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7"></td>
+    </tr>
+</table>

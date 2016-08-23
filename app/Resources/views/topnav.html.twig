@@ -11,31 +11,36 @@
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse">
-                    {#<h2 style="color: #7f7f7f">{{ headline }}</h2></div>#}
-                        <ul class="nav navbar-nav pull-right">
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                <li><a href="{{ path('homepage') }}">Übersicht</a></li>
-                                <li><a href="{{ path('display_current_projects') }}">Projekte</a></li>
-                                {#<li><a href="#"> Terminkalender</a></li>#}
-                                {#<li><a href="#"> Notizen</a></li>#}
-                                {#<li><a href="#"> </a></li>#}
-                                <li><a href="#"> Nachrichten</a></li>
-                                <li><a href="{{ path('display_current_person') }}">Mein Profil</a></li>
-                                <li><a href="#"> </a></li>
-                                <li><a href="{{ path('fos_user_security_logout') }}">Log-Out</a></li>
+                {#<h2 style="color: #7f7f7f">{{ headline }}</h2></div>#}
+                <ul class="nav navbar-nav pull-right">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li><a href="{{ path('homepage') }}">Meine Projekte</a>
+                            {#<li><a href="{{ path('display_all_projects') }}">Projekte</a></li>#}
+                            <!-- <li><a href="#"> Nachrichten</a></li>
+                            <li><a href="#"> Bauforum</a></li>
+                            <li><a href="#"> </a></li> -->
+                        {% if user is defined %}
+                            <li><a href="{{ path('display_current_person') }}">
+                            {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
+                                {{ user.person.vorname }} {{ user.person.nachname }}
                             {% else %}
-                                <li><a href="{{ path('fos_user_security_login') }}">Log-In alt</a></li>
-                                <li><a href="{{ path('fos_user_security_login') }}" data-toggle="modal"
-                                        data-target="#registerPopup">Log-In</a></li>
-                                <li><a href="{{ path('registration_register_user') }}">Registrieren alt</a></li>
-                                <li><a href="{{ path('registration_register_user_modal') }}" data-toggle="modal"
-                                       data-target="#registerPopup">Registrieren</a></li>
-
+                                {{ user.username }}
                             {% endif %}
-                        </ul>
-                </div>
-                <!--/.nav-collapse -->
+                            <span style="font-size: x-small"> Profil bearbeiten</span></a></li>
+                        {% else %}
+                            <li><a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
+                        {% endif %}
+                        <li><a href="#"> </a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Log-Out</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Log-In</a></li>
+                        <li><a href="{{ path('registration_register_user') }}">Registrieren</a></li>
+
+                    {% endif %}
+                </ul>
             </div>
+            <!--/.nav-collapse -->
+        </div>
     </nav>
 </section>
 <!-- /.NAVIGATION -->

@@ -5,8 +5,23 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
 
-    <route id="display_current_projects" path="/display" methods="GET">
-        <default key="_controller">AppBundle:Projekte:displayCurrentProjekt</default>
+    <route id="display_all_projects" path="/display_all_projects" methods="GET">
+        <default key="_controller">AppBundle:Projekte:displayAllProjectsForUser</default>
+    </route>
+    <route id="display_project_by_project_id" path="/{projektId}/display_project" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:displayProjectById</default>
+    </route>
+    <route id="add_grundstueck_to_current_projekt_modal" path="/{projektId}/add_grundstueck_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:addGrundstueck</default>
+    </route>
+    <route id="add_haus_to_current_projekt_modal" path="/{projektId}/add_haus_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:addHaus</default>
+    </route>
+    <route id="add_projekt_modal" path="/add_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:addProjekt</default>
+    </route>
+    <route id="display_intern_extras_by_projekt" path="/{projektId}/display_intern_extras_by_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:displayInternExtrasByProjectId</default>
     </route>
 
 </routes>

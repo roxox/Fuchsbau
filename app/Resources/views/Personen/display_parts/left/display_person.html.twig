@@ -1,0 +1,30 @@
+<h4>Name</h4>
+<div class="text">
+    <p>Dein Name sollte sich nicht nach belieben anpassen, aber sollte mal eine Hochzeit dazwischen
+        kommen, du konntest dich nicht durchsetzen und dein Nachname ändert sich tatsächlich, dann
+        kannst du das hier ändern.</p>
+</div>
+<br>
+<table style="width: 100%">
+    <tr>
+        <td style="width: 50%;">
+            <span style="font-size: small">{{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}
+                {{ person.getTitel() == null ? '' : person.getTitel().getName() }}</span>
+            <p><b>{{ person.getVorname() }} {{ person.getNachname() }}</b></p>
+        </td>
+        <td colspan="3" align="right">
+            <!-- Button Edit -->
+            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                    href="{{ path('edit_current_person') }}"
+                    data-toggle="modal"
+                    data-target="#editPersonPopup">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+            </button>
+    </tr>
+</table>
+<br>
+
+<div>
+    <!-- Popups -->
+    {% include "Personen/display_parts/left/popups/person/popup_person_edit.html.twig" %}
+</div>

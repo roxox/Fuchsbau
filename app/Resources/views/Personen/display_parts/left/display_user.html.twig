@@ -1,0 +1,58 @@
+<h4>User</h4>
+<div class="text">
+    <p>Jeder hat einen Usernamen und manchmal findet man genau diesen Usernamen nicht mehr so toll.
+        Für
+        den
+        Fall, dass es soweit kommt, kannst du hier deinen Usernamen und dein Passwort ändern.</p>
+</div>
+<table style="width: 100%">
+    <tr style="width: 100%">
+        <td style="width: 50%">
+            <b>{{ user.getUsername() }}</b><br>
+            <span style="font-size: small">{{ user.getEmail() }}</span>
+        </td>
+        {#<td style="width: 120px;">#}
+        {#</td>#}
+
+        <td style="font-size: small; width: 50%" align="right">
+
+            <!-- Button Edit -->
+            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                    href="{{ path('edit_current_user') }}"
+                    data-toggle="modal"
+                    data-target="#editUserPopup">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+            </button>
+
+            <!-- Button Delete -->
+            <a class="btn btn-linkfxred btn-xs"
+               href="#">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 50%">
+            Kennwort
+        </td>
+        {#<td style="width: 120px;">#}
+        {#</td>#}
+        <td style="width: 50%" align="right">
+            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                    href="{{ path('update_user_by_current_person') }}">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+            </button>
+        </td>
+    </tr>
+</table>
+<br><br>
+
+<div>
+    <!-- Popups -->
+    {% include "Personen/display_parts/left/popups/user/popup_user_edit.html.twig" %}
+</div>

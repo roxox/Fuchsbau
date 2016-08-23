@@ -16,25 +16,17 @@ class Rolle extends AbstractBasicEntity
 
     /**
      * @var string
-     *
      * @ORM\Column(type="string", length=255)
      */
-    private $rollenName;
-
-    /**
-     * @var Firma
-     *
-     * @ORM\ManyToOne(targetEntity="Firma", inversedBy="rollen", cascade={"remove", "persist"})
-     * @ORM\JoinColumn(name="firma_id", referencedColumnName="id", onDelete="set null")
-     */
-    private $firma;
+    private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Person", mappedBy="rollen")
+     * @ORM\ManyToMany(targetEntity="Firma", inversedBy="rollen", cascade={"remove", "persist"})
+     * @ORM\JoinTable(name="firmen_rollen")
      */
-    private $personen;
+    private $firmen;
 
     /**
      * @var Projekt
@@ -45,81 +37,79 @@ class Rolle extends AbstractBasicEntity
     private $projekt;
 
     /**
-     * Address rolle.
-     * @param string $rollenName
+     * @var Rolletyp
+     * @ORM\ManyToOne(targetEntity="Rolletyp")
      */
-    public function __construct(string $rollenName)
+    private $rolletyp;
+
+    /**
+     * @var float
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $kosten;
+
+    /**
+     * @var Mehrwertsteuer
+     * @ORM\ManyToOne(targetEntity="Mehrwertsteuer")
+     */
+    private $mehrwertsteuer;
+
+    /**
+     * Rolle constructor.
+     * @param string $name
+     */
+    public function __construct(string $name)
     {
-        $this->rollenName = $rollenName;
+        $this->name = $name;
         $this->firmen = new ArrayCollection();
-        $this->personen = new ArrayCollection();
     }
 
     /**
-     * @return ArrayCollection
+     * @return string
      */
-    public function getPersonen()
+    public function getName()
     {
-        return $this->personen->toArray();
+        return $this->name;
     }
 
     /**
-     * @param Person $person
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return array|Firma[]
+     */
+    public function getFirmen()
+    {
+        return $this->firmen->toArray();
+    }
+
+    /**
+     * @param Firma $firma
      * @return self
      */
-    public function addPerson(Person $person)
+    public function addFirma(Firma $firma)
     {
-        $this->personen->add($person);
+        $this->firmen->add($firma);
 
-        if (!$person->hasRolle($this)) {
-            $person->addRolle($this);
+        if (!$firma->hasRolle($this)) {
+            $firma->addRolle($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Person $person
+     * @param Firma $firma
      * @return bool
      */
-    public function hasPerson(Person $person)
+    public function hasFirma(Firma $firma)
     {
-        return $this->personen->contains($person);
-    }
-
-    /**
-     * @return string
-     */
-    public function getRollenName()
-    {
-        return $this->rollenName;
-    }
-
-    /**
-     * @param string $rollenName
-     */
-    public function setRollenName($rollenName)
-    {
-        $this->rollenName = $rollenName;
-    }
-
-    /**
-     * @return Firma
-     */
-    public function getFirma()
-    {
-        return $this->firma;
-    }
-
-    /**
-     * @param Firma $firma
-     */
-    public function setFirma($firma)
-    {
-        $this->firma = $firma;
-        if (!$firma->hasRolle($this)){
-            $firma->addRolle($this);
-        }
+        return $this->firmen->contains($firma);
     }
 
     /**
@@ -139,6 +129,77 @@ class Rolle extends AbstractBasicEntity
         if (!$projekt->hasRolle($this)){
             $projekt->addRolle($this);
         }
+    }
+
+    /**
+     * @return Rolletyp
+     */
+    public function getRolletyp()
+    {
+        return $this->rolletyp;
+    }
+
+    /**
+     * @param Rolletyp $rolletyp
+     */
+    public function setRolletyp($rolletyp)
+    {
+        $this->rolletyp = $rolletyp;
+    }
+
+    /**
+     * @return Mehrwertsteuer
+     */
+    public
+    function getMehrwertsteuer()
+    {
+        return $this->mehrwertsteuer;
+    }
+
+    /**
+     * Set mehrwertsteuer
+     *
+     * @param Mehrwertsteuer $mehrwertsteuer
+     * @return Rolle
+     */
+    public
+    function setMehrwertsteuer(
+        Mehrwertsteuer $mehrwertsteuer = null
+    ) {
+        $this->mehrwertsteuer = $mehrwertsteuer;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getKosten()
+    {
+        return $this->kosten;
+    }
+
+    /**
+     * @param float $kosten
+     */
+    public function setKosten($kosten)
+    {
+        $this->kosten = $kosten;
+    }
+
+    /**
+     * @return float %kostenInklMwst
+     */
+    public function getKostenInklMwsT()
+    {
+        return $this->mehrwertsteuer->isInklusive() ? $this->kosten : $this->kosten * (($this->mehrwertsteuer->getWert() / 100) + 1);
+    }
+
+    /**
+     * @return float %kostenExklMwst
+     */
+    public function getKostenExklMwsT()
+    {
+        return $this->mehrwertsteuer->isInklusive() ? $this->kosten / (($this->mehrwertsteuer->getWert() / 100) + 1) : $this->kosten;
     }
 
 

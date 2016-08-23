@@ -1,0 +1,135 @@
+<br>
+<div>
+    <h3>Bauort / Grundstück</h3>
+</div>
+<div>
+    <table class="table table-condensed">
+        <tr>
+            <th>
+                Adresse
+            </th>
+            <th>
+                Bundesland
+            </th>
+            <th>
+                Grunderwerbssteuer <br><span
+                        style="font-size: x-small">(zum Zeitpunkt der Projektanlage)</span>
+            </th>
+            <th>
+                Größe in m²
+            </th>
+            <th>
+                Preis je m² <br><span
+                        style="font-size: x-small">(Kaufpreis / Erschließungskostenanteil)</span>
+            </th>
+            <th>
+                Gesamtpreis
+            </th>
+            <th></th>
+        </tr>
+
+
+        {% if projekt.getGrundstueck != null %}
+            <tr>
+                <td>
+                    {{ projekt.getGrundstueck.getStrasse() }} {{ projekt.getGrundstueck.getHausnummer() }}
+                    {% if  projekt.getGrundstueck.getZusatz != null %}
+                        <br>{{ projekt.getGrundstueck.getZusatz }}
+                    {% endif %}
+                    <br>{{ projekt.getGrundstueck.getPostleitzahl }} {{ projekt.getGrundstueck.getOrt }}
+                </td>
+                <td>
+                    {{ projekt.getGrundstueck.getBundesland.getName }}
+                </td>
+                <td>
+                    {{ projekt.getGrundstueck.getBundesland.getGrunderwerbssteuersatz }}%
+                </td>
+                <td>
+                    {{ projekt.getGrundstueck.getGroesse }}
+                </td>
+                <td>
+                    {{ projekt.getGrundstueck.getKaufpreis + projekt.getGrundstueck.getErschiessungskostenanteil }} Euro
+                    <span style="font-size: x-small">({{ projekt.getGrundstueck.getKaufpreis }}
+                        Euro / {{ projekt.getGrundstueck.getErschiessungskostenanteil }} Euro)</span>
+                </td>
+                <td>
+                    <b>{{ projekt.getGrundstueck.getGroesse * (projekt.getGrundstueck.getKaufpreis + projekt.getGrundstueck.getErschiessungskostenanteil) }}
+                        Euro (inkl MwSt.)</b>
+                </td>
+                <td style="font-size: small" align="right">
+                    <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+                    </button>
+                    <br>
+                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+                    </button>
+                </td>
+               <!-- <td colspan="7" align="right">
+                    <button type="button" class="btn btn-default btn-xs"
+                            href="{{ path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()}) }}"
+                            data-toggle="modal"
+                            data-target="#addGrundstueckPopup">Bearbeiten
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs"
+                            href="{{ path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()}) }}"
+                            data-toggle="modal"
+                            data-target="#addGrundstueckPopup">Löschen
+                    </button>
+                    <br>
+                </td> -->
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7" align="center">
+                    Noch wurde kein Grundstück hinzugefügt
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" align="right">
+                    {#<br>#}
+                    {#<button type="button" class="btn btn-default btn-xs"#}
+                            {#href="{{ path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()}) }}"#}
+                            {#data-toggle="modal"#}
+                            {#data-target="#addGrundstueckPopup">Grundstück hinzufügen#}
+                    {#</button>#}
+                    {#<br><br>#}
+
+
+                    <br>
+                    <!-- Trigger the modal with a button -->
+                    <a class="btn btn-link-fx-brightblue btn-xs"
+                       href="{{ path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()}) }}"
+                       data-toggle="modal"
+                       data-target="#addGrundstueckPopup"
+                       role="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Grundstück hinzufügen </a>
+                    <br><br>
+                </td>
+            </tr>
+        {% endif %}
+        </tr>
+        <tr>
+            <td colspan="7"></td>
+        </tr>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="addGrundstueckPopup" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Email Adresse hinzufügen</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        Lade Formular
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

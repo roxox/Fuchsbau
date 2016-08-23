@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="projekt")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProjektRepository")
  */
 class Projekt extends AbstractBasicEntity
 {
@@ -16,47 +17,13 @@ class Projekt extends AbstractBasicEntity
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $projektName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $strasse;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $hausnummer;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $zusatz;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column( type="string", length=255)
-     */
-    private $postleitzahl;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ort;
+    private $name;
 
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Rolle", mappedBy="projekt", cascade={"remove", "persist"})
+     * @ORM\ManyToMany(targetEntity="Rolle", inversedBy="projekte", cascade={"remove", "persist"})
+     * @ORM\JoinTable(name="projekte_rollen")
      */
     private $rollen;
 
@@ -85,6 +52,29 @@ class Projekt extends AbstractBasicEntity
     private $einladungscode;
 
     /**
+     * @var Haus
+     *
+     * @ORM\OneToOne(targetEntity="Haus", inversedBy="projekt", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="haus_id", referencedColumnName="id")
+     */
+    private $haus;
+
+    /**
+     * @var Grundstueck
+     *
+     * @ORM\OneToOne(targetEntity="Grundstueck", inversedBy="projekt", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="grundstueck_id", referencedColumnName="id")
+     */
+    private $grundstueck;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $lastOpened = false;
+
+    /**
      * Projekt constructor.
      */
     public function __construct()
@@ -96,99 +86,112 @@ class Projekt extends AbstractBasicEntity
     }
 
     /**
+     * Funktionen
+     */
+
+    /**
+     * Ermittlung aller Firmen, die über Rollen an einem Projekt tätig sind.
+     *
+     * @return Firma[]|array
+     */
+    public function getFirmen()
+    {
+        $firmen = [];
+        /** @var Rolle $rolle */
+        foreach ($this->getRollen() as $rolle) {
+            foreach ($rolle->getFirmen() as $firma) {
+                if ($firma->isNoCompany() === false) {
+                    $firmen[] = $firma;
+                }
+            }
+        }
+        return $firmen;
+
+    }
+
+    /**
+     * Ermittlung aller Firmen, die über Rollen an einem Projekt tätig sind.
+     *
+     * @return array|Person[]
+     */
+    public function getPersonen()
+    {
+        $personenArr = [];
+        /** @var Rolle $rolle */
+        foreach ($this->getRollen() as $rolle) {
+            /** @var Firma $firma */
+            foreach ($rolle->getFirmen() as $firma) {
+                foreach ($firma->getPersonen() as $person) {
+                    $personenArr[] = $person;
+                }
+            }
+        }
+        return array_unique(array_merge([], $personenArr));
+    }
+
+    public function getRolleByTypKurzname(string $kurzname)
+    {
+        $rolleArr = [];
+        foreach ($this->getRollen() as $rolle) {
+            /** @var Rolle $rolle */
+            if ($rolle->getRolletyp()->getKurzname() === $kurzname) {
+                $rolleArr[] = $rolle;
+            }
+        }
+        return $rolleArr;
+    }
+
+    public function getGesamtKostenByKurzname(string $kurzname)
+    {
+        $rollen = $this->getRolleByTypKurzname($kurzname);
+        $gesamt = 0;
+        /** @var Rolle $rolle */
+        foreach ($rollen as $rolle) {
+            $gesamt = $gesamt + $rolle->getKosten();
+        }
+        return $gesamt;
+    }
+
+    public function getGesamtKostenInklMwstByKurzname(string $kurzname)
+    {
+        $rollen = $this->getRolleByTypKurzname($kurzname);
+        $gesamt = 0;
+        /** @var Rolle $rolle */
+        foreach ($rollen as $rolle) {
+            $gesamt = $gesamt + $rolle->getKostenInklMwsT();
+        }
+        return $gesamt;
+    }
+
+    public function getGesamtKostenExklMwstByKurzname(string $kurzname)
+    {
+        $rollen = $this->getRolleByTypKurzname($kurzname);
+        $gesamt = 0;
+        /** @var Rolle $rolle */
+        foreach ($rollen as $rolle) {
+            $gesamt = $gesamt + $rolle->getKostenExklMwsT();
+        }
+        return $gesamt;
+    }
+
+    /**
+     * Getter und Setter
+     */
+
+    /**
      * @return string
      */
-    public function getProjektName()
+    public function getName()
     {
-        return $this->projektName;
+        return $this->name;
     }
 
     /**
-     * @param string $projektName
+     * @param string $name
      */
-    public function setProjektName($projektName)
+    public function setName($name)
     {
-        $this->projektName = $projektName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStrasse()
-    {
-        return $this->strasse;
-    }
-
-    /**
-     * @param string $strasse
-     */
-    public function setStrasse($strasse)
-    {
-        $this->strasse = $strasse;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHausnummer()
-    {
-        return $this->hausnummer;
-    }
-
-    /**
-     * @param string $hausnummer
-     */
-    public function setHausnummer($hausnummer)
-    {
-        $this->hausnummer = $hausnummer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZusatz()
-    {
-        return $this->zusatz;
-    }
-
-    /**
-     * @param string $zusatz
-     */
-    public function setZusatz($zusatz)
-    {
-        $this->zusatz = $zusatz;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPostleitzahl()
-    {
-        return $this->postleitzahl;
-    }
-
-    /**
-     * @param string $postleitzahl
-     */
-    public function setPostleitzahl($postleitzahl)
-    {
-        $this->postleitzahl = $postleitzahl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrt()
-    {
-        return $this->ort;
-    }
-
-    /**
-     * @param string $ort
-     */
-    public function setOrt($ort)
-    {
-        $this->ort = $ort;
+        $this->name = $name;
     }
 
     /**
@@ -282,6 +285,60 @@ class Projekt extends AbstractBasicEntity
     public function setEinladungscode($einladungscode)
     {
         $this->einladungscode = $einladungscode;
+    }
+
+    /**
+     * @return Haus
+     */
+    public function getHaus()
+    {
+        return $this->haus;
+    }
+
+    /**
+     * @param Haus $haus
+     */
+    public function setHaus($haus)
+    {
+        $this->haus = $haus;
+        if (!$haus->getProjekt()) {
+            $haus->setProjekt($this);
+        }
+    }
+
+    /**
+     * @return Grundstueck
+     */
+    public function getGrundstueck()
+    {
+        return $this->grundstueck;
+    }
+
+    /**
+     * @param Grundstueck $grundstueck
+     */
+    public function setGrundstueck($grundstueck)
+    {
+        $this->grundstueck = $grundstueck;
+        if (!$grundstueck->getProjekt()) {
+            $grundstueck->setProjekt($this);
+        }
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLastOpened()
+    {
+        return $this->lastOpened;
+    }
+
+    /**
+     * @param boolean $lastOpened
+     */
+    public function setLastOpened($lastOpened)
+    {
+        $this->lastOpened = $lastOpened;
     }
 
 

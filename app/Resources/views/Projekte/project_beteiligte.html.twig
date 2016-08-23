@@ -1,0 +1,158 @@
+<div>
+    <h3>
+        Projektbeteiligte:
+    </h3>
+</div>
+<div>Hier kannst du dir alle Teilnehmer des Projekts ansehen und den beteiligten von hier aus
+    Nachrichten schicken. Als Teilnehmer, der nicht gleichzeitiig Besitzer des Projekts ist,
+    kann man das Projekt nicht löschen, es jedoch jederzeit verlassen.<br><br>
+
+    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+            data-target="#collapseProjektBeteiligte">
+        Einträge ein-/ausblenden
+    </button>
+
+    <br><br>
+
+    <div class="collapse in" id="collapseProjektBeteiligte">
+        <h4>Fuchsbau-User <span style="font-size: small">(Tatsächliche User, die hier angemeldet sind und entweder als Beobachte, Bauherr(-in), usw. am Projekt beteiligt sind)</span>
+        </h4></h4>
+        Der Projektbesitzer hat die meisten Rechte, er kann weitere Personen zum Projekt einladen, die
+        je
+        nach
+        Rolle die Möglichkeit haben das Projekt anzusehen oder zu bearbeiten, er kann den Besitz des
+        Projekts an
+        einen anderen User übertragen, und er kann das gesamte Projekt löschen.<br><br>
+        <table class="table table-condensed">
+            <tr>
+                <th>Username</th>
+                <th>Nachname, Vorname</th>
+                <th colspan="2">Rollen im Projekt</th>
+            </tr>
+
+            {% for user in projekt.getUsers %}
+                <tr>
+                    <td>
+                        {% if  user == projekt.getOwner %}
+                            <i> {{ user.getUserName }} </i>
+                        {% else %}
+                            {{ user.getUserName }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if  user == projekt.getOwner %}
+                            <i> {{ user.getPerson.getNachname }} {{ user.getPerson.getVorname }} </i>
+                        {% else %}
+                            {{ user.getPerson.getNachname }} {{ user.getPerson.getVorname }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if  user == projekt.getOwner %}
+                            <i>
+                                {% for rolle in user.getPerson.getPersonenRollenByProjekt(projekt) %}
+                                    {{ rolle.getName }}
+                                {% endfor %}
+                            </i>
+                        {% else %}
+                            {% for rolle in user.getPerson.getPersonenRollenByProjekt(projekt) %}
+                                {{ rolle.getName }}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                    {% if  user != projekt.getOwner %}
+                        <td style="width: 25%" align="right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Projekt übertragen</a>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Nachricht senden</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Entfernen</a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6" align="right">
+                    <br>
+                    <a class="btn btn-link-fx-brightblue btn-xs"
+                       href="{{ path('display_intern_extras_by_projekt', {'projektId': projekt.getId()}) }}"
+                       role="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> User einladen </a>
+                    <br><br>
+                </td>
+            </tr>
+        </table>
+        <h4>Firmen <span style="font-size: small">(Bauträger, Ausführende Gewerke, etc...)</span></h4>
+        Der Projektbesitzer hat die meisten Rechte, er kann weitere Personen zum Projekt einladen, die
+        je
+        nach
+        Rolle die Möglichkeit haben das Projekt anzusehen oder zu bearbeiten, er kann den Besitz des
+        Projekts an
+        einen anderen User übertragen, und er kann das gesamte Projekt löschen.<br><br>
+        <table class="table table-condensed">
+
+            <tr>
+                <th>Firmenname</th>
+                <th>Adressen</th>
+                <th>Telefon- /Faxnummer</th>
+                <th>Emailadresse</th>
+                <th colspan="2">Rollen im Projekt</th>
+            </tr>
+            {% if projekt.getFirmen != null %}
+            {% for firma in projekt.getFirmen %}
+                <tr>
+                    <td>
+                        firma.getName
+                    </td>
+                    <td>
+                        {% for rolle in firma.getRollen %}
+                            {{ rolle.getName }}
+                        {% endfor %}
+                    </td>
+                        <td style="width: 25%" align="right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Projekt übertragen</a>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Nachricht senden</a>
+                            <a class="btn btn-danger btn-xs"
+                               href="{{ path('update_person_by_current_person') }}"
+                               role="button">Entfernen</a>
+                        </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="4"></td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6" align="center">
+                        Bisher wurde noch keine Firma angelegt
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" align="right">
+                        <br>
+                        <a class="btn btn-link-fx-brightblue btn-xs"
+                           href="{{ path('display_intern_extras_by_projekt', {'projektId': projekt.getId()}) }}"
+                           role="button">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Firma hinzufügen </a>
+                        <br><br>
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        <hr>
+
+        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                data-target="#collapseProjektBeteiligte">
+            Einträge ein-/ausblenden
+        </button>
+    </div>
+</div>
+
+<hr>

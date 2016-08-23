@@ -4,8 +4,6 @@
 
 
 <div class="adressen_update_user">
-
-
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-4">
@@ -24,43 +22,12 @@
                     {{ form_row(form.email) }}
                     {{ form_row(form.plainPassword.first) }}
                     {{ form_row(form.plainPassword.second) }}
-                    {#<div>#}
-                    {#<input type="submit" value="{{ 'registration.submit'|trans }}" />#}
-                    {#</div>#}
                     <div>
                         <br>
-                        {#<input type="submit" value="{{ 'profile.edit.submit'|trans }}" />#}
-                        <input type="submit" class="btn btn-success" value="Benutzer anlegen">
-                        {#<a class="btn btn-success" href="#" role="button">update</a>#}
-                        {#<a class="btn btn-danger" href="{{ path('display_current_person') }}" role="button">abbruch</a>#}
+                        <input type="submit" class="btn btn-default btn-sm" value="Benutzer anlegen">
                     </div>
                     {{ form_end(form) }}
                 </div>
-                {#<br>#}
-                {#<hr>#}
-                {#<br>#}
-                {#<h4>Name</h4>#}
-                {#<div class="text">#}
-                {#<p>Dein Name sollte sich nicht nach belieben anpassen, aber sollte mal eine Hochzeit dazwischen#}
-                {#kommen, du konntest dich nicht durchsetzen und dein Nachname ändert sich tatsächlich, dann#}
-                {#kannst du das hier ändern.</p>#}
-                {#</div>#}
-
-                {#<table>#}
-                {#<tr>#}
-                {#<th style="width: 300px;">#}
-                {#{{ person.getVorname() }} {{ person.getNachname() }}#}
-                {#</th>#}
-                {#<th style="width: 120px;">#}
-                {#&#123;&#35;<a class="btn btn-default" href="#" role="button">bearbeiten</a>&#35;&#125;#}
-
-                {#</th>#}
-                {#<th style="width: 120px;">#}
-                {#&#123;&#35;<a class="btn btn-default btn-sm" href="#" role="button">bearbeiten</a>&#35;&#125;#}
-                {#</th>#}
-                {#</tr>#}
-                {#</table>#}
-                {#<hr>#}
 
             </div>
         </div><!-- /.col-lg-4 -->
@@ -68,138 +35,11 @@
             <br><br>
             <h2 style="color: #FFFFFF;"> .</h2>
             <br><br>
-            {#<div>#}
-            {#<h4>Adressen</h4>#}
-            {#<div class="text">#}
-            {#<p>Eine Adresse hast du mit Sicherheit schon, eine neue wird bald hinzukommen, hier kannst du deine#}
-            {#aktuellen Adressen (egal ob privat, geschäftlich hinterlegen.</p><br>#}
-            {#</div>#}
-            {#{% for adresse in adressen %}#}
-            {#<div align="right">#}
-            {#<table>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#{{ adresse.getStrasse() }} {{ adresse.getHausnummer() }}#}
-            {#</th>#}
-            {#<th style="width: 120px;">#}
-
-            {#&#123;&#35;<button type="button" class="btn btn-default btn-sm">&#35;&#125;#}
-            {#&#123;&#35;<span class="glyphicon glyphicon-wrench"></span>bearbeiten&#35;&#125;#}
-            {#&#123;&#35;</button>&#35;&#125;#}
-            {#&#123;&#35;<a class="btn btn-default btn-sm" href="#" role="button">bearbeiten</a>&#35;&#125;#}
-            {#</th>#}
-            {#<th style="width: 120px; vert-align: bottom">#}
-
-            {#&#123;&#35;<button type="button" class="btn btn-danger btn-sm">&#35;&#125;#}
-            {#&#123;&#35;<span class="glyphicon glyphicon-trash">löschen</span>&#35;&#125;#}
-            {#&#123;&#35;</button>&#35;&#125;#}
-            {#&#123;&#35;<a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>&#35;&#125;#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#{{ adresse.getPostleitzahl() }} {{ adresse.getOrt() }}#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#({{ adresse.getPrivatGeschaeft().getName() }})#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#<br>#}
-            {#Hauptadresse: {{ adresse.isHauptadresse() ? 'ja' : 'nein' }}#}
-            {#</th>#}
-            {#</tr>#}
-            {#</table>#}
-
-            {#<hr>#}
-            {#<br>#}
-            {#</div>#}
-            {#{% endfor %}#}
-            {#<div>#}
-            {#&#123;&#35;<button type="button" class="btn btn-success btn-sm">&#35;&#125;#}
-            {#&#123;&#35;<span class="glyphicon glyphicon-file"></span>&#35;&#125;#}
-            {#&#123;&#35;</button>&#35;&#125;#}
-            {#&#123;&#35;<a class="btn btn-success btn-sm" href="#" role="button">neue Adresse</a>&#35;&#125;#}
-            {#</div>#}
-            {#</div>#}
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <br><br>
             <h2 style="color: #FFFFFF;"> .</h2>
             <br><br>
-            {#<div>#}
-
-            {#&#123;&#35; Telefon &#35;&#125;#}
-            {#<h4>Telefonnummern</h4>#}
-            {#<div class="text">#}
-            {#<p>Ähnlich wie bei den Adressen, wirst du sicherlich die ein oder andere Telefonnummer haben, die du#}
-            {#hier verwalten kannst.</p><br>#}
-            {#</div>#}
-            {#{% for telefonnummer in person.getTelefonnummern() %}#}
-            {#<div align="right">#}
-            {#<table>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#{{ telefonnummer.getTelefonTyp().getKurzname() }}: {{ telefonnummer.getVorwahl() }} / {{ telefonnummer.getTelefonnummer() }} {{ telefonnummer.getDurchwahl() ? ' - ' : '' }} {{ telefonnummer.getDurchwahl() }}#}
-            {#</th>#}
-            {#<th style="width: 120px;">#}
-
-            {#&#123;&#35;<a class="btn btn-default btn-sm" href="#" role="button">bearbeiten</a>&#35;&#125;#}
-            {#</th>#}
-            {#<th style="width: 120px; vert-align: bottom">#}
-            {#&#123;&#35;<a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>&#35;&#125;#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#({{ telefonnummer.getPrivatGeschaeft().getName() }})#}
-            {#</th>#}
-            {#</tr>#}
-            {#</table>#}
-            {#<hr>#}
-            {#</div>#}
-            {#{% endfor %}#}
-            {#<div>#}
-            {#&#123;&#35;<a class="btn btn-success btn-sm" href="#" role="button">neue Telefonnummer</a>&#35;&#125;#}
-            {#</div>#}
-            {#<br>#}
-            {#&#123;&#35; Email &#35;&#125;#}
-            {#<h4>Emailadressen</h4>#}
-            {#<div class="text">#}
-            {#<p>Mindestens genauso wichtig wie die Telefonnummern, sind doch die Emailadressen. Die#}
-            {#Emailadressen, die du hast, kannst du hier verwalten.</p><br>#}
-            {#</div>#}
-            {#{% for email in emails %}#}
-            {#<div align="right">#}
-            {#<table>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#{{ email.getEmailadresse() }}#}
-            {#</th>#}
-            {#<th style="width: 120px;">#}
-
-            {#&#123;&#35;<a class="btn btn-default btn-sm" href="#" role="button">bearbeiten</a>&#35;&#125;#}
-            {#</th>#}
-            {#<th style="width: 120px; vert-align: bottom">#}
-            {#&#123;&#35;<a class="btn btn-danger btn-sm" href="#" role="button">löschen</a>&#35;&#125;#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr>#}
-            {#<th style="width: 300px;">#}
-            {#({{ email.getPrivatGeschaeft().getName() }})#}
-            {#</th>#}
-            {#</tr>#}
-            {#</table>#}
-            {#<hr>#}
-            {#</div>#}
-            {#{% endfor %}#}
-            {#<div>#}
-            {#&#123;&#35;<a class="btn btn-success btn-sm" href="#" role="button">neue Emailadresse</a>&#35;&#125;#}
-            {#</div>#}
-            {#</div>#}
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 </div>

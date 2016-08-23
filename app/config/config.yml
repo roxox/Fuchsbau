@@ -43,7 +43,19 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     group:
-      group_class: AppBundle\Entity\Group
+        group_class: AppBundle\Entity\Group
+    registration:
+        confirmation:
+            enabled:    false
+    from_email:
+        address:        no@roxox.de
+        sender_name:    App's Name
+    service:
+        mailer:               fos_user.mailer.default
+        email_canonicalizer:  fos_user.util.canonicalizer.default
+        token_generator:      fos_user.util.token_generator.default
+        username_canonicalizer:  fos_user.util.canonicalizer.default
+        user_manager:         fos_user.user_manager.default
 
 # Doctrine Configuration
 doctrine:
@@ -94,11 +106,13 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+       transport: %mailer_transport%
+       host:      %mailer_host%
+       username:  %mailer_user%
+       password:  %mailer_password%
+#       port : %mailer_port%
+       encryption: ssl
+       auth_mode:  login
 
 # Services
 services:

@@ -1,0 +1,68 @@
+<h4>Emailadressen</h4>
+<div class="text">
+    <p>Mindestens genauso wichtig wie die Telefonnummern, sind doch die Emailadressen. Die
+        Emailadressen, die du hast, kannst du hier verwalten.</p><br>
+</div>
+<table class="table table-condensed">
+    {% if emails != null %}
+        {% for email in emails %}
+            <div align="right">
+                <tr>
+                    <td style="width: 400px;">
+                        <p>{{ email.getEmailadresse() }}</p>
+                        {% if email.getEmailadresse == user.getEmail %}
+                            <p style="font-size: x-small">Dies ist die Registrierungsemailadresse, bitte
+                                ändere diese über deinen User.</p>
+                        {% else %}
+                            <p style="font-size: x-small">{{ email.getPrivatGeschaeft().getName() }}</p>
+                        {% endif %}
+                    </td>
+                    <td style="width: 40%;" align="right">
+
+                        {% if email.getEmailadresse != user.getEmail %}
+                            <!-- Button Edit -->
+                            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                                    href="{{ path('edit_email_by_current_person', {'emailId': email.getId()}) }}"
+                                    data-toggle="modal"
+                                    data-target="#editEmailPopup">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+                            </button>
+
+                            <!-- Button Delete -->
+                            <a class="btn btn-linkfxred btn-xs"
+                               href="{{ path('remove_email_by_current_person', {'emailId': email.getId()}) }}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
+                        {% endif %}
+                    </td>
+                </tr>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="9" align="center">
+                Noch wurde keine Emailadresse angelegt.
+            </td>
+        </tr>
+    {% endif %}
+    <tr>
+        <td colspan="3"></td>
+    </tr>
+    <tr style="border: hidden">
+        <td colspan="3" align="right">
+            <!-- Trigger the modal with a button -->
+            <a class="btn btn-fx-brightblue btn-xs"
+               href="{{ path('add_email_by_current_person') }}" data-toggle="modal"
+               data-target="#addEmailPopup"
+               role="button">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Emailadresse
+                Hinzufügen </a></td>
+
+    </tr>
+</table>
+
+<div>
+    <!-- Popups -->
+    {% include "Personen/display_parts/right/popups/email/popup_email_new.html.twig" %}
+    {% include "Personen/display_parts/right/popups/email/popup_email_edit.html.twig" %}
+</div>

@@ -1,0 +1,86 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div>
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Adresse ändern</h4>
+        </div>
+        <div class="modal-body">
+            <div class="text">
+                <p>Umgezogen? Zweitwohnung? Oder doch ein neues Haus? Wie ist denn die neuen Adresse.</p><br>
+            </div>
+            {{ form_start(form, {'action': path('edit_address_by_current_person', {'addressId': adresse.getId() })}) }}
+            <table style="width: 70%">
+                <tr>
+                    <td style="width: 100%">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 68%">
+                                    {{ form_row(form.strasse) }}
+                                </td>
+                                <td style="width: 4%">
+
+                                </td>
+                                <td style="width: 28%">
+                                    {{ form_row(form.hausnummer) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 28%">
+                                    {{ form_row(form.postleitzahl) }}
+                                </td>
+                                <td style="width: 4%">
+
+                                </td>
+                                <td style="width: 68%">
+                                    {{ form_row(form.ort) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="width: 100%">
+                                    {{ form_row(form.privatGeschaeft) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%">
+                        <hr>
+                        <table style="width: 100%">
+                            <tr>
+                                <td align="left">
+                                    <button type="submit" class="btn-linkfx btn-xs">
+                                        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                                        Ändern
+                                    </button>
+
+                                    <button type="button" class="btn-linkfxred btn-xs">
+                                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                                        Schließen
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

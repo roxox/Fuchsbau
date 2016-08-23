@@ -62,10 +62,10 @@ class Person extends AbstractBasicEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Rolle", inversedBy="personen", cascade={"remove", "persist"})
-     * @ORM\JoinTable(name="personen_rollen")
+     * @ORM\ManyToMany(targetEntity="Firma", inversedBy="personen", cascade={"remove", "persist"})
+     * @ORM\JoinTable(name="firmen_personen")
      */
-    private $rollen;
+    private $firmen;
 
     /**
      * @var Geschlecht
@@ -94,13 +94,42 @@ class Person extends AbstractBasicEntity
         $this->adressen = new ArrayCollection();
         $this->emailadressen = new ArrayCollection();
         $this->telefonnummern = new ArrayCollection();
-        $this->rollen = new ArrayCollection();
+        $this->firmen = new ArrayCollection();
     }
 
 
-    ############
-    # Methoden #
-    ############
+    ##############
+    # Funktionen #
+    ##############
+
+    /**
+     * @return Rolle[]|array
+     */
+    public function getPersonenRollenByProjekt(Projekt $projekt){
+        $rolleArr = [];
+        /** @var Firma $noCompany */
+        foreach ($this->firmen as $noCompany) {
+            if ($noCompany->isNoCompany()) {
+                foreach ($noCompany->getRollen() as $rolle) {
+                    if ($rolle->getProjekt() === $projekt) {
+                        $rolleArr[] = $rolle;
+                    }
+                }
+            }
+        }
+        return $rolleArr;
+    }
+
+    public function getAlleRollenByProjekt(Projekt $projekt){
+        $rolleArr = [];
+        foreach ($this->firmen as $firma) {
+            /** @var Firma $firma */
+            foreach ($firma->getRollen() as $rolle) {
+                $rolleArr[] = $rolle;
+            }
+        }
+        return array_unique(array_merge([], ...$rolleArr));
+    }
 
     ###########################
     # Getter / Setter / Adder #
@@ -266,35 +295,35 @@ class Person extends AbstractBasicEntity
     }
 
     /**
-     * @return array|Rolle[]
+     * @return array|Firma[]
      */
-    public function getRollen()
+    public function getFirmen()
     {
         return $this->rollen->toArray();
     }
 
     /**
-     * @param Rolle $rolle
+     * @param Firma $firma
      * @return self
      */
-    public function addRolle(Rolle $rolle)
+    public function addFirma(Firma $firma)
     {
-        $this->rollen->add($rolle);
+        $this->firmen->add($firma);
 
-        if (!$rolle->hasPerson($this)) {
-            $rolle->addPerson($this);
+        if (!$firma->hasPerson($this)) {
+            $firma->addPerson($this);
         }
 
         return $this;
     }
 
     /**
-     * @param Rolle $rolle
+     * @param Firma $firma
      * @return bool
      */
-    public function hasRolle(Rolle $rolle)
+    public function hasFirma(Firma $firma)
     {
-        return $this->rollen->contains($rolle);
+        return $this->firmen->contains($firma);
     }
 
     /**

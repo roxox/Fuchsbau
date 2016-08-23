@@ -1,0 +1,64 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div>
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Email Adresse hinzufügen</h4>
+        </div>
+        <div class="modal-body">
+            <div class="text">
+                <p>Na dann mal los, her mit der neuen Emailadresse.</p><br>
+            </div>
+            {{ form_start(form, {'action': path('add_email_by_current_person')}) }}
+            <table style="width: 70%">
+                <tr>
+                    <td style="width: 100%">
+                        <table style="width: 70%">
+                            <tr>
+                                <td style="width: 100%">
+                                    {{ form_row(form.emailadresse) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 100%">
+                        <table style="width: 40%">
+                            <tr>
+                                <td style="width: 100%">
+                                    {{ form_row(form.privatGeschaeft) }}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100%">
+                        <hr>
+                        <table style="width: 100%">
+                            <tr>
+                                <td align="left">
+                                    <button type="submit" class="btn-linkfx btn-xs">
+                                        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+                                        Hinzufügen
+                                    </button>
+
+                                    <button type="button" class="btn-linkfxred btn-xs">
+                                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                                        Schließen
+                                    </button>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

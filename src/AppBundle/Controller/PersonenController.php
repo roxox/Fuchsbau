@@ -24,10 +24,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PersonenController extends Controller
 {
-    private $save = false;
     const FORM_NAMESPACE = 'AppBundle\Form\\';
 
+    /**
+     * Overview
+     */
 
+    /**
+     * displayCurrentPersonAction
+     *
+     * display the user data overview
+     *
+     * @param Request $request
+     * @return null|\Symfony\Component\HttpFoundation\Response
+     */
     public function displayCurrentPersonAction(Request $request)
     {
 
@@ -61,43 +71,19 @@ class PersonenController extends Controller
 
     }
 
-    public function updateCurrentPersonAction(Request $request)
-    {
-        // 1) build the form
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        $person = $user->getPerson();
-        $form = $this->createForm(PersonType::class, $person);
+    /**
+     * User
+     */
 
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-
-            return $this->redirectToRoute("display_current_person");
-        }
-
-        return $this->render(
-            'Personen/update_person.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
-        );
-    }
-
-    public function updateCurrentUserAction(Request $request)
+    /**
+     * editCurrentUserAction
+     *
+     * edit current user
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editCurrentUserAction(Request $request)
     {
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
@@ -125,11 +111,11 @@ class PersonenController extends Controller
             $em->persist($email);
 
             $userManager->updateUser($user);
-            return $this->redirectToRoute("display_current_person");
+            return $this->redirectToRoute("edit_current_user");
         }
 
         return $this->render(
-            'Personen/update_user.html.twig',
+            'Personen/display_parts/left/popups/user/popup_user_edit_content.html.twig',
             array('adressen' => $person->getAdressen(),
                 'form' => $form->createView(),
                 'telefonnummern' => $person->getTelefonnummern(),
@@ -140,10 +126,20 @@ class PersonenController extends Controller
         );
     }
 
-    // TELEFON
-    public function addPhoneAction(Request $request)
-    {
+    /**
+     * Person
+     */
 
+    /**
+     * editCurrentPersonAction
+     *
+     * edit current person
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editCurrentPersonAction(Request $request)
+    {
         // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -151,13 +147,12 @@ class PersonenController extends Controller
         }
         /** @var Person $person */
         $person = $user->getPerson();
-        $telefonnummer = new Telefonnummer();
-        $form = $this->createForm(TelefonnummerType::class, $telefonnummer);
+        $form = $this->createForm(PersonType::class, $person);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $person->addTelefonnummer($telefonnummer);
+
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
@@ -169,7 +164,7 @@ class PersonenController extends Controller
         }
 
         return $this->render(
-            'Personen/new_phone.html.twig',
+            'Personen/display_parts/left/popups/person/popup_person_edit_content.html.twig',
             array('adressen' => $person->getAdressen(),
                 'form' => $form->createView(),
                 'telefonnummern' => $person->getTelefonnummern(),
@@ -180,78 +175,20 @@ class PersonenController extends Controller
         );
     }
 
-    public function editPhoneAction(Request $request, $phoneNumberId)
-    {
+    /**
+     * Addresses
+     */
 
-        // 1) build the form
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        $telefonRepo = $this->getDoctrine()->getRepository('AppBundle:Telefonnummer');
-        /** @var Person $person */
-        $person = $user->getPerson();
-        /** @var Telefonnummer $phoneNumber */
-        $phoneNumber = $telefonRepo->find($phoneNumberId);
-        $form = $this->createForm(TelefonnummerType::class, $phoneNumber);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($phoneNumber);
-            $em->flush();
-
-
-            return $this->redirectToRoute("display_current_person");
-        }
-
-        return $this->render(
-            'Personen/update_phone.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
-        );
-    }
-
-    public function removePhoneAction(Request $request, $phoneNumberId)
-    {
-
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        $telefonRepo = $this->getDoctrine()->getRepository('AppBundle:Telefonnummer');
-        /** @var Person $person */
-        $person = $user->getPerson();
-        /** @var Telefonnummer $phoneNumber */
-        $phoneNumber = $telefonRepo->find($phoneNumberId);
-        /** @var EntityManager $em */
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($phoneNumber);
-        $em->flush();
-
-        return $this->render(
-            'Personen/display.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
-        );
-    }
-
-    // ADRESSEN
+    /**
+     * addAddressAction
+     *
+     * add a new address
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addAddressAction(Request $request)
     {
-
         // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -266,31 +203,32 @@ class PersonenController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $person->addAdresse($adresse);
-
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
 
-
             return $this->redirectToRoute("display_current_person");
         }
 
         return $this->render(
-            'Personen/new_address.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
+            'Personen/display_parts/center/popups/address/popup_address_new_content.html.twig',
+            array('form' => $form->createView(),
+                'headline' => 'Personendaten bearbeiten')
         );
     }
 
+    /**
+     * editAddressAction
+     *
+     * edits selected address
+     *
+     * @param Request $request
+     * @param $addressId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAddressAction(Request $request, $addressId)
     {
-
         // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -317,17 +255,22 @@ class PersonenController extends Controller
         }
 
         return $this->render(
-            'Personen/update_address.html.twig',
-            array('adressen' => $person->getAdressen(),
+            'Personen/display_parts/center/popups/address/popup_address_edit_content.html.twig',
+            array('adresse' => $address,
                 'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
+                'headline' => 'Personendaten bearbeiten',)
         );
     }
 
+    /**
+     * removeAddressAction
+     *
+     * removes selected address
+     *
+     * @param Request $request
+     * @param $addressId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function removeAddressAction(Request $request, $addressId)
     {
 
@@ -358,11 +301,144 @@ class PersonenController extends Controller
         );
     }
 
+    /**
+     * Telephone
+     */
 
-    // EMAIL
+    /**
+     * addTelephoneAction
+     *
+     * add a new telephone
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function addTelephoneAction(Request $request)
+    {
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        /** @var Person $person */
+        $person = $user->getPerson();
+        $telefonnummer = new Telefonnummer();
+        $form = $this->createForm(TelefonnummerType::class, $telefonnummer);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $person->addTelefonnummer($telefonnummer);
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+
+            return $this->redirectToRoute("display_current_person");
+        }
+
+        return $this->render(
+            'Personen/display_parts/right/popups/telephone/popup_telephone_new_content.html.twig',
+            array('form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'headline' => 'Personendaten bearbeiten')
+        );
+    }
+
+    /**
+     * editTelephoneAction
+     *
+     * edits selected telephone
+     *
+     * @param Request $request
+     * @param $telephoneId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editTelephoneAction(Request $request, $telephoneId)
+    {
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $telefonRepo = $this->getDoctrine()->getRepository('AppBundle:Telefonnummer');
+        /** @var Telefonnummer $phoneNumber */
+        $phoneNumber = $telefonRepo->find($telephoneId);
+        $form = $this->createForm(TelefonnummerType::class, $phoneNumber);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($phoneNumber);
+            $em->flush();
+
+            return $this->redirectToRoute("display_current_person");
+        }
+
+        return $this->render(
+            'Personen/display_parts/right/popups/telephone/popup_telephone_edit_content.html.twig',
+            array('telephone' => $phoneNumber,
+                'form' => $form->createView(),
+                'headline' => 'Personendaten bearbeiten')
+        );
+    }
+
+    /**
+     * removeTelephoneAction
+     *
+     * removes selected telephone
+     *
+     * @param Request $request
+     * @param $telephoneId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeTelephoneAction(Request $request, $telephoneId)
+    {
+
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $telefonRepo = $this->getDoctrine()->getRepository('AppBundle:Telefonnummer');
+        /** @var Person $person */
+        $person = $user->getPerson();
+        /** @var Telefonnummer $phoneNumber */
+        $phoneNumber = $telefonRepo->find($telephoneId);
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($phoneNumber);
+        $em->flush();
+
+        return $this->render(
+            'Personen/display.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'user' => $user)
+        );
+    }
+
+    /**
+     * Email
+     */
+
+    /**
+     * addEmailAction
+     *
+     * add a new email
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addEmailAction(Request $request)
     {
-
         // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -372,7 +448,7 @@ class PersonenController extends Controller
         $person = $user->getPerson();
         $email = new Email();
         $form = $this->createForm(EmailType::class, $email);
-//
+
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -383,178 +459,88 @@ class PersonenController extends Controller
             $em->persist($person);
             $em->flush();
 
+
             return $this->redirectToRoute("display_current_person");
         }
 
         return $this->render(
-            'Personen/new_email.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
+            'Personen/display_parts/right/popups/email/popup_email_new_content.html.twig',
+            array('form' => $form->createView(),
                 'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
+                'headline' => 'Personendaten bearbeiten')
         );
     }
 
-    // MODAL POPUPS
-
-    public function addEmailModalAction(Request $request)
+    /**
+     * editEmailAction
+     *
+     * edits selected email
+     *
+     * @param Request $request
+     * @param $emailId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editEmailAction(Request $request, $emailId)
     {
-
         // 1) build the form
         $user = $this->getUser();
-//        if (!is_object($user) || !$user instanceof UserInterface) {
-//            throw new AccessDeniedException('This user does not have access to this section.');
-//        }
-        /** @var Person $person */
-        $person = $user->getPerson();
-        $email = new Email();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email');
+        /** @var Email $email */
+        $email = $emailRepo->find($emailId);
         $form = $this->createForm(EmailType::class, $email);
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $person->addEmailadresse($email);
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
+            $em->persist($email);
             $em->flush();
 
             return $this->redirectToRoute("display_current_person");
         }
+
         return $this->render(
-            'Personen/new_email_content_modal.html.twig',
-            array('adressen' => $person->getAdressen(),
+            'Personen/display_parts/right/popups/email/popup_email_edit_content.html.twig',
+            array('email' => $email,
                 'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
+                'headline' => 'Personendaten bearbeiten')
         );
     }
-    public function saveMe(){
-        echo 'abc';
-    }
 
-
-
-    // ADRESSEN
-    public function addAddressModalAction(Request $request)
+    /**
+     * removeEmailAction
+     *
+     * removes selected email
+     *
+     * @param Request $request
+     * @param $emailId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function removeEmailAction(Request $request, $emailId)
     {
 
-        // 1) build the form
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
+        $emailRepo = $this->getDoctrine()->getRepository('AppBundle:Email');
         /** @var Person $person */
         $person = $user->getPerson();
-        $adresse = new Adresse();
-        $form = $this->createForm(AdresseType::class, $adresse);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $person->addAdresse($adresse);
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-
-            return $this->redirectToRoute("display_current_person");
-        }
+        /** @var Email $email */
+        $email = $emailRepo->find($emailId);
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($email);
+        $em->flush();
 
         return $this->render(
-            'Personen/new_address_content_modal.html.twig',
+            'Personen/display.html.twig',
             array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
-        );
-    }
-
-    public function editAddressModalAction(Request $request, $addressId)
-    {
-
-        // 1) build the form
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
-        }
-        $addressRepo = $this->getDoctrine()->getRepository('AppBundle:Adresse');
-        /** @var Person $person */
-        $person = $user->getPerson();
-        /** @var Adresse $adress */
-        $address = $addressRepo->find($addressId);
-        $form = $this->createForm(AdresseType::class, $address);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($address);
-            $em->flush();
-
-
-            return $this->redirectToRoute("display_current_person");
-        }
-
-        return $this->render(
-            'Personen/update_address_content_modal.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'adresse' => $address,
-                'form' => $form->createView(),
-                'telefonnummern' => $person->getTelefonnummern(),
-                'emails' => $person->getEmailadressen(),
-                'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
-                'user' => $user)
-        );
-    }
-
-    public function addEmailPornoModalAction(Request $request, string $emailaddress = null)
-    {
-
-        // 1) build the form
-        $user = $this->getUser();
-//        if (!is_object($user) || !$user instanceof UserInterface) {
-//            throw new AccessDeniedException('This user does not have access to this section.');
-//        }
-        /** @var Person $person */
-        $person = $user->getPerson();
-        $email = new EmailCompany();
-        $email->setEmailadresse($emailaddress);
-        $form = $this->createForm(EmailCompanyType::class, $email);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-//            $mail = new Email();
-//            $mail->setEmailadresse($emailaddress);
-
-//            $person->addEmailadresse($email);
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-            return $this->redirectToRoute("display_current_person");
-        }
-        return $this->render(
-            'Personen/new_email_content_modal.html.twig',
-            array('adressen' => $person->getAdressen(),
-                'form' => $form->createView(),
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
