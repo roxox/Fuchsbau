@@ -1,0 +1,78 @@
+{# Ausführende Firmen #}
+<h4>Ausführende Firmen
+    <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
+            data-target="#collapseInfoFirmen">
+        <sup><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden</sup>
+    </button>
+</h4>
+<div class="collapse out" id="collapseInfoFirmen">
+    <div class="alert alert-warning fade in">
+        <left>
+            Hier werden die Firmen angezeigt, die sich um dieses Extra bzw. einen Unterpunkt dieses Extras kümmern.
+        </left>
+    </div>
+</div>
+<div>
+    <br>
+    <table class="table table-condensed">
+        {% if person.getTelefonnummern() != null %}
+            {% for telefonnummer in person.getTelefonnummern() %}
+                <div align="right">
+                    {#<table>#}
+                    <tr>
+                        <td style="width: 60%;">
+                            <p> {{ telefonnummer.getTelefonTyp().getKurzname() }}
+                                : {{ telefonnummer.getVorwahl() }}
+                                /{{ telefonnummer.getTelefonnummer() }}{{ telefonnummer.getDurchwahl() ? '-' : '' }}{{ telefonnummer.getDurchwahl() }}</p>
+                            <p style="font-size: x-small">{{ telefonnummer.getPrivatGeschaeft().getName() }}</p>
+                        </td>
+                        <td style="width: 40%;" align="right">
+
+                            <!-- Button Edit -->
+                            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                                    href="{{ path('edit_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}"
+                                    data-toggle="modal"
+                                    data-target="#editAddressPopup">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+                            </button>
+
+                            <!-- Button Delete -->
+                            <a class="btn btn-linkfxred btn-xs"
+                               href="{{ path('remove_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
+
+                        </td>
+                    </tr>
+
+                </div>
+            {% endfor %}
+
+        {% else %}
+            <tr>
+                <td colspan="9" align="center">
+                    Noch wurde keine Firma diesem Punkt oder einem Unterpunkt zugeordnet.
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+        <tr style="border: hidden">
+            <td colspan="3" align="right">
+                <!-- Trigger the modal with a button -->
+                <a class="btn btn-link-fx-brightblue btn-xs"
+                   href="{{ path('add_telephone_by_current_person') }}" data-toggle="modal"
+                   data-target="#addAddressPopup"
+                   role="button">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Firma
+                    Hinzufügen </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <!-- Popups -->
+    {% include "Personen/display_parts/right/popups/telephone/popup_telephone_new.html.twig" %}
+    {% include "Personen/display_parts/right/popups/telephone/popup_telephone_edit.html.twig" %}
+</div>

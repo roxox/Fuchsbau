@@ -1,5 +1,20 @@
 <div>
-    <h3>Projektinfos:</h3>
+    <h3>Projektinfos für <b>{{ projekt.getName() }}</b></h3>
+    <!-- Buttons -->
+    <a class="btn btn-linkfx btn-xs"
+       href="{{ path('homepage') }}"
+       role="button">
+        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Zurück zur Übersicht </a>
+    <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+            href="#"
+            data-toggle="modal"
+            data-target="#editPersonPopup">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten
+    </button>
+    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+    </button>
+    <hr>
 </div>
 Zunächsteinmal eine kleine Zusammenfassung des Projekts, besthend aus: <b>Arbeitstitel</b> (sofern
 vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden), <b> der aktuell
@@ -69,12 +84,15 @@ vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden)
 
             <b>365.432,98 Euro (inkl MwSt.)</b><br>
             <span style="font-size: x-small">
-            {% if projekt.getGrundstueck %}
-                Grundstück {{ projekt.getGrundstueck.getGroesse * (projekt.getGrundstueck.getKaufpreis + projekt.getGrundstueck.getErschiessungskostenanteil) }}
+                {#{% if projekt.getGrundstueck %}#}
+                Grundstück {{ projekt.getGrundstueckspreis }}
                 Euro (inkl MwSt.)<br>+
-            {% endif %}
-                 Haus 128.132,98 Euro (inkl MwSt.)<br> +
-                             Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>
+                {#{% endif %}#}
+                {% if projekt.getHaus %}
+                    Haus {{ projekt.getHauskaufpreis|number_format(2, ',', '.') }}
+                    Euro (inkl MwSt.)<br>+
+                {% endif %}
+                Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>
                             - Gutschriften 3.412,17 Euro (inkl MwSt.)<br>
                             + Außenanlagen 33.632,42 Euro (inkl MwSt.)<br>
                             + Inneneinrichtung 16.242,00 Euro (inkl MwSt.)</span>

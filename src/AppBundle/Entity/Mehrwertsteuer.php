@@ -14,7 +14,7 @@ class Mehrwertsteuer  extends AbstractBasicEntity
      * var string
      * @ORM\Column(type="string")
      */
-    private $bezeicnung;
+    private $bezeichnung;
 
     /**
      * var integer
@@ -32,17 +32,17 @@ class Mehrwertsteuer  extends AbstractBasicEntity
     /**
      * @return string
      */
-    public function getBezeicnung()
+    public function getBezeichnung()
     {
-        return $this->bezeicnung;
+        return $this->bezeichnung;
     }
 
     /**
-     * @param string $bezeicnung
+     * @param string $bezeichnung
      */
-    public function setBezeicnung($bezeicnung)
+    public function setBezeichnung($bezeichnung)
     {
-        $this->bezeicnung = $bezeicnung;
+        $this->bezeichnung = $bezeichnung;
     }
 
     /**

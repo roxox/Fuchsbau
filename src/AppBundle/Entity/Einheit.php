@@ -6,9 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RolletypRepository")
  */
-class Rolletyp  extends AbstractBasicEntity
+class Einheit  extends AbstractBasicEntity
 {
 
     /**
@@ -21,14 +20,16 @@ class Rolletyp  extends AbstractBasicEntity
      * var string
      * @ORM\Column(type="string")
      */
-    private $kurzname;
+    private $bezeichnung;
 
     /**
-     * Rolletyp constructor.
+     * Address constructor.
+     * @param string $bezeichnung
      * @param string $name
      */
-    public function __construct(string $name)
+    public function __construct(string $bezeichnung, string $name)
     {
+        $this->bezeichnung = $bezeichnung;
         $this->name = $name;
     }
 
@@ -49,18 +50,19 @@ class Rolletyp  extends AbstractBasicEntity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getKurzname()
+    public function getBezeichnung()
     {
-        return $this->kurzname;
+        return $this->bezeichnung;
     }
 
     /**
-     * @param mixed $kurzname
+     * @param string $bezeichnung
      */
-    public function setKurzname($kurzname)
+    public function setBezeichnung($bezeichnung)
     {
-        $this->kurzname = $kurzname;
+        $this->bezeichnung = $bezeichnung;
     }
+
 }

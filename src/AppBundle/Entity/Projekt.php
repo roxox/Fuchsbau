@@ -38,7 +38,7 @@ class Projekt extends AbstractBasicEntity
     /**
      * @var User
      *
-     * @ORM\OneToOne(targetEntity="User", cascade={"remove", "persist"})
+     * @ORM\ManyToOne(targetEntity="User", cascade={"remove", "persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $owner;
@@ -147,7 +147,7 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKosten();
+            $gesamt = $gesamt + $rolle->getKostenPlan();
         }
         return $gesamt;
     }
@@ -158,7 +158,7 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenInklMwsT();
+            $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenPlan());
         }
         return $gesamt;
     }
@@ -169,9 +169,30 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenExklMwsT();
+            $gesamt = $gesamt + $rolle->getKostenExklMwsT($rolle->getKostenPlan());
         }
         return $gesamt;
+    }
+
+    public function getGrundstueckspreis()
+    {
+        if ($this->getGrundstueck()) {
+            return $this->grundstueck->getGroesse() * ($this->grundstueck->getKaufpreis(
+                ) + $this->grundstueck->getErschiessungskostenanteil());
+        }
+
+        return '---';
+    }
+
+    public function getHauskaufpreis()
+    {
+        if ($this->getHaus()) {
+            return $this->haus->getKaufpreis() +
+            $this->getGesamtKostenInklMwstByKurzname('IE') +
+            $this->getGesamtKostenInklMwstByKurzname('EE') +
+            $this->getGesamtKostenInklMwstByKurzname('T');
+        }
+        return '---';
     }
 
     /**

@@ -1,0 +1,63 @@
+<tr>
+    <td colspan="7" style="font-size: small">
+        <table class="table table-condensed" style="border: hidden">
+            <th colspan="5">Auszuführende Arbeiten:</th>
+            <td style="font-size: small" align="right">
+                <a class="btn btn-link-fx-brightblue btn-xs"
+                   href="#"
+                   role="button">
+                    <span class="#"></span> Neuer Eintrag </a>
+            </td>
+            {% for taetigkeit in projekt.getRolleByTypKurzname('T') %}
+                <tr style="border: hidden">
+                    <td style="width: 20%">
+                        - {{ taetigkeit.getName }}
+                    </td>
+                    <td style="width: 15%">
+                        Team Massivhaus
+                    </td>
+                    <td style="width: 20%">
+                    </td>
+                    <td style="width: 15%" align="right">
+                        {{ taetigkeit.getKostenInklMwsT(taetigkeit.getKostenPlan)|number_format(2, ',', '.') }} Euro inkl. MwSt.
+                    </td>
+                    <td></td>
+                    <td style="font-size: small" align="right">
+                        <a class="btn btn-linkfx btn-xs"
+                           href="#"
+                           role="button">
+                            <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr style="border: hidden">
+                <td colspan="4" style="width: 60%" align="right">Summe zzgl. Handwerker Kosten:</td>
+                <td style="font-size: small">
+                    {% if projekt.getGesamtKostenInklMwstByKurzname('T') != 0 %}
+                        +{{ projekt.getGesamtKostenInklMwstByKurzname('T')|number_format(2, ',', '.') }} Euro
+                        (inkl. MwSt.)
+                    {% else %}
+                        <div align="right">Es sind keine weiteren Kosten angefallen</div>
+                    {% endif %}</td>
+                <td style="font-size: small" align="right">
+                    <a class="btn btn-linkfx btn-xs"
+                       href="#"
+                       role="button"
+                            {% if projekt.getRolleByTypKurzname('T')|length < 1 %}
+                                disabled
+                            {% endif %}
+                    >
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Plan / Ist
+                        Vergleich </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

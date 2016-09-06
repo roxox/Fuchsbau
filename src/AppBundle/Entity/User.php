@@ -78,6 +78,13 @@ class User extends BaseUser
      */
     private $projekte;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Projekt", mappedBy="owner")
+     */
+    private $ownedProjekte;
+
 
     /**
      * User constructor.
@@ -234,6 +241,27 @@ class User extends BaseUser
     public function setPerson($person)
     {
         $this->person = $person;
+    }
+
+    /**
+     * Set feature
+     *
+     * @param Projekt $projekt
+     * @return User
+     */
+    public function addOwnedProjekt(Projekt $projekt)
+    {
+        $this->ownedProjekte->add($projekt);
+        $projekt->setOwner($this);
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getOwnedProjekte()
+    {
+        return $this->ownedProjekte;
     }
 
 

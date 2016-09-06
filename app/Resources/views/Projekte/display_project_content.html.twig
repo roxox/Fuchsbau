@@ -10,10 +10,10 @@
             <div class="col-lg-12">
 
                 {# Projektinfo#}
-                {% include "Projekte/project_info.html.twig" %}
+                {% include "Projekte/display_parts/info/info_content.html.twig" %}
 
                 {# Projektbeteiligte#}
-                {% include "Projekte/project_beteiligte.html.twig" %}
+                {% include "Projekte/display_parts/involved/involved_content.html.twig" %}
                 <br>
                 {# Kostenhinweis #}
                 {#<div class="panel panel-warning">#}
@@ -37,16 +37,16 @@
                 </div>
 
                 {# Grundstück #}
-                {% include "Projekte/project_grundstueck.html.twig" %}
+                {% include "Projekte/display_parts/building_ground/building_ground_content.html.twig" %}
 
                 {# Haus #}
-                {% include "Projekte/project_haus.html.twig" %}
+                {% include "Projekte/display_parts/house/house_content.html.twig" %}
 
                 {# Nebenkosten #}
                 {% include "Projekte/project_nebenkosten.html.twig" %}
 
                 {# Gutschriften #}
-                {% include "Projekte/project_gutschriften.html.twig" %}
+                {% include "Projekte/display_parts/credit/credit_content.html.twig" %}
 
                 {# Außenalnagen #}
                 {% include "Projekte/project_aussenanlagen.html.twig" %}

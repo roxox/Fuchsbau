@@ -1,0 +1,109 @@
+<div>
+    <h3>Haus</h3>
+</div>
+Hier gibt es nun die nötigten Infos wie <b>Haustyp, Größe, Preis, etc.</b> zu dem Traumhaus. Desweiteren
+wird
+hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den
+jeweiligen
+Detailansichten können Elemente hinzugefügt werden, dort habe ich auch praktische Beispiele aufgelistet,
+so
+dass
+sich die Nutzung von selbst erklären sollte.
+
+{# Button zum toggeln der Collapse Funktion #}
+<br><br>
+<button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+        data-target="#collapseHaus">
+    Einträge ein-/ausblenden
+</button>
+<br><br>
+
+{# Collapsable div #}
+<div class="collapse in" id="collapseHaus">
+    <table class="table table-condensed">
+        <tr>
+            <th style="width: 10%">
+                Haustyp
+            </th>
+            <th style="width: 13%">
+                Größe <br><span style="font-size: x-small">(DIN / WoFIV)</span>
+            </th>
+            <th style="width: 17%">
+                Hausname <br><span style="font-size: x-small">(aus dem Katalog, wenn vorhaden)</span>
+            </th>
+            <th style="width: 18%">
+                Bauträger
+            </th>
+            <th style="width: 24%" colspan="1">
+                Hauspreis <br><span style="font-size: x-small">(Grundpreis + interne Extras)</span>
+            </th>
+            <th style="width: 18%" colspan="2">
+                weitere Hauskosten
+            </th>
+        </tr>
+
+
+        {% if projekt.getHaus != null %}
+
+            {# house base data #}
+            {% include "Projekte/display_parts/house/house_base/house_base_content.html.twig" %}
+
+            {# internal extras #}
+            {% include "Projekte/display_parts/house/internal_extras/internal_extras_content.html.twig" %}
+
+            {# external extras #}
+            {% include "Projekte/display_parts/house/external_extras/external_extras_content.html.twig" %}
+
+            {# work #}
+            {% include "Projekte/display_parts/house/work/work_content.html.twig" %}
+
+            <tr>
+                <td colspan="4">
+                    <b>Gesamtkosten</b> <span
+                            style="font-size: x-small">(Haus + interne und externe Extras + Tätigkeiten):</span>
+                </td>
+                <td colspan="3" align="right">
+                    <b>123.456,70 €
+                        <span style="font-size: x-small">(inkl. MwSt.)</span> </b>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <br>
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
+                            data-target="#collapseHaus">
+                        Einträge ein-/ausblenden
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" align="center">
+                    Noch wurde kein Haus hinzugefügt
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="right">
+                    <br>
+                    <!-- Trigger the modal with a button -->
+                    <a class="btn btn-link-fx-brightblue btn-xs"
+                       href="{{ path('add_haus_to_current_projekt_modal', {'projektId': projekt.getId()}) }}"
+                       data-toggle="modal"
+                       data-target="#addHausPopup"
+                       role="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Haus hinzufügen </a>
+                    <br><br>
+                </td>
+            </tr>
+        {% endif %}
+    </table>
+
+</div>
+<div>
+    <!-- Popups -->
+    {% include "Projekte/display_parts/house/house_base/popups/popup_house_new.html.twig" %}
+    {% include "Projekte/display_parts/house/house_base/popups/popup_house_edit.html.twig" %}
+    {% include "Projekte/display_parts/house/internal_extras/popups/popup_internal_extra_new.html.twig" %}
+</div>
+<hr>

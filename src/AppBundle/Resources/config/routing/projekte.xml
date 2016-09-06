@@ -17,11 +17,21 @@
     <route id="add_haus_to_current_projekt_modal" path="/{projektId}/add_haus_to_projekt" methods="GET POST">
         <default key="_controller">AppBundle:Projekte:addHaus</default>
     </route>
+    <route id="edit_haus_to_current_projekt_modal" path="/{projektId}/{hausId}/edit_haus_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:editHaus</default>
+    </route>
     <route id="add_projekt_modal" path="/add_projekt" methods="GET POST">
         <default key="_controller">AppBundle:Projekte:addProjekt</default>
     </route>
-    <route id="display_intern_extras_by_projekt" path="/{projektId}/display_intern_extras_by_projekt" methods="GET POST">
-        <default key="_controller">AppBundle:Projekte:displayInternExtrasByProjectId</default>
+
+    <!-- Internal Extra -->
+    <route id="add_internal_extra_to_current_projekt" path="/{projektId}/add_internal_extra_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:addInternalExtra</default>
     </route>
+    <route id="display_internal_extra" path="/{projektId}/{internalExtraId}/display_internal_extra" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:displayInternalExtra</default>
+    </route>
+
+
 
 </routes>

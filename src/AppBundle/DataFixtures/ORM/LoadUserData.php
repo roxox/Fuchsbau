@@ -4,10 +4,12 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Adresse;
 use AppBundle\Entity\Bundesland;
+use AppBundle\Entity\Einheit;
 use AppBundle\Entity\Email;
 use AppBundle\Entity\Firma;
 use AppBundle\Entity\Geschlecht;
 use AppBundle\Entity\Grundstueck;
+use AppBundle\Entity\Haustyp;
 use AppBundle\Entity\Mehrwertsteuer;
 use AppBundle\Entity\Nachricht;
 use AppBundle\Entity\Person;
@@ -62,20 +64,50 @@ class LoadUserData implements FixtureInterface
         $mwst19inkl = new Mehrwertsteuer();
         $mwst19inkl->setInklusive(true);
         $mwst19inkl->setWert(19);
-        $mwst19inkl->setBezeicnung('inkl. 19% MwSt.');
+        $mwst19inkl->setBezeichnung('inkl. 19% MwSt.');
         $manager->persist($mwst19inkl);
 
         $mwst19exkl = new Mehrwertsteuer();
         $mwst19exkl->setInklusive(false);
         $mwst19exkl->setWert(19);
-        $mwst19exkl->setBezeicnung('exkl. 19% MwSt.');
+        $mwst19exkl->setBezeichnung('exkl. 19% MwSt.');
         $manager->persist($mwst19exkl);
 
         $mwst0inkl = new Mehrwertsteuer();
         $mwst0inkl->setInklusive(true);
         $mwst0inkl->setWert(0);
-        $mwst0inkl->setBezeicnung('MwSt. entfällt');
+        $mwst0inkl->setBezeichnung('MwSt. entfällt');
         $manager->persist($mwst0inkl);
+
+        #############
+        # EINHEITEN #
+        #############
+
+        $einheit = new Einheit('g', 'Gramm');
+        $manager->persist($einheit);
+        $einheit = new Einheit('kg', 'Kilogramm');
+        $manager->persist($einheit);
+        $einheit = new Einheit('t', 'Tonne');
+        $manager->persist($einheit);
+        $einheit = new Einheit('m', 'Meter');
+        $manager->persist($einheit);
+        $einheit = new Einheit('m²', 'Quadratmeter');
+        $manager->persist($einheit);
+        $einheit = new Einheit('m³', 'Kubikmeter');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Stück', 'Stück');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Tag', 'Tag');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Woche', 'Woche');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Monat', 'Monat');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Jahr', 'Jahr');
+        $manager->persist($einheit);
+        $einheit = new Einheit('Person', 'Person');
+        $manager->persist($einheit);
+
 
         ############
         # Rolletyp #
@@ -94,27 +126,19 @@ class LoadUserData implements FixtureInterface
         $rolletypExternExtra->setKurzname('EE');
         $manager->persist($rolletypExternExtra);
 
-        $internesExtra = new Rolle('Bodentiefe Dusche');
+        $internesExtra = new Rolle();
+        $internesExtra->setName('Bodentiefe Dusche');
         $internesExtra->setRolletyp($rolletypInternExtra);
         $internesExtra->setMehrwertsteuer($mwst19inkl);
-        $internesExtra->setKosten(1100.50);
+        $internesExtra->setKostenPlan(1100.50);
         $manager->persist($internesExtra);
 
 
-//        ########
-//        # USER #
-//        ########
-//
-//
-//        # ADMIN
-//
-//        $userAdmin = new User();
-//        $userAdmin->setUsername('admin');
-//        $userAdmin->setPassword('test');
-//        $userAdmin->setEmail('admin@roxox.de');
-//
-//        # BAUHERR
-//
+        ########
+        # USER #
+        ########
+
+        # BAUHERR/IN
         $katha = new User();
         $katha->setUsername('Katha');
         $katha->setPassword('test');
@@ -250,14 +274,6 @@ class LoadUserData implements FixtureInterface
             $manager->persist($bundesland);
         }
 
-//        ############
-//        # PERSONEN #
-//        ############
-//
-//        $bauherr = new Person($userBauherr);
-//        $bauherr->setVorname('Mira');
-//        $bauherr->setNachname('Fox');
-
         #####################
         # PRIVAT / GESCHÄFT #
         #####################
@@ -270,6 +286,31 @@ class LoadUserData implements FixtureInterface
         $geschaeft->setName('Arbeit');
         $manager->persist($geschaeft);
 
+        ###########
+        # HAUSTYP #
+        ###########
+
+        $friesenhaus = new Haustyp();
+        $friesenhaus->setName('Friesenhaus');
+        $friesenhaus->setKurzname('FH');
+        $manager->persist($friesenhaus);
+
+        $einfamilienhaus = new Haustyp();
+        $einfamilienhaus->setName('Einfamilienhaus');
+        $einfamilienhaus->setKurzname('EFH');
+        $manager->persist($einfamilienhaus);
+
+        $doppelhaushaelfte = new Haustyp();
+        $doppelhaushaelfte->setName('Doppelhaushälfte');
+        $doppelhaushaelfte->setKurzname('DHH');
+        $manager->persist($doppelhaushaelfte);
+
+        $stadtvilla = new Haustyp();
+        $stadtvilla->setName('Stadvilla');
+        $stadtvilla->setKurzname('SV');
+        $manager->persist($stadtvilla);
+
+
         ##############
         # GESCHLECHT #
         ##############
@@ -281,9 +322,6 @@ class LoadUserData implements FixtureInterface
         $herr = new Geschlecht();
         $herr->setName('Herr');
         $manager->persist($herr);
-
-//        $bauherr->setGeschlecht($frau);
-//        $manager->persist($bauherr);
 
         #########
         # TITEL #
@@ -301,21 +339,6 @@ class LoadUserData implements FixtureInterface
         $prof->setName('Prof.');
         $manager->persist($prof);
 
-//        $manager->persist($bauherr);
-
-//        ###########
-//        # ADRESSE #
-//        ###########
-//
-//        $adressePrivat = new Adresse('Baumschulenweg', '1a', '25373', 'Ellerhoop', true);
-//        $adressePrivat->setStrasse('Baumschulenweg');
-//        $adressePrivat->setHausnummer('1a');
-//        $adressePrivat->setHausnummer('1a');
-//        $adressePrivat->setPostleitzahl('25373');
-//        $adressePrivat->setOrt('Ellerhoop');
-//        $adressePrivat->setHauptadresse(true);
-//        $bauherr->addAdresse($adressePrivat);
-
         #################
         # TELEFONNUMMER #
         #################
@@ -330,76 +353,6 @@ class LoadUserData implements FixtureInterface
         $telefonTypTelefon->setKurzname('Tel.');
         $manager->persist($telefonTypTelefon);
 
-//        $telefonnummerMobil = new Telefonnummer();
-//        $telefonnummerMobil->setVorwahl('0176');
-//        $telefonnummerMobil->setTelefonnummer('20516474');
-//        $telefonnummerMobil->setPrivatGeschaeft($privat);
-//        $telefonnummerMobil->setTelefonTyp($telefonTypMobil);
-//
-////        $telefonnummerArbeit = new Telefonnummer('040', '5070');
-////        $telefonnummerArbeit->setDurchwahl('41772');
-////        $telefonnummerArbeit->setPrivatGeschaeft($geschaeft);
-////        $telefonnummerArbeit->setTelefonTyp($telefonTypTelefon);
-//
-//        $bauherr->addTelefonnummer($telefonnummerMobil);
-////        $bauherr->addTelefonnummer($telefonnummerArbeit);
-//
-//        $manager->persist($bauherr);
-//
-//        #########
-//        # EMAIL #
-//        #########
-//
-//        $emailPrivat = new Email();
-//        $emailPrivat->setEmailadresse('mira@me.com');
-//        $emailPrivat->setPrivatGeschaeft($privat);
-//
-//        $bauherr->addEmailadresse($emailPrivat);
-//        $manager->persist($bauherr);
-//
-//        ##############
-//        # GRUNDSTÜCK #
-//        ##############
-//
-//        $grundstueck = new Grundstueck();
-//        $grundstueck->setStrasse('Baumschulenweg');
-//        $grundstueck->setHausnummer('1a');
-//        $grundstueck->setPostleitzahl('25373');
-//        $grundstueck->setOrt('Ellerhoop');
-//        $grundstueck->setBundesland($bundesland);
-//
-//        ##########
-//        # ROLLEN #
-//        ##########
-//
-//        $rolleBauherr = new Rolle('Bauherr');
-//        $rolleMaurer = new Rolle ('Maurer');
-//
-//        $rolleBauherr->addPerson($bauherr);
-//
-//        ##########
-//        # FIRMEN #
-//        ##########
-//
-//        $firmaMaurer = new Firma('Maurer GmbH');
-//        $rolleMaurer->setFirma($firmaMaurer);
-//
-//        ###########
-//        # PROJEKT #
-//        ###########
-//
-//        $project = new Projekt();
-//        $project->addRolle($rolleBauherr);
-//        $project->addRolle($rolleMaurer);
-//        $project->addUser($userBauherr);
-//        $project->setGrundstueck($grundstueck);
-//        $project->setOwner($userBauherr);
-//        $project->setProjektName('Fuchsbau');
-//        $project->setEinladungscode('xxx');
-//        $project->setLastOpened(true);
-//
-//        $manager->persist($project);
-
         ########
         # MAIL #
         ########
@@ -410,6 +363,19 @@ class LoadUserData implements FixtureInterface
         $timestamp = new \DateTime();
         $mail->setGesendetAm($timestamp);
         $manager->persist($mail);
+
+        ########
+        # TEST #
+        ########
+
+        $newRolle = new Rolle();
+        $newRolle->setName('Showerboard');
+        $newRolle->setRolletyp($rolletypInternExtra);
+        $newRolle->setMehrwertsteuer($mwst19inkl);
+        $newRolle->setKostenPlan(700.95);
+        $newRolle->setParent($internesExtra);
+        $internesExtra->addChild($newRolle);
+        $manager->persist($newRolle);
 
         $manager->flush();
     }

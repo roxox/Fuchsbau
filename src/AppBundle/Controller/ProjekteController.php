@@ -8,11 +8,14 @@ use AppBundle\Entity\Haus;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Projekt;
 use AppBundle\Entity\Rolle;
+use AppBundle\Entity\Rolletyp;
 use AppBundle\Entity\User;
 use AppBundle\Form\GrundstueckType;
 use AppBundle\Form\HausType;
+use AppBundle\Form\NewInternalExtraType;
 use AppBundle\Form\ProjektType;
 use AppBundle\Repository\ProjektRepository;
+use AppBundle\Repository\RolleRepository;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,6 +131,9 @@ class ProjekteController extends Controller
     public function addProjektAction(Request $request)
     {
         // 1) build the form
+        $firmaRepo = $this->getDoctrine()->getRepository('AppBundle:Firma');
+        $rolleTypRepo = $this->getDoctrine()->getRepository('AppBundle:Rolletyp');
+
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -137,9 +143,10 @@ class ProjekteController extends Controller
         /** @var Person $person */
         $person = $user->getPerson();
 
-        $firmaRepo = $this->getDoctrine()->getRepository('AppBundle:Firma');
         /** @var Firma $privateFirma */
         $privateFirma = $firmaRepo->findOneByName('NoCompnay_' . $person->getId());
+        /** @var Rolletyp $rolleTyp */
+        $rolleTyp = $rolleTypRepo->findOneBy(array('name' => 'Person'));
 
         $form = $this->createForm(ProjektType::class, $projekt);
 
@@ -156,12 +163,28 @@ class ProjekteController extends Controller
             $projekt->setOwner($user);
             $projekt->setEinladungscode('xxx');
             $projekt->setLastOpened(true);
-            $projekt->addRolle(new Rolle('Bauherr'));
-            $projekt->addRolle(new Rolle('Bauherrin'));
-            $rolleBesitzer = new Rolle('Besitzer');
-            $rolleBesitzer->addFirma($privateFirma);
-            $projekt->addRolle($rolleBesitzer);
-            $projekt->addRolle(new Rolle('Beobachter'));
+
+            $bauherr = new Rolle();
+            $bauherr->setName('Bauherr');
+            $bauherr->setRolletyp($rolleTyp);
+            $projekt->addRolle($bauherr);
+
+            $bauherrin = new Rolle();
+            $bauherrin->setName('Bauherrin');
+            $bauherrin->setRolletyp($rolleTyp);
+            $projekt->addRolle($bauherrin);
+
+            $besitzer = new Rolle();
+            $besitzer->setName('Besitzer');
+            $besitzer->setRolletyp($rolleTyp);
+            $besitzer->addFirma($privateFirma);
+            $projekt->addRolle($besitzer);
+
+            $beobachter = new Rolle();
+            $beobachter->setName('Beobachter');
+            $beobachter->setRolletyp($rolleTyp);
+            $projekt->addRolle($beobachter);
+
 
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
@@ -184,7 +207,6 @@ class ProjekteController extends Controller
                 'user' => $user)
         );
     }
-
 
     /**
      */
@@ -233,7 +255,110 @@ class ProjekteController extends Controller
         );
     }
 
-    public function displayInternExtrasByProjectIdAction(Request $request, $projektId)
+
+    /**
+     */
+    public function editHausAction(Request $request, $projektId, $hausId)
+    {
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $hausRepo = $this->getDoctrine()->getRepository('AppBundle:Haus');
+
+        $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
+        /** @var Projekt $projekt */
+        $projekt = $projektRepo->find($projektId);
+        /** @var Person $person */
+        $person = $user->getPerson();
+
+        $haus = $hausRepo->find($hausId);
+        $form = $this->createForm(HausType::class, $haus);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($haus);
+            $em->flush();
+
+
+            return $this->redirectToRoute(
+                'display_project_by_project_id',
+                array('projektId' => $projektId)
+            );
+        }
+
+        return $this->render(
+            'Projekte/edit_haus_content_modal.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'projekt' => $projekt,
+                'projektId' => $projektId,
+                'user' => $user)
+        );
+    }
+
+
+
+    /**
+     */
+    public function addInternalExtraAction(Request $request, $projektId)
+    {
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $rolleTypRepo = $this->getDoctrine()->getRepository('AppBundle:Rolletyp');
+        /** @var Rolletyp $rolleTyp */
+        $rolleTyp = $rolleTypRepo->findOneBy(array('name' => 'InternExtra'));
+        $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
+        /** @var Projekt $projekt */
+        $projekt = $projektRepo->find($projektId);
+        /** @var Person $person */
+        $person = $user->getPerson();
+        $internalExtra = new Rolle();
+        $internalExtra->setRolletyp($rolleTyp);
+        $form = $this->createForm(NewInternalExtraType::class, $internalExtra);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $projekt->addRolle($internalExtra);
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($projekt);
+            $em->flush();
+
+
+            return $this->redirectToRoute(
+                'display_internal_extra',
+                array('projektId' => $projektId, 'internalExtraId' => $internalExtra->getId())
+            );
+        }
+
+        return $this->render(
+            'Projekte/display_parts/house/internal_extras/popups/popup_internal_extra_new_content.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'projekt' => $projekt,
+                'projektId' => $projektId,
+                'user' => $user)
+        );
+    }
+
+    public function displayInternalExtraAction(Request $request, $projektId, $internalExtraId)
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -241,7 +366,13 @@ class ProjekteController extends Controller
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        /** @var ProjektRepository $emailRepo */
+        /** @var RolleRepository $rolleRepo */
+        $rolleRepo = $this->getDoctrine()->getRepository('AppBundle:Rolle');
+        /** @var Rolle $currentInternalExtra */
+        $currentInternalExtra = $rolleRepo->find($internalExtraId);
+
+
+        /** @var ProjektRepository $projektRepo */
         $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
         /** @var Projekt $currentProjekt */
         $currentProjekt = $projektRepo->find($projektId);
@@ -251,11 +382,11 @@ class ProjekteController extends Controller
 
         $internExtras = $currentProjekt->getRolleByTypKurzname('IE');
 
-
         return $this->render(
-            'Projekte/display_details_extras_intern.html.twig',
+            'Projekte/display_parts/house/internal_extras/details/display.html.twig',
             array('adressen' => $person->getAdressen(),
                 'projekt' => $currentProjekt,
+                'internalExtra' => $currentInternalExtra,
                 'interneExtras' => $internExtras,
                 'meineRollen' => $person->getPersonenRollenByProjekt($currentProjekt),
                 'telefonnummern' => $person->getTelefonnummern(),

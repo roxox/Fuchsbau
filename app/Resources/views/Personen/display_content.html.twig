@@ -2,9 +2,26 @@
     <!-- Three columns of text below the carousel -->
     <div class="container">
         <div>
-            <h3>Personendaten anzeigen</h3>
+            <h3>
+                Personendaten von
+                {# <span style="font-size: small">
+                {{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}#}
+                    {#{{ person.getTitel() == null ? '' : person.getTitel().getName() }} </span>#}
+                <b>{{ person.getVorname() }} {{ person.getNachname() }}</b>
+                </h3>
         </div>
-        <br>
+        <!-- Buttons -->
+        <!-- Button Edit -->
+        <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                href="{{ path('edit_current_person') }}"
+                data-toggle="modal"
+                data-target="#editPersonPopup">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten
+        </button>
+        <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+        </button>
+        <hr>
         An dieser Stelle lassen sich deine Daten wie <b>Benutzername</b>, <b>Kennwort</b>, dein richtiger <b>Name</b>
         und die gängigen Kontaktmöglichkeiten (<b>Adresse</b>, <b>Telefon- und Faxnummern</b>, sowie
         <b>Emailadressen</b> verwalten.

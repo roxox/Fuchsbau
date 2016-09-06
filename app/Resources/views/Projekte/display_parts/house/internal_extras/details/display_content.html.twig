@@ -1,0 +1,203 @@
+<span style="font-size: small; color: #61625d">
+    <!-- Three columns of text below the carousel -->
+    <div class="container">
+        <div>
+            {#<span style="font-size: small"> Zuletzt verändert am 31.08.2016 von Sebastian Fox </span>#}
+            <h3>Detailansicht für <b> {{ internalExtra.getName }} </b>
+                <span style="font-size: small"> (internes Extra) </span>
+            </h3>
+            <!-- Buttons -->
+            <a class="btn btn-linkfx btn-xs"
+               href="{{ path('display_project_by_project_id', {'projektId': projekt.getId()}) }}"
+               role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Zurück zum Projekt </a>
+            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                    href="{{ path('edit_current_person') }}"
+                    data-toggle="modal"
+                    data-target="#editPersonPopup">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten
+            </button>
+            <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+            </button>
+            <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
+                    data-target="#collapseInfo">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden
+            </button>
+            <hr>
+        </div>
+        {# HINWEISE #}
+        <div class="collapse out" id="collapseInfo">
+            <div class="alert alert-warning fade in">
+                <left>
+                    Hier findet die Verwaltung der internen Extras für euer künftiges Eigenheim statt.
+                    Um ein wenig die Begrifflichkeit zu erläutern, bei den interne Extras handelt es sich um die
+                    Extras, die direkt mit dem Bauträger vereinbart und auch an diesen bezahlt werden.
+                </left>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+
+            {# LINKE SEITE#}
+            {% include "Projekte/display_parts/house//internal_extras/details/display_parts/left.html.twig" %}
+            {# MITTELTEIL #}
+            {% include "Projekte/display_parts/house//internal_extras/details/display_parts/center.html.twig" %}
+            {# RECHTER TEIL#}
+            {% include "Projekte/display_parts/house//internal_extras/details/display_parts/right.html.twig" %}
+        </div>
+        <div>
+            <div>
+                <hr>
+                <h3>Unterpunkte
+                    <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
+                            data-target="#collapseInfoUnterpunkte">
+                        <sup><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            Hinweis ein-/ausblenden</sup>
+                    </button>
+                </h3>
+                {# HINWEIS UNTERPUNKTE #}
+                <div class="collapse out" id="collapseInfoUnterpunkte"><br>
+                    <div class="alert alert-warning fade in">
+                        <left>
+                            Es besteht die Möglichkeit Unterpunkete zu den einzelnen Extras zu erstellen, um die gesamte
+                            Aufstellung
+                            möglichst feingranular darzustellen. Bei den internen Extras, die direkt bei dem Bauträger
+                            geordert
+                            werden,
+                            macht das vielleicht noch nicht so viel Sinn. Im weiteren Verlauf z.B. bei den Nabenkosten
+                            oder bei den
+                            Tätigkeiten ist diese Mögichkeit sehr viel hilfreicher.
+                        </left>
+                    </div>
+                </div>
+                <table class="table table-condensed">
+                    {% if internalExtra.hasChildren %}
+                    <tr>
+                        <th style="width: 21%">
+                            Extra
+                        </th>
+                        <th style="width: 18%">
+                            Ausführende Firma
+                        </th>
+                        <th style="width: 3%">Status</th>
+                        <th style="width: 10%">
+                            Einzelpreis
+                        </th>
+                        <th style="width: 6%">
+                            Anzahl
+                        </th>
+                        <th style="width: 6%">
+                            Einheit
+                        </th>
+                        <th style="width: 14%">
+                            Gesamtpreis
+                            {#<span style="font-size: x-small">  inkl. MwSt.<br>(ohne Unterpunkte)</span>#}
+                        </th>
+                        <th style="width: 4%"></th>
+                    </tr>
+                    {% for subExtra in internalExtra.getChildren %}
+                        <tr>
+                            <td>
+                                {{ subExtra.getName }}
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                {% if subExtra.getKostenIst %}
+                                    Ist
+                                {% else %}
+                                    Plan
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if subExtra.getKostenIst %}
+                                    {{ subExtra.getKostenInklMwsT(subExtra.getKostenIst)|number_format(2, ',', '.') }} €
+                                    <span style="font-size: x-small"> (inkl. MwSt.) </span>
+                                    <br>
+                                    <span style="font-size: x-small"> {{ subExtra.getKostenExklMwsT(subExtra.getKostenIst)|number_format(2, ',', '.') }}
+                                        € </span>
+                                    <span style="font-size: xx-small"> (exkl. MwSt.) </span>
+                                {% elseif subExtra.getKostenPlan %}
+                                    {{ subExtra.getKostenInklMwsT(subExtra.getKostenPlan)|number_format(2, ',', '.') }} €
+                                    <span style="font-size: x-small"> (inkl. MwSt.) </span>
+                                    <br>
+                                    <span style="font-size: x-small"> {{ subExtra.getKostenExklMwsT(subExtra.getKostenPlan)|number_format(2, ',', '.') }}
+                                        € </span>
+                                    <span style="font-size: xx-small"> (exkl. MwSt.) </span>
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if subExtra.getAnzahl %}
+                                    {{ subExtra.getAnzahl }}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </td>
+                            <td colspan="2"></td>
+                            <td align="right">
+                                <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
+                                </button>
+                                <br>
+                                <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td align="right" colspan="9">
+                            <button type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-object-align-left" aria-hidden="true"></span>
+                                Unterpunkt hinzufügen
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            {% else %}
+                <table class="table table-condensed">
+                    <tr>
+                        <td colspan="9" align="center">
+                            Noch wurde kein Unterpunkt hinzugefügt.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" colspan="9">
+                            <a type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-object-align-left" aria-hidden="true"></span>
+                                Unterpunkt hinzufügen
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                {% endif %}
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+                <div class="modal fade" id="addInternExtra" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Extra hinzufügen</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text">
+                                    Lade Formular
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+</span>

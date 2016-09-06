@@ -1,0 +1,79 @@
+<tr>
+    <td colspan="7" style="font-size: small">
+        <table class="table table-condensed" style="border: hidden">
+            <tr>
+                <th colspan="5">interne Extrakosten</th>
+                <td style="font-size: small" align="right">
+
+                    <!-- Trigger the modal with a button -->
+                    <a class="btn btn-link-fx-brightblue btn-xs"
+                       href="{{ path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()}) }}"
+                       data-toggle="modal"
+                       data-target="#addInternalExtraPopup"
+                       role="button">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Eintrag </a>
+                </td>
+            </tr>
+            {% for internalExtra in projekt.getRolleByTypKurzname('IE') %}
+                {% if internalExtra.parent == false %}
+                    <tr style="border: hidden">
+                        <td style="width: 20%">
+                            {{ internalExtra.getName }}
+                            {% if internalExtra.hasChildren %}
+                                <span style="font-size: x-small"> inkl.: </span>
+                                {% for subExtra in internalExtra.getChildren %}
+                                    <br><span style="font-size: x-small"> - {{ subExtra.getName }} </span>
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td style="width: 15%">
+                            Team Massivhaus
+                        </td>
+                        <td style="width: 20%">
+                        </td>
+                        <td style="width: 15%" align="right">
+                            {{ internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan)|number_format(2, ',', '.') }}
+                            €
+                            <span style="font-size: x-small">(inkl. MwSt.)</span>
+                        </td>
+                        <td></td>
+                        <td style="font-size: small" align="right">
+                            <a class="btn btn-linkfx btn-xs"
+                               href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
+                               role="button">
+                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                Details
+                            </a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
+                {% set disabled = "true" %}
+            {% else %}
+                {% set disabled = "false" %}
+            {% endif %}
+            <tr style="border: hidden">
+                <td colspan="4" style="width: 60%">Summe zzgl. interne Extrakosten: {{ disabled }}</td>
+                <td style="font-size: small">
+                    {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
+                        +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
+                        <span style="font-size: x-small">(inkl. MwSt.)</span>
+                    {% else %}
+                        <div align="right">Es sind keine weiteren Kosten angefallen</div>
+                    {% endif %}</td>
+                <td style="font-size: small" align="right">
+                    <a class="btn btn-linkfx btn-xs"
+                       href="#"
+                       role="button"
+                            {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
+                                disabled
+                            {% endif %}
+                    >
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Plan / Ist
+                        Vergleich </a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

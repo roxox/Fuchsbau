@@ -1,0 +1,65 @@
+
+<tr>
+    <td>
+        {{ projekt.getHaus.getHausTyp.getName }}
+    </td>
+    <td>
+        {{ projekt.getHaus.getWohnflaecheDin|number_format(2, ',', '.') }}m²
+        / {{ projekt.getHaus.getWohnflaecheWoFiv|number_format(2, ',', '.') }}m²
+    </td>
+    <td>
+        FH155
+    </td>
+    <td>
+        Team Massivhaus
+    </td>
+    <td>
+        {{ (projekt.getHaus.getKaufpreis + projekt.getGesamtKostenInklMwstByKurzname('IE') )|number_format(2, ',', '.') }}
+        € <span style="font-size: x-small">(inkl. MwSt.)</span><br>
+        <span style="font-size: x-small">Grundpreis {{ projekt.getHaus.getKaufpreis|number_format(2, ',', '.') }} € (inkl MwSt.)<br>
+        + interne Extras {{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} € (inkl MwSt.)</span>
+    </td>
+    <td>55.000,00 €
+        <span style="font-size: x-small">(inkl. MwSt.)</span></td>
+</tr>
+<tr>
+
+</tr>
+<tr>
+    <td colspan="7" style="font-size: small" align="center"><b>Aufgegliedert in den
+            Hauspreis,
+            Kosten für Extras die der Bauträger direkt mit verkauft, Kosten für Extras und
+            Leistungen von weiteren Dienstleistern und die Auszuführenden Arbeiten, die dazu
+            notwendig sind, um das Haus fertig zu stellen.</b></td>
+</tr>
+<tr>
+    <td colspan="7" style="font-size: small">
+        <table class="table table-condensed" style="border: hidden">
+            <tr>
+                <th colspan="7">Haus</th>
+            </tr>
+            <tr style="border: hidden">
+                <td style="width: 20%">Grundausführung {{ projekt.getHaus.getHausName }}</td>
+                <td colspan="3" style="width: 50%">Team Massivhaus</td>
+                <td style="font-size: small">+{{ projekt.getHaus.getKaufpreis|number_format(2, ',', '.') }}
+                    €
+                    <span style="font-size: x-small">(inkl. MwSt.)</span>
+                </td>
+                <td style="font-size: small" align="right">
+
+                    <!-- Trigger the modal with a button -->
+                    <a class="btn btn-linkfx btn-xs"
+                       href="{{ path('edit_haus_to_current_projekt_modal', {'projektId': projekt.getId, 'hausId': projekt.getHaus.getId}) }}"
+                       data-toggle="modal"
+                       data-target="#editHausPopup"
+                       role="button">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten </a>
+                    <br>
+                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>

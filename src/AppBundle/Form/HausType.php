@@ -1,14 +1,12 @@
 <?php
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Adresse;
-use AppBundle\Entity\Email;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class HausType extends AbstractType
 {
@@ -44,8 +42,10 @@ class HausType extends AbstractType
             )
             ->add(
                 'kaufpreis',
-                TextType::class,
+                NumberType::class,
                 [
+                    'grouping' => true,
+                    'scale' => 2,
                     'label' => 'Haus Grundpreis',
                     'required' => false
                 ]

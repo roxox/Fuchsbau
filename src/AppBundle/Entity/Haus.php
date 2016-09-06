@@ -91,8 +91,7 @@ class Haus extends AbstractBasicEntity
     /**
      * @return Haustyp
      */
-    public
-    function getHaustyp()
+    public function getHaustyp()
     {
         return $this->haustyp;
     }
@@ -103,19 +102,22 @@ class Haus extends AbstractBasicEntity
      * @param Haustyp $haustyp
      * @return Haus
      */
-    public
-    function setHaustyp(
-        Haustyp $haustyp = null
-    ) {
+    public function setHaustyp(Haustyp $haustyp = null)
+    {
         $this->haustyp = $haustyp;
         return $this;
+    }
+
+    public function getHausName()
+    {
+        // ToDo: sobald Kataloghäuser exisiteren, vorrangig Katalognamen verwenden
+        return $this->haustyp->getName();
     }
 
     /**
      * @return integer
      */
-    public
-    function getWohnflaecheDin()
+    public function getWohnflaecheDin()
     {
         return $this->wohnflaecheDin;
     }
@@ -123,18 +125,15 @@ class Haus extends AbstractBasicEntity
     /**
      * @param integer $wohnflaecheDin
      */
-    public
-    function setWohnflaecheDin(
-        $wohnflaecheDin
-    ) {
+    public function setWohnflaecheDin($wohnflaecheDin)
+    {
         $this->wohnflaecheDin = $wohnflaecheDin;
     }
 
     /**
      * @return integer
      */
-    public
-    function getWohnflaecheWoFiv()
+    public function getWohnflaecheWoFiv()
     {
         return $this->wohnflaecheWoFiv;
     }
@@ -142,18 +141,15 @@ class Haus extends AbstractBasicEntity
     /**
      * @param integer $wohnflaecheWoFiv
      */
-    public
-    function setWohnflaecheWoFiv(
-        $wohnflaecheWoFiv
-    ) {
+    public function setWohnflaecheWoFiv($wohnflaecheWoFiv)
+    {
         $this->wohnflaecheWoFiv = $wohnflaecheWoFiv;
     }
 
     /**
      * @return Haustyp
      */
-    public
-    function getKataloghaus()
+    public function getKataloghaus()
     {
         return $this->kataloghaus;
     }
@@ -161,18 +157,15 @@ class Haus extends AbstractBasicEntity
     /**
      * @param Haustyp $kataloghaus
      */
-    public
-    function setKataloghaus(
-        $kataloghaus
-    ) {
+    public function setKataloghaus($kataloghaus)
+    {
         $this->kataloghaus = $kataloghaus;
     }
 
     /**
      * @return Projekt
      */
-    public
-    function getProjekt()
+    public function getProjekt()
     {
         return $this->projekt;
     }
@@ -180,10 +173,8 @@ class Haus extends AbstractBasicEntity
     /**
      * @param Projekt $projekt
      */
-    public
-    function setProjekt(
-        $projekt
-    ) {
+    public function setProjekt($projekt)
+    {
         $this->projekt = $projekt;
         if (!$projekt->getHaus()) {
             $projekt->setHaus($this);
@@ -193,8 +184,7 @@ class Haus extends AbstractBasicEntity
     /**
      * @return mixed
      */
-    public
-    function getKaufpreis()
+    public function getKaufpreis()
     {
         return $this->kaufpreis;
     }
@@ -202,18 +192,15 @@ class Haus extends AbstractBasicEntity
     /**
      * @param mixed $kaufpreis
      */
-    public
-    function setKaufpreis(
-        $kaufpreis
-    ) {
+    public function setKaufpreis($kaufpreis)
+    {
         $this->kaufpreis = $kaufpreis;
     }
 
     /**
      * @return boolean
      */
-    public
-    function isPreisInklMwSt()
+    public function isPreisInklMwSt()
     {
         return $this->preisInklMwSt;
     }
@@ -221,10 +208,8 @@ class Haus extends AbstractBasicEntity
     /**
      * @param boolean $preisInklMwSt
      */
-    public
-    function setPreisInklMwSt(
-        $preisInklMwSt
-    ) {
+    public function setPreisInklMwSt($preisInklMwSt)
+    {
         $this->preisInklMwSt = $preisInklMwSt;
     }
 

@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Projekt;
 use AppBundle\Entity\User;
-use AppBundle\Form\ProjektType;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,7 +23,6 @@ class DefaultController extends Controller
         $user = $this->getUser();
 
         if (!is_object($user) || !$user instanceof UserInterface) {
-//            throw new AccessDeniedException('This user does not have access to this section.');
             return $this->render('default/display_index.html.twig');
         }
 
