@@ -14,27 +14,24 @@
                 {#<h2 style="color: #7f7f7f">{{ headline }}</h2></div>#}
                 <ul class="nav navbar-nav pull-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('homepage') }}">Meine Projekte</a>
-                            {#<li><a href="{{ path('display_all_projects') }}">Projekte</a></li>#}
-                            <!-- <li><a href="#"> Nachrichten</a></li>
-                            <li><a href="#"> Bauforum</a></li>
-                            <li><a href="#"> </a></li> -->
+                        <li><a href="{{ path('homepage') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Meine Projekte </span></a>
                         {% if user is defined %}
-                            <li><a href="{{ path('display_current_person') }}">
+                            <li><a href="{{ path('display_current_person') }}"><span style="width: 100px; font-weight: 200; font-size: 21px">
                             {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
                                 {{ user.person.vorname }} {{ user.person.nachname }}
                             {% else %}
                                 {{ user.username }}
                             {% endif %}
-                            <span style="font-size: x-small"> Profil bearbeiten</span></a></li>
+                                    </span>
+                                    <span style="width: 100px; font-weight: 200; font-size: 14px"> Profil bearbeiten</span></a></li>
                         {% else %}
                             <li><a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
                         {% endif %}
                         <li><a href="#"> </a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">Log-Out</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"> <span style="width: 100px; font-weight: 200; font-size: 21px"> Log-Out</span></a></li>
                     {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}">Log-In</a></li>
-                        <li><a href="{{ path('registration_register_user') }}">Registrieren</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Log-In</span></a></li>
+                        <li><a href="{{ path('registration_register_user') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Registrieren </span></a></li>
 
                     {% endif %}
                 </ul>
