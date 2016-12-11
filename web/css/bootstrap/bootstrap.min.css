@@ -3732,7 +3732,8 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 	padding: 30px;
 	margin-bottom: 30px;
 	color: inherit;
-	background-color: #eee
+	border-bottom-style: solid;
+	background-color: #fff
 }
 .jumbotron h1, .jumbotron .h1 {
 	color: inherit
@@ -3743,7 +3744,7 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
 	font-weight: 200
 }
 .container .jumbotron {
-	border-radius: 6px
+	border-radius: 0px
 }
 .jumbotron .container {
 	max-width: 100%
@@ -4978,4 +4979,23 @@ th.visible-print, td.visible-print {
 .hidden-print {
 	display: none!important
 }
+}
+
+
+.feeltext {
+	padding: 30px;
+	margin-bottom: 30px;
+	color: inherit;
+	background-color: #fff
+}
+.feeltext h1, .feeltext .h1 {
+	color: inherit
+}
+.feeltext p {
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200
+}
+.feeltext .feeltext {
+	border-radius: 6px
 }

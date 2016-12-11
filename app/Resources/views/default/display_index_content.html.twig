@@ -1,67 +1,46 @@
 <div>
-    <span style="font-size: small; color: #61625d">
+    <span style="font-size: small; color: #61625d" align="justify">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
-            <!-- <div class="container">
-                <h3>Willkommen (zurück) {{ person.getVorname() }}!</h3>
-            </div>  /container -->
-
-            {# Termine #}
-            {#{% include "default/default_termine.html.twig" %}#}
-
-            {# Grundstück #}
             {% include "default/default_projekte.html.twig" %}
 
-
         </div>
-
-
                 {% else %}
         {# AUGELOGGT #}
         <div class="jumbotron">
             {#<div>#}
             <div class="container">
-                <h1>You are not logged In</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large
-                    callout
-                    called a jumbotron and three supporting pieces of content. Use it as a starting point to
-                    create
-                    something more unique.</p>
-                <p><a class="btn btn-default btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+                <h1 align="center"><b>fuchsbau</b> # Plane deinen Hausbau und behalten Kosten und Zeit im Blick</h1>
+                <p>
+                    <br>
+                    <br>
+                    Ich bin davon überzeugt, dass noch nicht alles rund läuft, und Fragen auftauchen. Wenn ihr also etwas findet, wobei ihr Hilfe benötigt oder irgendwas nicht so funktioniert, wie es sollte, lasst es mich wissen.</p>
+
+                <br>
+                <p><a class="btn btn-primary btn-lg" href="{{ path('fos_user_security_login') }}"
+                      role="button">Log-In &raquo;</a> <a
+                            class="btn btn-default btn-lg" href="{{ path('registration_register_user') }}"
+                            role="button">Registrieren &raquo;</a></p>
             </div>
         </div>
-
+        <br>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
-                        commodo,
-                        tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                        malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
+                    <h2># Um was handelt es sich bei <b>fuchsbau</b>? // Was mache ich damit?</h2>
+                    <p>Der Fuchsbau soll Bauherren unterstützen in der Planung und der Übersicht während ihres Hausbaus. Wie das ganze funktionieren soll, dass erfahrt ihr hier. </p>
+                    <p><a class="btn btn-default btn-sm" href="#" role="button">Mehr Infos</a></p>
                 </div>
                 <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus
-                        commodo,
-                        tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
-                        malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
+                    <h2># Wer steckt hinter <b>fuchsbau</b>? // Und warum!?</h2>
+                    <p>Gut und schön, dass jemand so ein Projekt startet, aber wer war das, was macht der so, und warum zur Hölle hat er das Projhekt gestartet? Das könnt ihr hier in Erfahrung bringen. </p>
+                    <p><a class="btn btn-default btn-sm" href="#" role="button">Mehr Infos</a></p>
                 </div>
                 <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                        Vestibulum
-                        id
-                        ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris
-                        condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-default btn-xs" href="#" role="button">View details &raquo;</a></p>
+                    <h2># Release notes // <br><b>Aktuelle Version: 0.1.0</b></h2>
+                    <p>Wer rastet der rostet und es ist ja auch bekannt, dass Programme und Apps nur dann funktionieren, anklang finden und weiter leben, wenn die Entwicklung nicht still steht. Daran arbeiute auch ich und immer wenn es was neues gibt, könnt ihr hier nachlesen, was sich geändert hat.
+
+                    <p><a class="btn btn-default btn-sm" href="#" role="button">Anzeigen</a></p>
                 </div>
             </div>
         </div> <!-- /container -->
