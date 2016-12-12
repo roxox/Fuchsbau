@@ -2,39 +2,42 @@
 
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
-
-<div class="adressen_update_user">
-    <!-- Three columns of text below the carousel -->
+<span style="font-size: small; color: #61625d">
+<div class="feeltext">
     <div class="row">
+        <br><br>
+        <h2># Dann lass uns erst mal ein Profil anlegen</h2>
         <div class="col-lg-4">
             <br><br>
-            <h2>Profil anlegen</h2>
-            <br><br>
             <div>
-                <h4>Benutzer</h4>
                 <div class="text">
-                    Wir fangen klein an, zunächst einmal legen wir dir einen Benutzer an. Such dir einen Benutzernamen
-                    aus, wähle deine lieblings Emailadresse und gib dem ganzen ein Passwort. Rechts gibt es ein paar
-                    kleine Hinweise zu dem Ganzen.
-                    <br><br>
+                    <span style="font-weight: 200; font-size: 21px">
                     {{ form_start(form) }}
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.plainPassword.first) }}
-                    {{ form_row(form.plainPassword.second) }}
+                        {{ form_row(form.username) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.plainPassword.first) }}
+                        {{ form_row(form.plainPassword.second) }}
+                        </span>
                     <div>
                         <br>
-                        <input type="submit" class="btn btn-default btn-sm" value="Benutzer anlegen">
+                        <br>
+                        <input type="submit" class="btn btn-default btn-lg" value="Benutzer anlegen">
                     </div>
                     {{ form_end(form) }}
                 </div>
 
             </div>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <br><br>
-            <h2 style="color: #FFFFFF;"> .</h2>
-            <br><br>
+        <div class="col-lg-6">
+            <div class="feeltext">
+            {#<h4>Benutzer</h4>#}
+                <div class="text">
+                <p align="justify">Wir fangen klein an, zunächst einmal legen wir dir einen Benutzer an. Such dir einen
+                    <b>Benutzernamen</b> aus, wähle deine lieblings <b>Emailadresse</b> und gib dem ganzen ein
+                    <b>Passwort</b>. Vorsichtshalber gibst du dein PAsswort noch ein zweites mal mit an, damit du
+                    sichergehen kannst, dass du dich beim ersten mal nicht vertippt hast.</p>
+            </div>
+
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <br><br>

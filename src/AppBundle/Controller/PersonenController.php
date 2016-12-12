@@ -65,7 +65,8 @@ class PersonenController extends Controller
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
-                'headline' => 'Personendaten anzeigen',
+                'headline' => '# Personendaten anzeigen',
+                'boldheadline' => $person->getName(),
                 'user' => $user)
         );
 

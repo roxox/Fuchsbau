@@ -44,13 +44,16 @@
         }
 
         .subnav {
-            margin: 0;
+            margin-top: 90px;
+            /*margin-bottom: 30px;*/
             top: 0px;
             z-index: 1020;
             /*background-color: rgb(247,247,247);*/
-            background-color: transparent;
-            /*border-bottom: 2px solid #E1E1E1;*/
-            padding: 60px 0px 0px 0px;
+            /*background-color: red;*/
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #333;
+            /*border-left: 1px solid #333;*/
+            padding: 8px 0px 0px 0px;
             /*padding-top: 60px;*/
         }
 
@@ -121,10 +124,130 @@
             text-decoration: none;
         }
 
+        /* LINK FX BRIGHT*/
+        .btn-linkfxbrt {
+            font-weight: 200;
+            color: #878882;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .btn-linkfxbrt,
+        .btn-linkfxbrt:active,
+        .btn-linkfxbrt[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .btn-linkfxbrt,
+        .btn-linkfxbrt:hover,
+        .btn-linkfxbrt:focus,
+        .btn-linkfxbrt:active {
+            border-color: transparent;
+        }
+
+        .btn-linkfxbrt:hover,
+        .btn-linkfxbrt:focus {
+            color: #4e4f4b;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .btn-linkfxbrt[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-linkfxbrt[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
+        /* LINK FX BRIGHT RED*/
+        .btn-linkfxbrtrd {
+            font-weight: 200;
+            color: #878882;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .btn-linkfxbrtrd,
+        .btn-linkfxbrtrd:active,
+        .btn-linkfxbrtrd[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .btn-linkfxbrtrd,
+        .btn-linkfxbrtrd:hover,
+        .btn-linkfxbrtrd:focus,
+        .btn-linkfxbrtrd:active {
+            border-color: transparent;
+        }
+
+        .btn-linkfxbrtrd:hover,
+        .btn-linkfxbrtrd:focus {
+            color: #810e13;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .btn-linkfxbrtrd[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-linkfxbrtrd[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
+        /* LINK FX DARK*/
+        .btn-linkfxdrk {
+            font-weight: 200;
+            color: #4e4f4b;
+            cursor: pointer;
+            border-radius: 0;
+        }
+
+        .btn-linkfxdrk,
+        .btn-linkfxdrk:active,
+        .btn-linkfxdrk[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .btn-linkfxdrk,
+        .btn-linkfxdrk:hover,
+        .btn-linkfxdrk:focus,
+        .btn-linkfxdrk:active {
+            border-color: transparent;
+        }
+
+        .btn-linkfxdrk:hover,
+        .btn-linkfxdrk:focus {
+            color: #4e4f4b;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .btn-linkfxdrk[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-linkfxdrk[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #999;
+            text-decoration: none;
+        }
+
         /* LINK FX RED*/
         .btn-linkfxred {
             font-weight: normal;
-            color: #d0171f;
+            color: #921016;
             cursor: pointer;
             border-radius: 0;
         }
@@ -147,7 +270,7 @@
 
         .btn-linkfxred:hover,
         .btn-linkfxred:focus {
-            color: #b6141b;
+            color: #6e0d10;
             font-weight: bold;
             text-decoration: none;
             background-color: transparent;
@@ -322,7 +445,7 @@
         {% include 'topnav.html.twig' %}
     {% endblock %}
 </div>
-<br><br><br>
+<br><br><br><br>
 
 <div class="container">
     <div>

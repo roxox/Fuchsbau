@@ -11,10 +11,22 @@
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse">
-                {#<h2 style="color: #7f7f7f">{{ headline }}</h2></div>#}
+                {#{{ headline }}</div>#}
+
+                <ul class="nav navbar-nav pull-left">
+                    <li> <span style="font-size: 36px; color: #61625d">
+                            {% if headline is defined%}
+                            {{ headline }} <b>
+                                {% endif %}
+
+                                {% if boldheadline is defined %}
+                                {{ boldheadline }} </b> </span> </li>
+                    {% endif %}
+
+                </ul>
                 <ul class="nav navbar-nav pull-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('homepage') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Meine Projekte </span></a>
+                        <li><a href="{{ path('homepage') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Meine Projekte <span style="width: 100px; font-weight: 200; font-size: 14px"><br>anzeigen und bearbeiten</span></span></a>
                         {% if user is defined %}
                             <li><a href="{{ path('display_current_person') }}"><span style="width: 100px; font-weight: 200; font-size: 21px">
                             {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
@@ -23,15 +35,15 @@
                                 {{ user.username }}
                             {% endif %}
                                     </span>
-                                    <span style="width: 100px; font-weight: 200; font-size: 14px"> Profil bearbeiten</span></a></li>
+                                    <span style="width: 100px; font-weight: 200; font-size: 14px"> <br>Profil bearbeiten</span></a></li>
                         {% else %}
                             <li><a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
                         {% endif %}
                         <li><a href="#"> </a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"> <span style="width: 100px; font-weight: 200; font-size: 21px"> Log-Out</span></a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}"> <span style="width: 100px; font-weight: 200; font-size: 21px"> Abmelden</span></a></li>
                     {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Log-In</span></a></li>
-                        <li><a href="{{ path('registration_register_user') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Registrieren </span></a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Anmelden <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Bestehendes Profil</span></span></a></li>
+                        <li><a href="{{ path('registration_register_user') }}"><span style="width: 100px; font-weight: 200; font-size: 21px"> Registrieren <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Neues Profil</span></span></a></li>
 
                     {% endif %}
                 </ul>

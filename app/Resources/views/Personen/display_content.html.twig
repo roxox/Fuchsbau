@@ -4,27 +4,44 @@
 	color: #61625d">
     <!-- Three columns of text below the carousel -->
     <div class="container">
-        <div>
-            <h1>
-                # Personendaten von
+
+        <div class="subnav">
+            <div align="left">
+            <!-- Buttons -->
+
+            <button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+                    {#href="{{ path('homepage') }}"#}
+                    style="font-weight: 200; font-size: 16px"
+                    {#role="button">#}
+                    data-target="#collapseInfo">
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>
+
+                {#<button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">#}
+                {#<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen#}
+                {#</button>#}
+                {#<button type="button" class="btn btn-link btn-xs" data-toggle="collapse"#}
+                {#data-target="#collapseInfo">#}
+                {#<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden#}
+                {#</button>#}
+            </div>
+        </div>
+        {#<div>#}
+            {#<h1>#}
+                {## Personendaten von#}
                 {# <span style="font-size: small">
                 {{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}#}
                     {#{{ person.getTitel() == null ? '' : person.getTitel().getName() }} </span>#}
-                <b>{{ person.getVorname() }} {{ person.getNachname() }}</b>
-                </h1>
-        </div>
+                {#<b>{{ person.getVorname() }} {{ person.getNachname() }}</b>#}
+                {#</h1>#}
+        {#</div>#}
         <!-- Buttons -->
         <!-- Button Edit -->
-        <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
-                href="{{ path('edit_current_person') }}"
-                data-toggle="modal"
-                data-target="#editPersonPopup">
-            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten
-        </button>
-        <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
-        </button>
-        <hr>
+        <br>
+        <br>
+        <br><div class="collapse out" id="collapseInfo">
+            {#<div class="alert alert-warning fade in">#}
+            <justify>
+                    <p style="font-size: 14px; font-weight: 200">
         An dieser Stelle lassen sich deine Daten wie <b>Benutzername</b>, <b>Kennwort</b>, dein richtiger <b>Name</b>
         und die gängigen Kontaktmöglichkeiten (<b>Adresse</b>, <b>Telefon- und Faxnummern</b>, sowie
         <b>Emailadressen</b> verwalten.
@@ -33,8 +50,9 @@
         will aber nicht ausschließen, dass in naher Zukunft Funktionen entstehen, bei denen genau diese Daten benötigt
         werden könnten. Aber lass dich dadurch nicht beeinflussen, die genannten Attribte lassen sich auch später noch
         hinzufügen. Erstmal ist wichtig <b>Benutzername</b>, <b>Kennwort</b> und eine <b>Emailadresse</b>, aber das ahst
-        du ja bei der Registrierung schon hinter dich gebracht.
+                        du ja bei der Registrierung schon hinter dich gebracht.</p></justify>
         <hr>
+        </div>
         <div class="row">
 
             {# RECHTE SEITE#}

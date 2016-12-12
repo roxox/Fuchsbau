@@ -160,6 +160,14 @@ class Person extends AbstractBasicEntity
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->vorname . ' ' . $this->getNachname();
+    }
+
+    /**
      * @param string $nachname
      */
     public function setNachname($nachname)

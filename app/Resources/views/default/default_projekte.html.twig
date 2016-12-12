@@ -1,8 +1,11 @@
 <div class="container">
-    <h1># Projekte mit meiner Beteiligung</h1>
+
+    {#<h1># Projekte mit meiner Beteiligung</h1>#}
+    <br>
+    <br>
     <br>
 
-    <p>Du bist bei <b>
+    <p style="font-weight: 200; font-size: 16px">Du bist bei <b>
             {% if numberOfProjects == 0 %}
                 keinem Projekt
             {% elseif numberOfProjects == 1 %}
@@ -17,7 +20,7 @@
     <p>
 
 
-    <div class="alert alert-warning fade in">
+    <div class="alert alert-warning fade in" style="font-weight: 200; font-size: 14px">
         {#<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>#}
         <center><strong>Achtung:</strong> Nur der Projektbesitzer kann ein Projekt auch
             löschen,

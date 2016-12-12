@@ -1,15 +1,16 @@
-<h4>Kosten, Anzahl und Einheit
-    <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-            data-target="#collapseInfoZeiten">
-        <sup><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden</sup>
-    </button>
-</h4>
+<h3>Zeiten und Termine
+    <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+            {#href="{{ path('homepage') }}"#}
+            style="font-weight: 200; font-size: 12px"
+            {#role="button">#}
+                 data-target="#collapseInfoZeiten"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
+</h3>
 <div class="collapse out" id="collapseInfoZeiten">
-    <div class="alert alert-warning fade in">
-        <left>
-            In welcher Einheit und wie viel davon wird dieses Extra gemessen? Stück, m, m², m³ oder sonst irgendetwas anderes?
+    {#<div class="aler alert-warning fade in">#}
+        <left><p style="font-size: 14px; font-weight: 200">
+                In welcher Einheit und wie viel davon wird dieses Extra gemessen? Stück, m, m², m³ oder sonst irgendetwas anderes?</p>
         </left>
-    </div>
+    {#</div>#}
 </div>
 <br>
 <table style="width: 100%">
@@ -75,8 +76,8 @@
         <td style="width: 2%;">
         </td>
         <td colspan="2">
-            <b>Mit Berücksichtigung der Unterpunkte:</b>
-            <br><br>
+            <h4>Mit Berücksichtigung der Unterpunkte:</h4>
+            <br>
         </td>
         <td style="width: 2%;">
         </td>

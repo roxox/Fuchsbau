@@ -3744,7 +3744,7 @@ a.list-group-item.active>.badge, .nav-pills>.active>a>.badge {
   font-weight: 200
 }
 .container .jumbotron {
-  border-radius: 0px
+  border-radius: 8px
 }
 .jumbotron .container {
   max-width: 100%
@@ -4998,4 +4998,31 @@ button.close {
 }
 .feeltext .feeltext {
   border-radius: 6px
+}
+
+feeltextme {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200
+}
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+  color: #a94442
+}
+.has-error .form-control {
+  border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075)
+}
+.has-error .form-control:focus {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px #ce8483
+}
+.has-error .input-group-addon {
+  color: #a94442;
+  border-color: #a94442;
+  background-color: #f2dede
+}
+.has-error .form-control-feedback {
+  color: #a94442
 }

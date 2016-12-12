@@ -1,16 +1,18 @@
 {# Ausführende Firmen #}
-<h4>Ausführende Firmen
-    <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-            data-target="#collapseInfoFirmen">
-        <sup><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden</sup>
-    </button>
-</h4>
+<h3>Ausführende Firmen
+    <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+            {#href="{{ path('homepage') }}"#}
+            style="font-weight: 200; font-size: 12px"
+            {#role="button">#}
+                 data-target="#collapseInfoFirmen"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
+</h3>
 <div class="collapse out" id="collapseInfoFirmen">
-    <div class="alert alert-warning fade in">
+    {#<div class="alert alert-warning fade in">#}
         <left>
-            Hier werden die Firmen angezeigt, die sich um dieses Extra bzw. einen Unterpunkt dieses Extras kümmern.
+            <p style="font-size: 14px; font-weight: 200">
+                Hier werden die Firmen angezeigt, die sich um dieses Extra bzw. einen Unterpunkt dieses Extras kümmern.</p>
         </left>
-    </div>
+    {#</div>#}
 </div>
 <div>
     <br>

@@ -43,7 +43,7 @@ class DefaultController extends Controller
                     'lastOpenedProject' => $lastOpenedProject,
  //                   'meineRollen' => $person->getPersonenRollen(),
 //                    'headline' => 'Willkommen (zurück) ' . $person->getVorname() . '!',
-                    'headline' => 'Übersicht für ' . $person->getVorname() . ' ' . $person->getNachname() . '!',
+                    'headline' => '# Projekte mit meiner Beteiligung',
                     'user' => $user));
         } else {
             return $this->render('default/display_index.html.twig',
