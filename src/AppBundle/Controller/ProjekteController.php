@@ -75,8 +75,8 @@ class ProjekteController extends Controller
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
-                'headline' => "# Projektinfos für",
-                'boldheadline' => $currentProjekt->getName(),
+                'headline' => "# 4Projektinfos",
+                'boldheadline' => "für: " . $currentProjekt->getName(),
                 'user' => $user)
         );
 
@@ -356,8 +356,8 @@ class ProjekteController extends Controller
                 'headline' => 'Personendaten bearbeiten',
                 'projekt' => $projekt,
                 'projektId' => $projektId,
-                'headline' => "# Projektinfos für",
-                'boldheadline' => $internalExtra->getName(),
+                'headline' => "# Projektinfos",
+                'boldheadline' => "\tfür: " . $internalExtra->getName(),
                 'user' => $user)
         );
     }
