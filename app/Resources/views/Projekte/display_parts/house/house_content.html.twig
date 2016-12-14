@@ -1,9 +1,9 @@
-
+<span style="font-weight: 200; font-size: 14px">
 {# Start #}
 <br>
     <div class="subnav">
         <div align="left">
-            {#{% include "Projekte/display_project_header.html.twig" %}#}
+            {% include "Projekte/display_project_header.html.twig" %}
             {#<br>#}
             {#<button type="button" class="btn btn-linkfxdrk btn-xs" aria-label="Left Align"#}
                     {#style="font-size: 16px; font-weight: 200; vertical-align: top"#}
@@ -80,7 +80,7 @@
 {# ENDE #}
 <br>
 <br>
-Hier gibt es nun die nötigten Infos wie <b>Haustyp, Größe, Preis, etc.</b> zu dem Traumhaus. Desweiteren
+Hier gibt es nun die nötigten Infos wie <span style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem Traumhaus. Desweiteren
 wird
 hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den
 jeweiligen
@@ -99,24 +99,24 @@ sich die Nutzung von selbst erklären sollte.
 
 {# Collapsable div #}
 <div class="collapse in" id="collapseHaus">
-    <table class="table table-condensed">
+    <table class="table table-condensed" style="font-weight: 400">
         <tr>
-            <th style="width: 10%">
+            <th style="width: 10%; font-weight: 400">
                 Haustyp
             </th>
-            <th style="width: 13%">
+            <th style="width: 13%; font-weight: 400">
                 Größe <br><span style="font-size: x-small">(DIN / WoFIV)</span>
             </th>
-            <th style="width: 17%">
+            <th style="width: 17%; font-weight: 400">
                 Hausname <br><span style="font-size: x-small">(aus dem Katalog, wenn vorhaden)</span>
             </th>
-            <th style="width: 18%">
+            <th style="width: 18%; font-weight: 400">
                 Bauträger
             </th>
-            <th style="width: 24%" colspan="1">
+            <th style="width: 24%; font-weight: 400" colspan="1">
                 Hauspreis <br><span style="font-size: x-small">(Grundpreis + interne Extras)</span>
             </th>
-            <th style="width: 18%" colspan="2">
+            <th style="width: 18%; font-weight: 400" colspan="2">
                 weitere Hauskosten
             </th>
         </tr>
@@ -186,3 +186,4 @@ sich die Nutzung von selbst erklären sollte.
     {% include "Projekte/display_parts/house/internal_extras/popups/popup_internal_extra_new.html.twig" %}
 </div>
 <hr>
+</span>

@@ -21,9 +21,9 @@
                             {% endif %}
                         </span>
                         {#<br style="font-size: xx-small">#}
-                        <span style="font-size: 26px; color: #61625d">
+                        <span style="font-size: 29px; color: #61625d">
                             {% if boldheadline is defined %}
-                                <br><thin> {{ boldheadline }} </thin>
+                                <br><b> {{ boldheadline }} </b>
                                 {% else %}
                                 <br>
                             {% endif %}
@@ -53,6 +53,10 @@
                         {% else %}
                             <li><a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
                         {% endif %}
+                        <li><a href="{{ path('fos_user_security_login') }}"><span
+                                        style="width: 100px; font-weight: 200; font-size: 21px"> Dokumentation <span
+                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Anleitung, Hilfe & Beispiele </span></span></a>
+                        </li>
                         <li><a href="#"> </a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}"> <span
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Abmelden</span></a>

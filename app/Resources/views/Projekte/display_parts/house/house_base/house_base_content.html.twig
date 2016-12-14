@@ -1,65 +1,68 @@
-
+<span style="font-weight: 200; font-size: 14px">
 <tr>
-    <td>
+    <td style="font-weight: 200; font-size: 14px">
         {{ projekt.getHaus.getHausTyp.getName }}
     </td>
-    <td>
+    <td style="font-weight: 200; font-size: 14px">
         {{ projekt.getHaus.getWohnflaecheDin|number_format(2, ',', '.') }}m²
         / {{ projekt.getHaus.getWohnflaecheWoFiv|number_format(2, ',', '.') }}m²
     </td>
-    <td>
+    <td style="font-weight: 200; font-size: 14px">
         FH155
     </td>
-    <td>
+    <td style="font-weight: 200; font-size: 14px">
         Team Massivhaus
     </td>
-    <td>
+    <td style="font-weight: 200; font-size: 14px">
         {{ (projekt.getHaus.getKaufpreis + projekt.getGesamtKostenInklMwstByKurzname('IE') )|number_format(2, ',', '.') }}
         € <span style="font-size: x-small">(inkl. MwSt.)</span><br>
         <span style="font-size: x-small">Grundpreis {{ projekt.getHaus.getKaufpreis|number_format(2, ',', '.') }} € (inkl MwSt.)<br>
         + interne Extras {{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} € (inkl MwSt.)</span>
     </td>
-    <td>55.000,00 €
+    <td style="font-weight: 200; font-size: 14px">55.000,00 €
         <span style="font-size: x-small">(inkl. MwSt.)</span></td>
 </tr>
 <tr>
 
 </tr>
 <tr>
-    <td colspan="7" style="font-size: small" align="center"><b>Aufgegliedert in den
+    <td colspan="7" align="center" style="font-weight: 400">Aufgegliedert in den
             Hauspreis,
             Kosten für Extras die der Bauträger direkt mit verkauft, Kosten für Extras und
             Leistungen von weiteren Dienstleistern und die Auszuführenden Arbeiten, die dazu
-            notwendig sind, um das Haus fertig zu stellen.</b></td>
+            notwendig sind, um das Haus fertig zu stellen.</td>
 </tr>
 <tr>
-    <td colspan="7" style="font-size: small">
+    <td colspan="7">
         <table class="table table-condensed" style="border: hidden">
             <tr>
-                <th colspan="7">Haus</th>
+                <th colspan="7" style="font-weight: 400">Haus</th>
             </tr>
             <tr style="border: hidden">
-                <td style="width: 20%">Grundausführung {{ projekt.getHaus.getHausName }}</td>
-                <td colspan="3" style="width: 50%">Team Massivhaus</td>
-                <td style="font-size: small">+{{ projekt.getHaus.getKaufpreis|number_format(2, ',', '.') }}
+                <td style="width: 20%; font-weight: 200; font-size: 14px">Grundausführung {{ projekt.getHaus.getHausName }}</td>
+                <td colspan="3" style="width: 50%; font-weight: 200; font-size: 14px">Team Massivhaus</td>
+                <td style="font-weight: 200; font-size: 14px">+{{ projekt.getHaus.getKaufpreis|number_format(2, ',', '.') }}
                     €
                     <span style="font-size: x-small">(inkl. MwSt.)</span>
                 </td>
-                <td style="font-size: small" align="right">
+                <td align="right" style="font-weight: 200; font-size: 14px">
 
                     <!-- Trigger the modal with a button -->
                     <a class="btn btn-linkfx btn-xs"
+                       style="font-weight: 400; font-size: 12px"
                        href="{{ path('edit_haus_to_current_projekt_modal', {'projektId': projekt.getId, 'hausId': projekt.getHaus.getId}) }}"
                        data-toggle="modal"
                        data-target="#editHausPopup"
                        role="button">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten </a>
-                    <br>
-                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+                    {#<br>#}
+                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align"
+                            style="font-weight: 400; font-size: 12px">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Entfernen
                     </button>
                 </td>
             </tr>
         </table>
     </td>
 </tr>
+    </span>

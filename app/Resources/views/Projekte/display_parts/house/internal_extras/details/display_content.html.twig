@@ -11,7 +11,7 @@
             <!-- Buttons -->
 
             <a class="btn btn-linkfxbrt btn-xs"
-               href="{{ path('homepage') }}"
+               href="{{ path('display_project_by_project_id', {'projektId': projekt.getId()}) }}"
                style="font-weight: 200; font-size: 16px"
                role="button">
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Zurück zur Übersicht </a>
@@ -22,7 +22,7 @@
                role="button">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten </a>
 
-            <a class="btn btn-linkfxbrtrd btn-xs"
+            <a class="btn btn-linkfxbrt btn-xs"
                href="{{ path('homepage') }}"
                style="font-weight: 200; font-size: 16px"
                role="button">
@@ -156,11 +156,17 @@
                             </td>
                             <td colspan="2"></td>
                             <td align="right">
-                                <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
+                                <button type="button"
+                                        class="btn btn-linkfxbrt btn-xs"
+                                        aria-label="Left Align"
+                                        style="font-weight: 200; font-size: 14px">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
                                 </button>
                                 <br>
-                                <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+                                <button type="button"
+                                        class="btn btn-linkfxred btn-xs"
+                                        style="font-weight: 200; font-size: 14px"
+                                        aria-label="Left Align">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
                                 </button>
                             </td>
@@ -168,7 +174,8 @@
                     {% endfor %}
                     <tr>
                         <td align="right" colspan="9">
-                            <button type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align">
+                            <button type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align"
+                                    style="font-weight: 200; font-size: 14px">
                                 <span class="glyphicon glyphicon-object-align-left" aria-hidden="true"></span>
                                 Unterpunkt hinzufügen
                             </button>
@@ -184,7 +191,8 @@
                     </tr>
                     <tr>
                         <td align="right" colspan="9">
-                            <a type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align">
+                            <a type="button" class="btn btn-link-fx-brightblue btn-xs" aria-label="Left Align"
+                               style="font-weight: 200; font-size: 14px">
                                 <span class="glyphicon glyphicon-object-align-left" aria-hidden="true"></span>
                                 Unterpunkt hinzufügen
                             </a>
@@ -204,7 +212,8 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        style="font-weight: 200; font-size: 14px">&times;</button>
                                 <h4 class="modal-title">Extra hinzufügen</h4>
                             </div>
                             <div class="modal-body">

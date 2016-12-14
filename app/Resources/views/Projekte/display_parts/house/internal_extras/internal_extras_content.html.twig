@@ -1,49 +1,69 @@
 <tr>
-    <td colspan="7" style="font-size: small">
+    <td colspan="7"
+        style="font-weight: 200; font-size: 14px">
         <table class="table table-condensed" style="border: hidden">
             <tr>
-                <th colspan="5">interne Extrakosten</th>
-                <td style="font-size: small" align="right">
+                <th colspan="5" style="font-weight: 400">interne Extrakosten</th>
+                <td align="right">
 
                     <!-- Trigger the modal with a button -->
                     <a class="btn btn-link-fx-brightblue btn-xs"
+                       style="font-weight: 400; font-size: 12px"
                        href="{{ path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()}) }}"
                        data-toggle="modal"
                        data-target="#addInternalExtraPopup"
                        role="button">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neuer Eintrag </a>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neues internes Extra </a>
                 </td>
             </tr>
             {% for internalExtra in projekt.getRolleByTypKurzname('IE') %}
                 {% if internalExtra.parent == false %}
                     <tr style="border: hidden">
                         <td style="width: 20%">
-                            {{ internalExtra.getName }}
-                            {% if internalExtra.hasChildren %}
-                                <span style="font-size: x-small"> inkl.: </span>
-                                {% for subExtra in internalExtra.getChildren %}
-                                    <br><span style="font-size: x-small"> - {{ subExtra.getName }} </span>
-                                {% endfor %}
-                            {% endif %}
+
+                            <a class="btn btn-linkfx btn-xs"
+                               style="font-weight: 400; font-size: 12px"
+                               href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
+                               role="button">{{ internalExtra.getName }}
+                            </a>
+                            {#{% if internalExtra.hasChildren %}#}
+                                {#{% for subExtra in internalExtra.getChildren %}#}
+                                    {#<a class="btn btn-linkfx btn-xs"#}
+                                       {#style="font-weight: 200; font-size: 14px"#}
+                                       {#href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"#}
+                                       {#role="button"><br><span#}
+                                                {#style="font-size: x-small"> - {{ subExtra.getName }} </span>#}
+                                    {#</a>#}
+
+                                {#{% endfor %}#}
+                            {#{% endif %}#}
+
                         </td>
-                        <td style="width: 15%">
+                        <td style="width: 15%; font-weight: 200; font-size: 12px">
                             Team Massivhaus
                         </td>
                         <td style="width: 20%">
                         </td>
-                        <td style="width: 15%" align="right">
+                        <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
                             {{ internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan)|number_format(2, ',', '.') }}
                             €
                             <span style="font-size: x-small">(inkl. MwSt.)</span>
                         </td>
                         <td></td>
-                        <td style="font-size: small" align="right">
+                        <td align="right">
                             <a class="btn btn-linkfx btn-xs"
+                               style="font-weight: 400; font-size: 12px"
                                href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
                                role="button">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                                 Details
                             </a>
+{#<br>#}
+                            <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align"
+                                    style="font-weight: 400; font-size: 12px">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                Entfernen
+                            </button>
                         </td>
                     </tr>
                 {% endif %}
@@ -54,23 +74,25 @@
                 {% set disabled = "false" %}
             {% endif %}
             <tr style="border: hidden">
-                <td colspan="4" style="width: 60%">Summe zzgl. interne Extrakosten: {{ disabled }}</td>
-                <td style="font-size: small">
-                    {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
+                <td colspan="4" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
+                <td style="font-weight: 400">
+                        {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
                         +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
-                        <span style="font-size: x-small">(inkl. MwSt.)</span>
+                        <span style="font-size: x-small">(inkl. MwSt.)</span></b>
                     {% else %}
                         <div align="right">Es sind keine weiteren Kosten angefallen</div>
                     {% endif %}</td>
-                <td style="font-size: small" align="right">
+                <td align="right">
                     <a class="btn btn-linkfx btn-xs"
                        href="#"
+                       aria-disabled="true"
+                       style="font-weight: 600; font-size: 12px"
                        role="button"
                             {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
                                 disabled
                             {% endif %}
                     >
-                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Plan / Ist
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist
                         Vergleich </a>
                 </td>
             </tr>

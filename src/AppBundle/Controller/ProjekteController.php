@@ -75,7 +75,7 @@ class ProjekteController extends Controller
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
-                'headline' => "# 4Projektinfos",
+                'headline' => "# Projektinformationen",
                 'boldheadline' => "für: " . $currentProjekt->getName(),
                 'user' => $user)
         );
