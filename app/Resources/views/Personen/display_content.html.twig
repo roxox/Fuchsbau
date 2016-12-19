@@ -3,17 +3,27 @@
 	font-weight: 200;
 	color: #61625d">
     <!-- Three columns of text below the carousel -->
-    <div class="container">
+    {#<div class="container">#}
+    {#<div class="headlinenav">#}
+    {#<!-- Buttons -->#}
 
-        <div class="subnav">
+    {#<button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"#}
+    {#href="{{ path('homepage') }}"#}
+    {#style="font-weight: 200; font-size: 16px"#}
+    {#role="button">#}
+    {#data-target="#collapseInfo">#}
+    {#<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>#}
+    {#</div>#}
+    <div class="subnav" data-spy="affix">
             <div align="left">
-            <!-- Buttons -->
-
-            <button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
-                    {#href="{{ path('homepage') }}"#}
-                    style="font-weight: 200; font-size: 16px"
-                    {#role="button">#}
-                    data-target="#collapseInfo">
+                {#Headline#}
+                <span style="font-size: x-large; font-weight: 200">Personendaten für <b>Sebastian Fox</b></span><br>
+                {#Buttons#}
+                <button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+                        {#href="{{ path('homepage') }}"#}
+                        style="font-weight: 200; font-size: 16px"
+                        {#role="button">#}
+                        data-target="#collapseInfo">
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>
 
                 {#<button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">#}
@@ -25,22 +35,23 @@
                 {#</button>#}
             </div>
         </div>
-        {#<div>#}
-            {#<h1>#}
-                {## Personendaten von#}
-                {# <span style="font-size: small">
-                {{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}#}
-                    {#{{ person.getTitel() == null ? '' : person.getTitel().getName() }} </span>#}
-                {#<b>{{ person.getVorname() }} {{ person.getNachname() }}</b>#}
-                {#</h1>#}
-        {#</div>#}
-        <!-- Buttons -->
-        <!-- Button Edit -->
+    {#<div>#}
+    {#<h1>#}
+    {## Personendaten von#}
+    {# <span style="font-size: small">
+    {{ person.getGeschlecht() == null ? '' : person.getGeschlecht().getName() }}#}
+    {#{{ person.getTitel() == null ? '' : person.getTitel().getName() }} </span>#}
+    {#<b>{{ person.getVorname() }} {{ person.getNachname() }}</b>#}
+    {#</h1>#}
+    {#</div>#}
+    <!-- Buttons -->
+    <!-- Button Edit -->
+        <br>
         <br>
         <br>
         <br><div class="collapse out" id="collapseInfo">
             {#<div class="alert alert-warning fade in">#}
-            <justify>
+        <justify>
                     <p style="font-size: 14px; font-weight: 200">
         An dieser Stelle lassen sich deine Daten wie <b>Benutzername</b>, <b>Kennwort</b>, dein richtiger <b>Name</b>
         und die gängigen Kontaktmöglichkeiten (<b>Adresse</b>, <b>Telefon- und Faxnummern</b>, sowie
@@ -62,5 +73,5 @@
             {# RECHTER TEIL#}
             {% include "Personen/display_parts/right.html.twig" %}
         </div>
-    </div>
+    {#</div>#}
 </span>

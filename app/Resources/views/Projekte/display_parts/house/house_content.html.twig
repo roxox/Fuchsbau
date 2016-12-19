@@ -1,52 +1,50 @@
 <span style="font-weight: 200; font-size: 14px">
 {# Start #}
-<br>
+    <br>
     <div class="subnav">
         <div align="left">
+            {#Headline#}
+            <span style="font-size: x-large; font-weight: 200"># Projektinformationen zu: <b>{{ projekt.getName }}</b></span><br>
             {% include "Projekte/display_project_header.html.twig" %}
-            {#<br>#}
-            {#<button type="button" class="btn btn-linkfxdrk btn-xs" aria-label="Left Align"#}
-                    {#style="font-size: 16px; font-weight: 200; vertical-align: top"#}
-                    {#href="#"#}
-                    {#data-toggle="modal"#}
-                    {#data-target="#editAddressPopup">#}
-                {#<span class="glyphicon glyphicon glyphicon-th" aria-hidden="true"></span>#}
-                {#Bereichsauswahl:#}
-            {#</button>#}
             <button type="button" class="btn btn-linkfxbrt btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200; vertical-align: top"
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon lyphicon glyphicon-list-alt" aria-hidden="true"></span> Zusammenfassung
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon lyphicon glyphicon-list-alt"
+                      aria-hidden="true"></span> Zusammenfassung
             </button>
             <button type="button" class="btn btn-linkfxbrt btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200; vertical-align: top"
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon-user" aria-hidden="true"></span> Projektbeteiligte
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon-user"
+                      aria-hidden="true"></span> Projektbeteiligte
             </button>
             <button type="button" class="btn btn-linkfxbrt btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200"
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon glyphicon-globe" aria-hidden="true"></span> Grundstück
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon glyphicon-globe"
+                      aria-hidden="true"></span> Grundstück
             </button>
             <button type="button" class="btn btn-linkfxdrk btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200"
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon-home" aria-hidden="true"></span> <b>Haus</b>
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon-home"
+                      aria-hidden="true"></span> <b>Haus</b>
             </button>
             <button type="button" class="btn btn-linkfxbrt btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200"
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon glyphicon-indent-right" aria-hidden="true"></span> Nebenkosten
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon glyphicon glyphicon-indent-right"
+                      aria-hidden="true"></span> Nebenkosten
             </button>
             <button type="button" class="btn btn-linkfxbrt btn-xs" aria-label="Left Align"
                     style="font-size: 16px; font-weight: 200"
@@ -67,11 +65,12 @@
                     href="#"
                     data-toggle="modal"
                     data-target="#editAddressPopup">
-                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon-euro" aria-hidden="true"></span> Gutschriften
+                <span class="glyphicon glyphicon glyphicon gglyphicon glyphicon glyphicon-euro"
+                      aria-hidden="true"></span> Gutschriften
             </button>
             </span>
-        </div>
-    {#<hr>#}
+</div>
+{#<hr>#}
     {#<br>#}
     {#<br>#}
 </div>
@@ -80,7 +79,8 @@
 {# ENDE #}
 <br>
 <br>
-Hier gibt es nun die nötigten Infos wie <span style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem Traumhaus. Desweiteren
+Hier gibt es nun die nötigten Infos wie <span
+        style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem Traumhaus. Desweiteren
 wird
 hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den
 jeweiligen

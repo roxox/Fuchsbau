@@ -3,7 +3,7 @@
 <!-- NAVIGATION STARTS
    ========================================================================= -->
 <section id="navigation">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
@@ -14,21 +14,18 @@
                 {#{{ headline }}</div>#}
 
                 <ul class="nav navbar-nav pull-left">
-                    <li>
-                        <span style="font-size: 36px; color: #61625d">
-                            {% if headline is defined %}
-                                {{ headline }}
-                            {% endif %}
-                        </span>
-                        {#<br style="font-size: xx-small">#}
-                        <span style="font-size: 29px; color: #61625d">
-                            {% if boldheadline is defined %}
-                                <br><b> {{ boldheadline }} </b>
-                                {% else %}
-                                <br>
-                            {% endif %}
-                        </span></p>
-                    </li>
+                    {#<li>#}
+                        {#<span style="font-size: x-large; color: #61625d">#}
+                            {#{% if headline is defined %}#}
+                                {#{{ headline }}#}
+                            {#{% endif %}#}
+                        {#</span>#}
+                        {#<span style="font-size: x-large; color: #61625d">#}
+                            {#{% if boldheadline is defined %}#}
+                                {#<b> {{ boldheadline }} </b>#}
+                            {#{% endif %}#}
+                        {#</span></p>#}
+                    {#</li>#}
                     <br style="font-size: 10px">
                     <li>
                     </li>
@@ -57,11 +54,20 @@
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Dokumentation <span
                                             style="width: 100px; font-weight: 200; font-size: 14px"><br>Anleitung, Hilfe & Beispiele </span></span></a>
                         </li>
+                        <li><a href="{{ path('fos_user_security_login') }}"><span
+                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt <span
+                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Social, Mail & Impressum </span></span></a>
+                        </li>
                         <li><a href="#"> </a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}"> <span
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Abmelden</span></a>
                         </li>
                     {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}"><span
+                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt <span
+                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span></span></a>
+                        </li>
+                        <li><a href="#"> </a></li>
                         <li><a href="{{ path('fos_user_security_login') }}"><span
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Anmelden <span
                                             style="width: 100px; font-weight: 200; font-size: 14px"><br>Bestehendes Profil</span></span></a>
