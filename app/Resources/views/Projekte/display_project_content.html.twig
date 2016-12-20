@@ -1,7 +1,7 @@
 {#<div class="container-fluid">#}
     <span style="font-size: small; color: #61625d">
     <!-- Three columns of text below the carousel -->
-    {#<div class="container">#}
+    <div class="container">
         {#<h2>Projekt</h2>#}
         {#<hr>#}
         <div class="row">
@@ -9,42 +9,43 @@
 
             {#<div class="col-lg-12">#}
 
+            {% include "Projekte/display_parts/subnav.html.twig" %}
                  {#Projektinfo#}
-                {#{% include "Projekte/display_parts/info/info_content.html.twig" %}#}
+                {% include "Projekte/display_parts/info/info_content.html.twig" %}
 
                 {# Projektbeteiligte#}
-                {#{% include "Projekte/display_parts/involved/involved_content.html.twig" %}#}
-                {#<br>#}
+                {% include "Projekte/display_parts/involved/involved_content.html.twig" %}
+                <br>
                 {##}
 
-                {#<div class="alert alert-warning fade in">#}
-                    {#<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>#}
-                    {#<center><strong>Info bevor wir über die Kosten reden:</strong> Sofern tatsächliche Kosten#}
-                        {#angegeben wurden, werden diese zur Kalkulation verwendet. Sollten noch keine tatsächlichen#}
-                        {#Kosten, sondern lediglich geplante Kosten angegeben sein, werden diese in der Kalkulation#}
-                        {#berücksichtigt. Im Falle, dass das gar keine Kosten angegeben sind, werden auch keien Kosten#}
-                        {#zur Kalkulation rangeführt!#}
-                    {#</center>#}
-                {#</div>#}
+                <div class="alert alert-fox fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <center><strong>Info bevor wir über die Kosten reden:</strong> Sofern tatsächliche Kosten
+                        angegeben wurden, werden diese zur Kalkulation verwendet. Sollten noch keine tatsächlichen
+                        Kosten, sondern lediglich geplante Kosten angegeben sein, werden diese in der Kalkulation
+                        berücksichtigt. Im Falle, dass das gar keine Kosten angegeben sind, werden auch keien Kosten
+                        zur Kalkulation rangeführt!
+                    </center>
+                </div>
 
                 {# Grundstück #}
-                {#{% include "Projekte/display_parts/building_ground/building_ground_content.html.twig" %}#}
+                {% include "Projekte/display_parts/building_ground/building_ground_content.html.twig" %}
 
                 {# Haus #}
                 {% include "Projekte/display_parts/house/house_content.html.twig" %}
 
                 {# Nebenkosten #}
-                {#{% include "Projekte/project_nebenkosten.html.twig" %}#}
+                {% include "Projekte/project_nebenkosten.html.twig" %}
 
                 {# Gutschriften #}
-                {#{% include "Projekte/display_parts/credit/credit_content.html.twig" %}#}
+                {% include "Projekte/display_parts/credit/credit_content.html.twig" %}
 
                 {# Außenalnagen #}
-                {#{% include "Projekte/project_aussenanlagen.html.twig" %}#}
+                {% include "Projekte/project_aussenanlagen.html.twig" %}
 
                 {# Inneneinrichtung #}
-                {#{% include "Projekte/project_inneneinrichtung.html.twig" %}#}
-            {#</div>#}
+                {% include "Projekte/project_inneneinrichtung.html.twig" %}
+            </div>
         </div>
     {#</div>#}
     </span>

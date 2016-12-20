@@ -47,16 +47,19 @@
         }
 
         .subnav {
-            margin-top: 95px;
+            margin-top: 93px;
             /*margin-bottom: 30px;*/
             top: 0px;
             z-index: 1020;
             /*background-color: rgb(247,247,247);*/
             /*background-color: red;*/
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 1px solid #333;
+            background: rgba(249, 249, 249, 0.7);
+            border-bottom: 2px solid #b6b6b6;
+            /*border-color: #666;*/
+            /*border-width: 0 0 1px;*/
             /*border-left: 1px solid #333;*/
             padding: 8px 0px 0px 0px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
             /*padding-top: 60px;*/
         }
 
@@ -642,22 +645,6 @@
 
             $('.subnav').affix({
                 offset: {
-                    top: $('#navtop + #headlinenav').height()
-                }
-            });
-
-
-        });
-
-    </script>
-
-
-    <script type='text/javascript'>
-
-        $(document).ready(function () {
-
-            $('.headlinenav').affix({
-                offset: {
                     top: $('#navtop').height()
                 }
             });
@@ -666,6 +653,22 @@
         });
 
     </script>
+
+
+    {#<script type='text/javascript'>#}
+
+        {#$(document).ready(function () {#}
+
+            {#$('.headlinenav').affix({#}
+                {#offset: {#}
+                    {#top: $('#navtop').height()#}
+                {#}#}
+            {#});#}
+
+
+        {#});#}
+
+    {#</script>#}
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;

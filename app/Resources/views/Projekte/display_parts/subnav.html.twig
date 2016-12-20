@@ -1,0 +1,71 @@
+<span style="font-weight: 200; font-size: 14px">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    {# Javascript#}
+    <script type="text/javascript">
+$(function() {
+    $('a[href*="#"]:not([href="#"])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html, body').animate({
+//                    scrollTop: 190
+                    scrollTop: target.offset().top - 200
+                }, 600);
+                return false;
+            }
+        }
+    });
+});
+
+    </script>
+    {# Start #}
+    <br>
+    <nav class="subnav navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" align="left">
+                <ul class="nav navbar-nav pull-left">
+                    {# Headline #}
+                    <span style="font-size: x-large; font-weight: 200"># Projektinformationen zu: <b>{{ projekt.getName }}</b></span><br>
+                    {# Links to sections #}
+                    <a href="{{ path('homepage') }}"><span class="btn btn-linkfxbrt btn-xs"
+                                                           style="font-size: 16px; font-weight: 200"><span
+                                    class="glyphicon glyphicon-menu-left"
+                                    aria-hidden="true"></span> Zurück zur Übersicht</span></a>
+                    <a href="#zusammenfassung"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-list-alt"
+                                    aria-hidden="true"></span> Zusammenfassung</span></a>
+                    <a href="#projektbeteiligte"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-user"
+                                    aria-hidden="true"></span> Projektbeteiligte</span></a>
+                    <a href="#grundstueck"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-globe"
+                                    aria-hidden="true"></span> Grundstück</span></a>
+                    <a href="#haus"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-home"
+                                    aria-hidden="true"></span> Haus</span></a>
+                    <a href="#nebenkosten"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-indent-right"
+                                    aria-hidden="true"></span> Nebenkosten</span></a>
+                    <a href="#gutschriften"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-euro"
+                                    aria-hidden="true"></span> Gutschriften</span></a>
+                    <a href="#aussenanlagen"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-leaf"
+                                    aria-hidden="true"></span> Außenanlagen</span></a>
+                    <a href="#inneneinrichtung"><span
+                                style="font-size: 16px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-bed"
+                                    aria-hidden="true"></span> Inneneinrichtung</span></a>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            </span>

@@ -1,9 +1,8 @@
 <!-- app/Resources/FOSUserBundle/views/topnav.html.twig -->
-
 <!-- NAVIGATION STARTS
    ========================================================================= -->
 <section id="navigation">
-    <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" data-spy="affix" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
@@ -54,16 +53,16 @@
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Dokumentation <span
                                             style="width: 100px; font-weight: 200; font-size: 14px"><br>Anleitung, Hilfe & Beispiele </span></span></a>
                         </li>
-                        <li><a href="{{ path('fos_user_security_login') }}"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt <span
-                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Social, Mail & Impressum </span></span></a>
+                        <li><a href="#zweitens"><span
+                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt
+                                    <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Social, Mail & Impressum </span></span></a>
                         </li>
                         <li><a href="#"> </a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}"> <span
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Abmelden</span></a>
                         </li>
                     {% else %}
-                        <li><a href="{{ path('fos_user_security_login') }}"><span
+                        <li><a href="#zweitens"><span
                                         style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt <span
                                             style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span></span></a>
                         </li>
