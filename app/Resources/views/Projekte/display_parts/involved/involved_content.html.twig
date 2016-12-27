@@ -1,21 +1,19 @@
 <div>
-    <h3 id="projektbeteiligte">
-        ** Projektbeteiligte
-    </h3>
+    <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        /*border-bottom: 1px solid #b6b6b6;*/
+        /*border-top: 1px solid #b6b6b6;*/
+        border: 1px solid #b6b6b6;"
+        id="projektbeteiligte"><span
+                    class="glyphicon glyphicon-user"
+                    aria-hidden="true"></span> Projektbeteiligte
+    </h4> <br>
 </div>
 <div>Hier kannst du dir alle Teilnehmer des Projekts ansehen und den beteiligten von hier aus
     Nachrichten schicken. Als Teilnehmer, der nicht gleichzeitiig Besitzer des Projekts ist,
     kann man das Projekt nicht löschen, es jedoch jederzeit verlassen.<br><br>
 
-    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
-            data-target="#collapseProjektBeteiligte">
-        Einträge ein-/ausblenden
-    </button>
-
-    <br><br>
-
     <div class="collapse in" id="collapseProjektBeteiligte">
-        <h4>* Fuchsbau-User <span style="font-size: small">(Tatsächliche User, die hier angemeldet sind und entweder als Beobachte, Bauherr(-in), usw. am Projekt beteiligt sind)</span>
+        <h4>Fuchsbau-User <span style="font-size: small">(Tatsächliche User, die hier angemeldet sind und entweder als Beobachte, Bauherr(-in), usw. am Projekt beteiligt sind)</span>
         </h4></h4>
         Der Projektbesitzer hat die meisten Rechte, er kann weitere Personen zum Projekt einladen, die
         je
@@ -76,16 +74,15 @@
             {% endfor %}
             <tr>
                 <td colspan="6" align="right">
-                    <br>
                     <a class="btn btn-link-fx-brightblue btn-xs"
                        href="#"
                        role="button">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> User einladen </a>
-                    <br><br>
+                    <br>
                 </td>
             </tr>
         </table>
-        <h4>* Firmen <span style="font-size: small">(Bauträger, Ausführende Gewerke, etc...)</span></h4>
+        <h4>Firmen <span style="font-size: small">(Bauträger, Ausführende Gewerke, etc...)</span></h4>
         Der Projektbesitzer hat die meisten Rechte, er kann weitere Personen zum Projekt einladen, die
         je
         nach
@@ -93,7 +90,6 @@
         Projekts an
         einen anderen User übertragen, und er kann das gesamte Projekt löschen.<br><br>
         <table class="table table-condensed">
-
             <tr>
                 <th>Firmenname</th>
                 <th>Adressen</th>
@@ -136,22 +132,14 @@
                 </tr>
                 <tr>
                     <td colspan="6" align="right">
-                        <br>
                         <a class="btn btn-link-fx-brightblue btn-xs"
                            href="#"
                            role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neue Firma hinzufügen </a>
-                        <br><br>
                     </td>
                 </tr>
             {% endif %}
         </table>
-        <hr>
-
-        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse"
-                data-target="#collapseProjektBeteiligte">
-            Einträge ein-/ausblenden
-        </button>
     </div>
 </div>
 

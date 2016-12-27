@@ -2,15 +2,14 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
     {# Javascript#}
     <script type="text/javascript">
-$(function() {
-    $('a[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+$(function () {
+    $('a[href*="#"]:not([href="#"])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
             var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
                 $('html, body').animate({
-//                    scrollTop: 190
-                    scrollTop: target.offset().top - 200
+                    scrollTop: target.offset().top - 140
                 }, 600);
                 return false;
             }
@@ -26,7 +25,7 @@ $(function() {
             <div class="navbar-header" align="left">
                 <ul class="nav navbar-nav pull-left">
                     {# Headline #}
-                    <span style="font-size: x-large; font-weight: 200"># Projektinformationen zu: <b>{{ projekt.getName }}</b></span><br>
+                    {#<span style="font-size: x-large; font-weight: 200"># Projektinformationen zu: <b>{{ projekt.getName }}</b></span><br>#}
                     {# Links to sections #}
                     <a href="{{ path('homepage') }}"><span class="btn btn-linkfxbrt btn-xs"
                                                            style="font-size: 16px; font-weight: 200"><span

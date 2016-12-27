@@ -1,22 +1,14 @@
-{#<div class="container-fluid">#}
     <span style="font-size: small; color: #61625d">
     <!-- Three columns of text below the carousel -->
     <div class="container">
-        {#<h2>Projekt</h2>#}
-        {#<hr>#}
         <div class="row">
-            {# RECHTE SEITE#}
-
-            {#<div class="col-lg-12">#}
-
             {% include "Projekte/display_parts/subnav.html.twig" %}
+
                  {#Projektinfo#}
                 {% include "Projekte/display_parts/info/info_content.html.twig" %}
 
                 {# Projektbeteiligte#}
                 {% include "Projekte/display_parts/involved/involved_content.html.twig" %}
-                <br>
-                {##}
 
                 <div class="alert alert-fox fade in">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -47,6 +39,4 @@
                 {% include "Projekte/project_inneneinrichtung.html.twig" %}
             </div>
         </div>
-    {#</div>#}
     </span>
-{#</div>#}
