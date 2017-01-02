@@ -2,34 +2,22 @@
 	font-size: 14px;
 	font-weight: 200;
 	color: #61625d">
-    <div class="subnav" data-spy="affix">
-            <div align="left">
-                <button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
-                        style="font-weight: 200; font-size: 16px"
-                        data-target="#collapseInfo">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>
-            </div>
-        </div>
+    {#{% include "Personen/subnav.html.twig" %}#}
+    <!-- Buttons -->
+    <!-- Button Edit -->
         <br>
         <br>
-        <br>
-        <br><div class="collapse out" id="collapseInfo">
-        <justify>
-            <p style="font-size: 14px; font-weight: 200">
-                An dieser Stelle lassen sich deine Daten wie <b>Benutzername</b>, <b>Kennwort</b>, dein richtiger <b>Name</b>
-                und die gängigen Kontaktmöglichkeiten (<b>Adresse</b>, <b>Telefon- und Faxnummern</b>, sowie
-                <b>Emailadressen</b> verwalten.
-                <br><br>
-                Aktuell ist es nicht notwendig den richtigen Namen sowie irgendwelche Adressen oder Nummern zu hinterlegen. Ich
-                will aber nicht ausschließen, dass in naher Zukunft Funktionen entstehen, bei denen genau diese Daten benötigt
-                werden könnten. Aber lass dich dadurch nicht beeinflussen, die genannten Attribte lassen sich auch später noch
-                hinzufügen. Erstmal ist wichtig <b>Benutzername</b>, <b>Kennwort</b> und eine <b>Emailadresse</b>, aber das ahst
-                du ja bei der Registrierung schon hinter dich gebracht.
-            </p>
-        </justify>
+        {#<br><div class="collapse out" id="collapseInfo">#}
+            {#<div class="alert alert-warning fade in">#}
+        <center>
+                    <p style="font-size: 16px; font-weight: 200">
+        An dieser Stelle lassen sich deine Daten wie Benutzername, Kennwort, dein richtiger Name
+        und die gängigen Kontaktmöglichkeiten (Adresse, Telefon- und Faxnummern, sowie
+        Emailadressen) verwalten.</p></center>
         <hr>
-        </div>
+        {#</div>#}
         <div class="row">
+
             {# RECHTE SEITE#}
             {% include "Personen/display_parts/left.html.twig" %}
             {# MITTELTEIL #}

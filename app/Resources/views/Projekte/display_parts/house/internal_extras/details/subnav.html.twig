@@ -1,0 +1,52 @@
+<span style="font-weight: 200; font-size: 14px">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    {# Javascript#}
+    <script type="text/javascript">
+$(function () {
+    $('a[href*="#"]:not([href="#"])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 140
+                }, 600);
+                return false;
+            }
+        }
+    });
+});
+
+    </script>
+    {# Start #}
+    <br>
+    <nav class="subnav navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" align="left">
+                <ul class="nav navbar-nav pull-left">
+                    <a class="btn btn-linkfxbrt btn-xs"
+                       href="{{ path('display_project_by_project_id', {'projektId': projekt.getId()}) }}"
+                       style="font-weight: 200; font-size: 14px"
+                       role="button">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Zurück zur Übersicht
+                    </a>
+                    <b>{{ internalExtra.getName() }}:</b>
+                    <a class="btn btn-linkfxbrt btn-xs"
+                       href="{{ path('homepage') }}"
+                       style="font-weight: 200; font-size: 14px"
+                       role="button">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> umbennenen
+                    </a>
+
+                    <a class="btn btn-linkfxbrt btn-xs"
+                       href="{{ path('homepage') }}"
+                       style="font-weight: 200; font-size: 14px"
+                       role="button">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>  löschen
+                    </a>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</span>

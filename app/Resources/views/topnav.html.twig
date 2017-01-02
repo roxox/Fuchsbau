@@ -10,70 +10,78 @@
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse">
-                {#{{ headline }}</div>#}
-
-                <ul class="nav navbar-nav pull-left">
-                    {#<li>#}
-                        {#<span style="font-size: x-large; color: #61625d">#}
-                            {#{% if headline is defined %}#}
-                                {#{{ headline }}#}
-                            {#{% endif %}#}
-                        {#</span>#}
-                        {#<span style="font-size: x-large; color: #61625d">#}
-                            {#{% if boldheadline is defined %}#}
-                                {#<b> {{ boldheadline }} </b>#}
-                            {#{% endif %}#}
-                        {#</span></p>#}
-                    {#</li>#}
-                    <br style="font-size: 10px">
-                    <li>
-                    </li>
-
-                </ul>
                 <ul class="nav navbar-nav pull-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('homepage') }}"><span
-                                style="width: 100px; font-weight: 200; font-size: 21px"> Meine Projekte <span
-                                    style="width: 100px; font-weight: 200; font-size: 14px"><br>anzeigen und bearbeiten</span></span></a>
+                        <li>
+                            <a href="{{ path('homepage') }}">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Meine Projekte </span>
+                                <br>
+                                <span style="width: 100px; font-weight: 200; font-size: 12px">anzeigen und bearbeiten</span>
+                            </a>
                         {% if user is defined %}
-                            <li><a href="{{ path('display_current_person') }}"><span
-                                            style="width: 100px; font-weight: 200; font-size: 21px">
-                            {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
-                                {{ user.person.vorname }} {{ user.person.nachname }}
-                            {% else %}
-                                {{ user.username }}
-                            {% endif %}
+                            <li>
+                                <a href="{{ path('display_current_person') }}">
+                                    <span style="width: 100px; font-weight: 200; font-size: 18px">
+                                        {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
+                                            {{ user.person.vorname }} {{ user.person.nachname }}
+                                        {% else %}
+                                            {{ user.username }}
+                                        {% endif %}
                                     </span>
-                                    <span style="width: 100px; font-weight: 200; font-size: 14px"> <br>Profil bearbeiten</span></a>
+                                    <br>
+                                    <span style="width: 100px; font-weight: 200; font-size: 12px"> Profil bearbeiten</span>
+                                </a>
                             </li>
                         {% else %}
-                            <li><a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
+                            <li>
+                                <a href="{{ path('display_current_person') }}"> Profil bearbeiten</a>
+                            </li>
                         {% endif %}
-                        <li><a href="{{ path('fos_user_security_login') }}"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Dokumentation <span
-                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Anleitung, Hilfe & Beispiele </span></span></a>
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Dokumentation </span>
+                                <br>
+                                <span style="width: 100px; font-weight: 200; font-size: 12px">Anleitung, Hilfe & Beispiele </span>
+
+                            </a>
                         </li>
-                        <li><a href="#zweitens"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt
-                                    <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Social, Mail & Impressum </span></span></a>
+                        <li>
+                            <a href="#zweitens">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Kontakt </span>
+                                <br>
+                                <span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>
+
+                            </a>
                         </li>
-                        <li><a href="#"> </a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}"> <span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Abmelden</span></a>
+                        <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Abmelden</span>
+                            </a>
                         </li>
                     {% else %}
-                        <li><a href="#zweitens"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Kontakt <span
-                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span></span></a>
+                        <li>
+                            <a href="#zweitens">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Kontakt </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span>
+
+                            </a>
                         </li>
-                        <li><a href="#"> </a></li>
-                        <li><a href="{{ path('fos_user_security_login') }}"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Anmelden <span
-                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Bestehendes Profil</span></span></a>
+                        <li>
+                            <a href="#"> </a>
                         </li>
-                        <li><a href="{{ path('registration_register_user') }}"><span
-                                        style="width: 100px; font-weight: 200; font-size: 21px"> Registrieren <span
-                                            style="width: 100px; font-weight: 200; font-size: 14px"><br>Neues Profil</span></span></a>
+                        <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Anmelden </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Bestehendes Profil</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('registration_register_user') }}">
+                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Registrieren </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Neues Profil</span>
+
+                            </a>
                         </li>
 
                     {% endif %}

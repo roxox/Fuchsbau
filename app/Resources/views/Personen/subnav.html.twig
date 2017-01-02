@@ -1,0 +1,40 @@
+<span style="font-weight: 200; font-size: 14px">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    {# Javascript#}
+    <script type="text/javascript">
+$(function() {
+    $('a[href*="#"]:not([href="#"])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+            if (target.length) {
+                $('html, body').animate({
+//                    scrollTop: 190
+                    scrollTop: target.offset().top - 200
+                }, 600);
+                return false;
+            }
+        }
+    });
+});
+
+    </script>
+    {# Start #}
+    <br>
+    <nav class="subnav navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" align="left">
+                <ul class="nav navbar-nav pull-left">
+                    {# Links to sections #}
+                    <button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+                    href="{{ path('homepage') }}"
+                    style="font-weight: 200; font-size: 16px"
+                    role="button"
+                    data-target="#collapseInfo">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+            </span>

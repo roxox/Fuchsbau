@@ -1,10 +1,12 @@
-<h3>Zeiten und Termine
+<span style="font-weight: 200; font-size: 26px">Zeiten und Termine
     <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
             {#href="{{ path('homepage') }}"#}
             style="font-weight: 200; font-size: 12px"
             {#role="button">#}
                  data-target="#collapseInfoZeiten"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
-</h3>
+</span>
+<br>
+<br>
 <div class="collapse out" id="collapseInfoZeiten">
     {#<div class="aler alert-warning fade in">#}
         <left><p style="font-size: 14px; font-weight: 200">
@@ -12,8 +14,9 @@
         </left>
     {#</div>#}
 </div>
-<br>
-<table style="width: 100%">
+<table  style="width: 100%;
+                  border: 2px solid #cfcfcf;
+                  border-radius: 8px;">
     <tr style="background-color: #FAFAFA">
         <td colspan="4">
             <br>
@@ -22,8 +25,8 @@
     <tr style="background-color: #FAFAFA">
         <td style="width: 2%;">
         </td>
-        <td colspan="2" align="right">
-            <b>Ausführungszeiten</b>
+        <td colspan="2" align="right" style="width: 22%; font-size: 18px; font-weight: 200">
+            Ausführungszeiten
         </td>
         <td style="width: 2%;">
         </td>
@@ -57,7 +60,7 @@
             <p>Tatsächlicher Ausführungszeitraum:</p>
         </td>
         <td align="right">
-            02.08.2016 - 31.08.2016
+            <b>02.08.2016 - 31.08.2016</b>
         </td>
         <td style="width: 2%;">
         </td>
@@ -89,7 +92,7 @@
             <p>Gepl. / Tat. frühester Ausführungsbeginn: </p>
         </td>
         <td align="right">
-            02.08.2016 / 02.08.2016
+            02.08.2016 / <b>02.08.2016</b>
         </td>
         <td style="width: 2%;">
         </td>
@@ -101,7 +104,7 @@
             <p>Gepl. / Tat. spätestes Ausführungsende: </p>
         </td>
         <td align="right">
-            31.08.2016 / 31.08.2016
+            31.08.2016 / <b>31.08.2016</b>
         </td>
         <td style="width: 2%;">
         </td>

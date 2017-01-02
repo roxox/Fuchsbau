@@ -1,43 +1,8 @@
 <span style="font-size: small; color: #61625d">
     <!-- Three columns of text below the carousel -->
     {#<div class="container">#}
-    <div>
-            {#<span style="font-size: small"> Zuletzt verändert am 31.08.2016 von Sebastian Fox </span>#}
-        {#<h2>Detailansicht für <b> {{ internalExtra.getName }} </b>#}
-        {#<span style="font-size: small"> (internes Extra) </span>#}
-        {#</h2>#}
-        <div class="subnav">
-            <div align="left">
-            <!-- Buttons -->
 
-            <a class="btn btn-linkfxbrt btn-xs"
-               href="{{ path('display_project_by_project_id', {'projektId': projekt.getId()}) }}"
-               style="font-weight: 200; font-size: 16px"
-               role="button">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Zurück zur Übersicht </a>
-
-            <a class="btn btn-linkfxbrt btn-xs"
-               href="{{ path('homepage') }}"
-               style="font-weight: 200; font-size: 16px"
-               role="button">
-                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Namen bearbeiten </a>
-
-            <a class="btn btn-linkfxbrt btn-xs"
-               href="{{ path('homepage') }}"
-               style="font-weight: 200; font-size: 16px"
-               role="button">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <b>{{ internalExtra.getName() }}</b> Löschen </a>
-
-                {#<button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"#}
-                {#href="{{ path('homepage') }}"#}
-                {#style="font-weight: 200; font-size: 16px"#}
-                {#role="button">#}
-                {#data-target="#collapseInfo">#}
-                {#<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button>#}
-
-            </div>
-        </div>
-    </div>
+    {% include "Projekte/display_parts/house/internal_extras/details/subnav.html.twig" %}
     {# HINWEISE #}
     <br><br>
     <br>
@@ -45,13 +10,13 @@
     {#<div class="collapse out" id="collapseInfo">#}
     {#<div class="alert alert-warning fade in">#}
     <left>
-                    <p style="font-size: 14px; font-weight: 200">Hier findet die Verwaltung der internen Extras für euer künftiges Eigenheim statt.
-                    Um ein wenig die Begrifflichkeit zu erläutern, bei den interne Extras handelt es sich um die
-                        Extras, die direkt mit dem Bauträger vereinbart und auch an diesen bezahlt werden.</p>
-                </left>
+<p style="font-size: 16px; font-weight: 200" align="center">
+            Hier findet die Verwaltung der internen Extras für euer künftiges Eigenheim statt.
+            Um ein wenig die Begrifflichkeit zu erläutern, bei den interne Extras handelt es sich um die
+            Extras, die direkt mit dem Bauträger vereinbart und auch an diesen bezahlt werden.
+</p>
         <hr>
-    {#</div>#}
-    {#</div>#}
+                </left>
     <div class="row">
 
             {# LINKE SEITE#}
@@ -63,15 +28,17 @@
         </div>
         <div>
             <div>
-                <hr>
-                <h3>Unterpunkte
+                <br>
+                <br>
+
+                <span style="font-weight: 200; font-size: 26px">Unterpunkte
                 <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
-                {#href="{{ path('homepage') }}"#}
-                 style="font-weight: 200; font-size: 12px"
-                {#role="button">#}
-                 data-target="#collapseInfoUnterpunkte"><span class="glyphicon glyphicon-info-sign"
-                                                         aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
-                </h3>
+                            {#href="{{ path('homepage') }}"#}
+                             style="font-weight: 200; font-size: 12px"
+                            {#role="button">#}
+                             data-target="#collapseInfoUnterpunkte"><span class="glyphicon glyphicon-info-sign"
+                                                                          aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
+                </span>
                 {# HINWEIS UNTERPUNKTE #}
                 <div class="collapse out" id="collapseInfoUnterpunkte"><br>
                     <div class="alert alert-warning fade in">
@@ -183,9 +150,9 @@
                     </tr>
                 </table>
             {% else %}
-                <table class="table table-condensed">
+                <table class="table table-condensed" style="border-color: #ececec">
                     <tr>
-                        <td colspan="9" align="center">
+                        <td colspan="9" align="center" style="color: #c6c6c6">
                             Noch wurde kein Unterpunkt hinzugefügt.
                         </td>
                     </tr>
