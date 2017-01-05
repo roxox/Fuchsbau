@@ -3,12 +3,15 @@
     <div class="container">
         <div class="row">
             {% include "Projekte/display_parts/subnav.html.twig" %}
-<br><br>
+<br>
+            {#<br>#}
             <center>
                     <span style="font-size: 16px; font-weight: 200">
                         Willkommen in deinem Projekt <b>{{ projekt.getName }}</b>.
                         Hier siehst und bearbeitest eigentlich alles, was zum Projekt hinzugehört.
-                    </span></center>
+                    </span>
+            </center>
+            <hr>
 
                  {#Projektinfo#}
                 {% include "Projekte/display_parts/info/info_content.html.twig" %}
@@ -16,14 +19,13 @@
                 {# Projektbeteiligte#}
                 {% include "Projekte/display_parts/involved/involved_content.html.twig" %}
 
-                <div class="alert alert-fox fade in">
+                <div class="alert alert-fox fade in" align="center">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <center><strong>Info bevor wir über die Kosten reden:</strong> Sofern tatsächliche Kosten
+                        <strong>Info bevor wir über die Kosten reden:</strong> Sofern tatsächliche Kosten
                         angegeben wurden, werden diese zur Kalkulation verwendet. Sollten noch keine tatsächlichen
                         Kosten, sondern lediglich geplante Kosten angegeben sein, werden diese in der Kalkulation
                         berücksichtigt. Im Falle, dass das gar keine Kosten angegeben sind, werden auch keien Kosten
                         zur Kalkulation rangeführt!
-                    </center>
                 </div>
 
                 {# Grundstück #}
