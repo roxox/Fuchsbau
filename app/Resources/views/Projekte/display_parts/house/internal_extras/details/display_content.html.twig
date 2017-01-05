@@ -4,17 +4,24 @@
 
     {% include "Projekte/display_parts/house/internal_extras/details/subnav.html.twig" %}
     {# HINWEISE #}
-    <br><br>
+    {#<br><br>#}
     <br>
     {#<br>#}
     {#<div class="collapse out" id="collapseInfo">#}
     {#<div class="alert alert-warning fade in">#}
     <left>
-<p style="font-size: 16px; font-weight: 200" align="center">
-            Hier findet die Verwaltung der internen Extras für euer künftiges Eigenheim statt.
-            Um ein wenig die Begrifflichkeit zu erläutern, bei den interne Extras handelt es sich um die
-            Extras, die direkt mit dem Bauträger vereinbart und auch an diesen bezahlt werden.
-</p>
+        <div align="center">
+<span style="font-size: 16px; font-weight: 200" align="center">
+            Hier findet die Verwaltung für das interne Extra <b>{{ internalExtra.getName }}</b> für euer künftiges Eigenheim statt.<br>
+            Bisher gibt es hierzu <b>
+        {% if internalExtra.getChildren|length > 0 %}
+            {{ internalExtra.getChildren|length }}
+        {% else %}
+            keine
+        {% endif %}
+        Unterpunkte</b>.
+</span>
+            </div>
         <hr>
                 </left>
     <div class="row">
@@ -31,18 +38,32 @@
                 <br>
                 <br>
 
-                <span style="font-weight: 200; font-size: 26px">Unterpunkte
-                <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
-                            {#href="{{ path('homepage') }}"#}
-                             style="font-weight: 200; font-size: 12px"
-                            {#role="button">#}
-                             data-target="#collapseInfoUnterpunkte"><span class="glyphicon glyphicon-info-sign"
-                                                                          aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
-                </span>
+                {#<span style="font-weight: 200; font-size: 26px">Unterpunkte#}
+
+                <h4 align="center"
+                    style="background: rgba(249, 249, 249, 0.5);
+                    border: 1px solid #b6b6b6;
+                    font-family: 'CANDYINC';
+                    color: #61625d;
+                    /*color: #d94a37;*/
+                    font-size: 33px;
+                    border-radius: 3px">Unterpunkte
+                </h4>
+
+                {#<br>#}
+
+                {#<sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"#}
+                {#href="{{ path('homepage') }}"#}
+                {#style="font-weight: 200; font-size: 12px"#}
+                {#role="button">#}
+                {#data-target="#collapseInfoUnterpunkte"><span class="glyphicon glyphicon-info-sign"#}
+                {#aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>#}
+                {#</span>#}
                 {# HINWEIS UNTERPUNKTE #}
-                <div class="collapse out" id="collapseInfoUnterpunkte"><br>
-                    <div class="alert alert-warning fade in">
-                        <left>
+                <div class="collapse in" id="collapseInfoUnterpunkte"><br>
+
+                    {#<div class="alert alert-warning fade in">#}
+                    <left><p style="font-size: 14px; font-weight: 200">
                             Es besteht die Möglichkeit Unterpunkete zu den einzelnen Extras zu erstellen, um die gesamte
                             Aufstellung
                             möglichst feingranular darzustellen. Bei den internen Extras, die direkt bei dem Bauträger
@@ -50,9 +71,9 @@
                             werden,
                             macht das vielleicht noch nicht so viel Sinn. Im weiteren Verlauf z.B. bei den Nabenkosten
                             oder bei den
-                            Tätigkeiten ist diese Mögichkeit sehr viel hilfreicher.
+                            Tätigkeiten ist diese Mögichkeit sehr viel hilfreicher.</p>
                         </left>
-                    </div>
+                    {#</div>#}
                 </div>
                 <table class="table table-condensed">
                     {% if internalExtra.hasChildren %}

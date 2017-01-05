@@ -1,11 +1,44 @@
 <div class="container">
+    {% include "default/subnav.html.twig" %}
 
     {#<h1># Projekte mit meiner Beteiligung</h1>#}
     <br>
     <br>
     <br>
+    <div align="center">
+    <span style="font-weight: 200; font-size: 16px">
+            Hier gibt es ganz klar einen Überblick zu den beteiligten Projekten, dazu gibt es projektübergreifend, die nächsten Termine.
+        </span>
+    </div>
 
-    <p style="font-weight: 200; font-size: 16px">Du bist bei <b>
+    <hr>
+    <br>
+
+    {# Übersicht aller Projekte #}
+    <div>
+        {#<h4 align="center" style="background: rgba(249, 249, 249, 0.5);#}
+        {#border-radius: 3px;#}
+        {#border: 1px solid #b6b6b6;"#}
+            {#id="projekte"><span#}
+                    {#class="glyphicon glyphicon-heart-empty"#}
+                    {#aria-hidden="true"></span> Meine Projekte#}
+        {#</h4>#}
+
+        <h4 align="center"
+            style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        /*color: #d94a37;*/
+        color: #61625d;
+        font-size: 33px;
+        border-radius: 3px"
+            id="projekte">
+            Meine Projekte
+        </h4>
+    </div>
+    <br>
+    <div align="center">
+    <span style="font-weight: 200; font-size: 16px">Du bist aktuell an <b>
             {% if numberOfProjects == 0 %}
                 keinem Projekt
             {% elseif numberOfProjects == 1 %}
@@ -14,54 +47,41 @@
                 {{ numberOfProjects }} Projekten
             {% endif %}
         </b> beteiligt, egal ob als Bauherr(in), Bauleiter, Handwerker oder nur als
-        Beobachter. Durch einen Klick auf <b><i>zum Projekt</i></b> des
-        jeweiligen Projekts, wird das dann ausgewählte Projekt auch als aktuelles Projekt
-        markiert. </p>
-    <p>
-
-
-    <div class="alert alert-fox fade in" style="font-weight: 200; font-size: 16px">
-        {#<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>#}
-        <center><span style="color: #AA3333">Achtung:</span> Nur der Projektbesitzer kann ein Projekt auch
-            löschen,
-            alle anderen können das Projekt lediglich verlassen. Sowohl das Löschen als auch das
-            Austreten
-            aus einem Projekt geschieht im Projekt.
-        </center>
+        Beobachter. Proejktbesitzer können in dem geöffneten Projekt das Projekt löschen, alle anderen können das Projekt verlassen.
+        </span>
     </div>
-
-    {# Übersicht aller Projekte #}
-    <table class="table table-striped">
-        <tr>
-            <th>
-                Projekttitel
-            </th>
-            <th>
-                Bauort
-            </th>
-            <th>
-                Haustyp
-            </th>
-            <th>
-                Bauträger
-            </th>
-            <th>
-                Meine Rollen
-            </th>
-            <th colspan="2">
-                Gesamtkosten
-            </th>
+    <br>
+    <table class="table table-condensed">
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)">
+            Projekttitel
+        </th>
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)">
+            Bauort
+        </th>
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)">
+            Haustyp
+        </th>
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)">
+            Bauträger
+        </th>
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)">
+            Meine Rollen
+        </th>
+        <th style="font-size: 16px; font-weight: 200; background-color: rgba(249, 249, 249, 0.5)" colspan="2">
+            Gesamtkosten
+        </th>
         </tr>
         {% if projekte != null %}
 
             {% for projekt in projekte %}
-                <tr>
+                <tr style="font-size: 14px; font-weight: 200">
                     <td style="width: 16%">
                         <p>{{ projekt.getName() }}</p>
                     </td>
                     <td style="width: 18%">
                         {% if projekt.getGrundstueck != null %}
-                            {{ projekt.getGrundstueck.getStrasse() }} {{ projekt.getGrundstueck.getHausnummer() }} <br> {{ projekt.getGrundstueck.getPostleitzahl }} {{ projekt.getGrundstueck.getOrt }}
+                            {{ projekt.getGrundstueck.getStrasse() }} {{ projekt.getGrundstueck.getHausnummer() }}
+                            <br> {{ projekt.getGrundstueck.getPostleitzahl }} {{ projekt.getGrundstueck.getOrt }}
                         {% else %}
                             -
                         {% endif %}
@@ -74,16 +94,6 @@
                         {% endif %}
                     </td>
                     <td style="width: 16%">
-                        {#{% if projekt.Haus != null %}#}
-                        {#{% if projekt.Haus.getBautraeger != null %}#}
-                        {#{{ projekt.getHaus.getBautraeger.getName }}#}
-                        {#{% else %}#}
-                        {#-#}
-                        {#{% endif %}#}
-                        {#{{ projekt.getHaus.getHausTyp }}#}
-                        {#{% else %}#}
-                        {#-#}
-                        {#{% endif %}#}
                         -
                     </td>
                     <td style="width: 10%">
@@ -93,19 +103,18 @@
                     </td>
                     <td style="width: 20%">
 
-                        <b>365.432,98 Euro (inkl MwSt.)</b><br>
-                        {#<span style="font-size: x-small">Grundstück 99.980,00 Euro (inkl MwSt.)<br>#}
-                        {#+ Haus 128.132,98 Euro (inkl MwSt.)<br>#}
-                        {#+ Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>#}
-                        {#- Gutschriften 3.412,17 Euro (inkl MwSt.)<br>#}
-                        {#+ Außenanlagen 33.632,42 Euro (inkl MwSt.)<br>#}
-                        {#+ Inneneinrichtung 16.242,00 Euro (inkl MwSt.)</span>#}
+                        365.432,98 Euro (inkl MwSt.)<br>
                     </td>
                     <td style="width: 10%" align="right">
                         <a class="btn btn-linkfx btn-xs"
+                           style="font-weight: 400; font-size: 12px"
                            href="{{ path('display_project_by_project_id', {'projektId': projekt.getId()}) }}"
                            role="button">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Projekt öffnen</a>
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            Projekt öffnen
+                        </a>
+
+
                     </td>
                 </tr>
             {% endfor %}
@@ -129,6 +138,27 @@
             </td>
         </tr>
     </table>
+
+    <br>
+    <div>
+
+        <h4 align="center"
+            style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        /*color: #d94a37;*/
+        color: #61625d;
+        font-size: 33px;
+        border-radius: 3px"
+            id="projekte">Meine Termine</h4>
+
+            <br>
+    </div>
+
+    <div align="center">
+    <span style="font-weight: 200; font-size: 16px">Hier werden dir die <b>nächsten 5 Termine</b> angezeigt. Zu diesen Terminen gehören auch die Termine, die in der Vergangenheit liegen, jedoch nicht als abgeschlossen oder als ignoriert markiert wurden
+        </span>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="addProjektPopup" role="dialog">
         <div class="modal-dialog">

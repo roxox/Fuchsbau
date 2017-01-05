@@ -3,6 +3,12 @@
     <div class="container">
         <div class="row">
             {% include "Projekte/display_parts/subnav.html.twig" %}
+<br><br>
+            <center>
+                    <span style="font-size: 16px; font-weight: 200">
+                        Willkommen in deinem Projekt <b>{{ projekt.getName }}</b>.
+                        Hier siehst und bearbeitest eigentlich alles, was zum Projekt hinzugehört.
+                    </span></center>
 
                  {#Projektinfo#}
                 {% include "Projekte/display_parts/info/info_content.html.twig" %}

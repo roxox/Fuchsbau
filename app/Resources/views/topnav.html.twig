@@ -8,27 +8,27 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
                             class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
                             class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <a class="navbar-brand"style="font-family: 'CANDYINC'; font-weight: 200; font-size: 76px; color: #d94a37"> fuchsbau</a>
+
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav pull-right">
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li>
                             <a href="{{ path('homepage') }}">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Meine Projekte </span>
-                                <br>
-                                <span style="width: 100px; font-weight: 200; font-size: 12px">anzeigen und bearbeiten</span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Meine Projekte </span>
                             </a>
                         {% if user is defined %}
                             <li>
                                 <a href="{{ path('display_current_person') }}">
-                                    <span style="width: 100px; font-weight: 200; font-size: 18px">
+                                    <span style="width: 100px; font-weight: 200; font-size: 16px">
                                         {% if user.person.vorname != null and user.person.vorname != '' and user.person.nachname != null and user.person.nachname != '' %}
                                             {{ user.person.vorname }} {{ user.person.nachname }}
                                         {% else %}
                                             {{ user.username }}
                                         {% endif %}
                                     </span>
-                                    <br>
+                                    {#<br>#}
                                     <span style="width: 100px; font-weight: 200; font-size: 12px"> Profil bearbeiten</span>
                                 </a>
                             </li>
@@ -39,47 +39,44 @@
                         {% endif %}
                         <li>
                             <a href="{{ path('fos_user_security_login') }}">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Dokumentation </span>
-                                <br>
-                                <span style="width: 100px; font-weight: 200; font-size: 12px">Anleitung, Hilfe & Beispiele </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Dokumentation </span>
+                                {#<br>#}
+                                {#<span style="width: 100px; font-weight: 200; font-size: 12px">Anleitung, Hilfe & Beispiele </span>#}
 
                             </a>
                         </li>
                         <li>
                             <a href="#zweitens">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Kontakt </span>
-                                <br>
-                                <span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Kontakt </span>
+                                {#<br>#}
+                                {#<span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>#}
 
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Abmelden</span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Abmelden</span>
                             </a>
                         </li>
                     {% else %}
                         <li>
-                            <a href="#zweitens">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Kontakt </span>
-                                <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span>
-
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#"> </a>
-                        </li>
-                        <li>
                             <a href="{{ path('fos_user_security_login') }}">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Anmelden </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Anmelden </span>
                                 <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Bestehendes Profil</span>
 
                             </a>
                         </li>
                         <li>
                             <a href="{{ path('registration_register_user') }}">
-                                <span style="width: 100px; font-weight: 200; font-size: 18px"> Registrieren </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Registrieren </span>
                                 <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Neues Profil</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#zweitens">
+                                <span style="width: 100px; font-weight: 200; font-size: 16px"> Kontakt </span>
+                                <span style="width: 100px; font-weight: 200; font-size: 14px"><br>Kontakt & Impressum </span>
 
                             </a>
                         </li>

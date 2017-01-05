@@ -1,13 +1,25 @@
 {# Ausführende Firmen #}
-<span style="font-weight: 200; font-size: 26px">Ausführende Firmen
-    <sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"
+{#<span style="font-weight: 200; font-size: 26px">Ausführende Firmen#}
+
+<h4 align="center"
+    style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">Ausfuehrende Firmen
+</h4>
+
+<br>
+    {#<sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"#}
             {#href="{{ path('homepage') }}"#}
-            style="font-weight: 200; font-size: 12px"
+            {#style="font-weight: 200; font-size: 12px"#}
             {#role="button">#}
-                 data-target="#collapseInfoFirmen"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>
-</span>
-<br><br>
-<div class="collapse out" id="collapseInfoFirmen">
+                 {#data-target="#collapseInfoFirmen"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>#}
+{#</span>#}
+{#<br><br>#}
+<div class="collapse in" id="collapseInfoFirmen">
     {#<div class="alert alert-warning fade in">#}
         <left>
             <p style="font-size: 14px; font-weight: 200">
@@ -15,6 +27,7 @@
         </left>
     {#</div>#}
 </div>
+<br>
 <div>
     <br>
     <table class="table table-condensed">
