@@ -147,7 +147,7 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenPlan();
+            $gesamt = $gesamt + $rolle->getKostenPlan() * $rolle->getAnzahl();
         }
         return $gesamt;
     }
@@ -158,7 +158,7 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenPlan());
+            $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenPlan()) * $rolle->getAnzahl();
         }
         return $gesamt;
     }
@@ -169,7 +169,7 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenExklMwsT($rolle->getKostenPlan());
+            $gesamt = $gesamt + $rolle->getKostenExklMwsT($rolle->getKostenPlan()) * $rolle->getAnzahl();
         }
         return $gesamt;
     }
@@ -193,6 +193,18 @@ class Projekt extends AbstractBasicEntity
             $this->getGesamtKostenInklMwstByKurzname('T');
         }
         return '---';
+    }
+
+    public function getGesamtpreis()
+    {
+        $gesamtKosten = $this->getHauskaufpreis() +
+            $this->getGrundstueckspreis() +
+            $this->getGesamtKostenInklMwstByKurzname('N') +
+            $this->getGesamtKostenInklMwstByKurzname('A') +
+            $this->getGesamtKostenInklMwstByKurzname('I') -
+            $this->getGesamtKostenInklMwstByKurzname('G') ;
+
+            return $gesamtKosten ?: '---';
     }
 
     /**

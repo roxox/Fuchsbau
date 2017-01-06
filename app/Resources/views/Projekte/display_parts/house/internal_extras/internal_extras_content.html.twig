@@ -25,19 +25,16 @@
                                style="font-weight: 400; font-size: 12px"
                                href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
                                role="button">{{ internalExtra.getName }}
+                                ({{ internalExtra.getAnzahl }} {{ internalExtra.getEinheit.getBezeichnung }})
                             </a>
-                            {#{% if internalExtra.hasChildren %}#}
-                                {#{% for subExtra in internalExtra.getChildren %}#}
-                                    {#<a class="btn btn-linkfx btn-xs"#}
-                                       {#style="font-weight: 200; font-size: 14px"#}
-                                       {#href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"#}
-                                       {#role="button"><br><span#}
-                                                {#style="font-size: x-small"> - {{ subExtra.getName }} </span>#}
-                                    {#</a>#}
-
-                                {#{% endfor %}#}
-                            {#{% endif %}#}
-
+                            <br>
+                            {% if internalExtra.getChildren|length != 0 %}
+                                {% for sub in internalExtra.getChildren %}
+                                    <span style="font-size: 10px; font-weight: 200"
+                                          class="btn btn-linkfx btn-xs"> {{ sub.getName }}
+                                        ({{ sub.getAnzahl }} {{ sub.getEinheit.getBezeichnung }})</span>
+                                {% endfor %}
+                            {% endif %}
                         </td>
                         <td style="width: 15%; font-weight: 200; font-size: 12px">
                             Team Massivhaus
@@ -45,7 +42,7 @@
                         <td style="width: 20%">
                         </td>
                         <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
-                            {{ internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan)|number_format(2, ',', '.') }}
+                            {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
                             €
                             <span style="font-size: x-small">(inkl. MwSt.)</span>
                         </td>
@@ -58,7 +55,6 @@
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                                 Details
                             </a>
-{#<br>#}
                             <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align"
                                     style="font-weight: 400; font-size: 12px">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -76,7 +72,7 @@
             <tr style="border: hidden">
                 <td colspan="4" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
                 <td style="font-weight: 400">
-                        {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
+                    {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
                         +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
                         <span style="font-size: x-small">(inkl. MwSt.)</span></b>
                     {% else %}

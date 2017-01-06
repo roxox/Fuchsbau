@@ -10,6 +10,8 @@ use AppBundle\Entity\Projekt;
 use AppBundle\Entity\Rolle;
 use AppBundle\Entity\Rolletyp;
 use AppBundle\Entity\User;
+use AppBundle\Repository\RolletypRepository;
+use AppBundle\Services\KostenService;
 use AppBundle\Form\GrundstueckType;
 use AppBundle\Form\HausType;
 use AppBundle\Form\NewInternalExtraType;
@@ -47,17 +49,29 @@ class ProjekteController extends Controller
 
     public function displayProjectByIdAction(Request $request, $projektId)
     {
+
         /** @var User $user */
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        /** @var ProjektRepository $emailRepo */
+        /** @var ProjektRepository $projektRepo */
         $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
         /** @var Projekt $currentProjekt */
         $currentProjekt = $projektRepo->find($projektId);
 
+        /** @var KostenService $kostenService */
+        $kostenService = $this->get('fuchsbau.kosten');
+        $gesamtkosten = $kostenService->kostenBerechnenGesamt($currentProjekt);
+
+        /** @var RolletypRepository $rolletypRepo */
+        $rolletypRepo = $this->getDoctrine()->getRepository('AppBundle:Rolletyp');
+
+        /** @var Rolletyp $rolletyp */
+        $rolletypInternesExtra = $rolletypRepo->findOneByKurzname('IE');
+        $kostenInterneExtras = $kostenService->kostenBerechnenByType($currentProjekt, [$rolletypInternesExtra]);
+        $hauskosten = $kostenInterneExtras + $currentProjekt->getHauskaufpreis();
         /** @var Person $person */
         $person = $user->getPerson();
         foreach ($user->getProjekte() as $projekt) {
@@ -65,7 +79,6 @@ class ProjekteController extends Controller
             $projekt->setLastOpened(false);
         }
         $currentProjekt->setLastOpened(true);
-
 
         return $this->render(
             'Projekte/display_project.html.twig',
@@ -76,6 +89,9 @@ class ProjekteController extends Controller
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
                 'headline' => "# Projektinformationen",
+                'gesamtkosten' => $gesamtkosten,
+                'interneKosten' => $kostenInterneExtras,
+                'hauskosten' => $hauskosten,
                 'boldheadline' => "für: " . $currentProjekt->getName(),
                 'user' => $user)
         );

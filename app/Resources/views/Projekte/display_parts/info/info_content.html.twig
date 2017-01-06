@@ -86,20 +86,27 @@ vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden)
         </td>
         <td style="width: 20%">
 
-            <b>365.432,98 Euro (inkl MwSt.)</b><br>
+            <b>{{ projekt.getGesamtpreis()|number_format(2, ',', '.') }} (inkl MwSt.)</b><br>
             <span style="font-size: x-small">
-                {#{% if projekt.getGrundstueck %}#}
-                Grundstück {{ projekt.getGrundstueckspreis }}
+                {% if projekt.getGrundstueck %}
+                Grundstück {{ projekt.getGrundstueckspreis|number_format(2, ',', '.') }}
                 Euro (inkl MwSt.)<br>+
-                {#{% endif %}#}
+                {% endif %}
                 {% if projekt.getHaus %}
                     Haus {{ projekt.getHauskaufpreis|number_format(2, ',', '.') }}
                     Euro (inkl MwSt.)<br>+
                 {% endif %}
-                Nebenkosten 52.348,98 Euro (inkl MwSt.)<br>
-                            - Gutschriften 3.412,17 Euro (inkl MwSt.)<br>
-                            + Außenanlagen 33.632,42 Euro (inkl MwSt.)<br>
-                            + Inneneinrichtung 16.242,00 Euro (inkl MwSt.)</span>
+                Nebenkosten {{ projekt.getGesamtKostenInklMwstByKurzname('I')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
+                {% if projekt.getGesamtKostenInklMwstByKurzname('G') != 0 %}
+                            - Gutschriften {{ projekt.getGesamtKostenInklMwstByKurzname('G')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
+                {% endif %}
+                {% if projekt.getGesamtKostenInklMwstByKurzname('A') != 0 %}
+                            + Außenanlagen {{ projekt.getGesamtKostenInklMwstByKurzname('A')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
+                {% endif %}
+                {% if projekt.getGesamtKostenInklMwstByKurzname('I') != 0 %}
+                            + Inneneinrichtung {{ projekt.getGesamtKostenInklMwstByKurzname('I')|number_format(2, ',', '.') }} Euro (inkl MwSt.)
+                {% endif %}
+            </span>
         </td>
         <td style="width: 25%" align="right">
             <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
