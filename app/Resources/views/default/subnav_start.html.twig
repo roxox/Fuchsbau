@@ -1,0 +1,57 @@
+<span style="font-weight: 200; font-size: 14px">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    {# Javascript#}
+    <script type="text/javascript">
+$(function () {
+    $('a[href*="#"]:not([href="#"])').click(function () {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 140
+                }, 600);
+                return false;
+            }
+        }
+    });
+});
+
+    </script>
+    {# Start #}
+    <br>
+    <nav class="subnav navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" align="left">
+                <ul class="nav navbar-nav pull-left">
+                    <!--suppress HtmlUnknownAnchorTarget -->
+                    <li href="#zusammenfassung"><span
+                                style="font-size: 14px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-home"
+                                    aria-hidden="true"></span> Start</span></li>
+                    <!--suppress HtmlUnknownAnchorTarget -->
+                    <li href="#projektbeteiligte"><span
+                                style="font-size: 14px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-user"
+                                    aria-hidden="true"></span> Über den Fuchsbau</span></li>
+                    <!--suppress HtmlUnknownAnchorTarget -->
+                    <li href="#grundstueck"><span
+                                style="font-size: 14px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-globe"
+                                    aria-hidden="true"></span> Bauen oder nicht bauen</span></li>
+                    <!--suppress HtmlUnknownAnchorTarget -->
+                    <li href="#projektbeteiligte"><span
+                                style="font-size: 14px; font-weight: 200" class="btn btn-linkfxbrt btn-xs">
+                                <span class="glyphicon glyphicon-user"
+                                    aria-hidden="true"></span> Bauträgerauswahl</span></li>
+                    <!--suppress HtmlUnknownAnchorTarget -->
+                    <li href="#haus"><span
+                                style="font-size: 14px; font-weight: 200" class="btn btn-linkfxbrt btn-xs"><span
+                                    class="glyphicon glyphicon-euro"
+                                    aria-hidden="true"></span> Hausbaukosten</span></li>
+                    </ul>
+            {#</div>#}
+                </div>
+            </div>
+        </nav>
+</span>
