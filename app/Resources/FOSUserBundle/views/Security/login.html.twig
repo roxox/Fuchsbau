@@ -9,8 +9,18 @@
 <span style="font-size: small; color: #61625d">
     <div class="feeltext">
         <div class="row">
-            <br><br>
-            <h2># Nur schnell anmelden und es geht los</h2>
+            {#<br><br>#}
+    <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">
+        Nur noch schnell anmelden und schon geht es weiter
+    </h4>
+
+    <br>
             <div class="col-md-4">
             <br><br>
                 <div>
@@ -18,29 +28,29 @@
                         <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                             <label for="username"
-                                   style="width: 100px; font-weight: 200; font-size: 21px">{{ 'security.login.username'|trans }}</label>
+                                   style="width: 100px; font-weight: 200; font-size: 16px">{{ 'security.login.username'|trans }}</label>
                             <input type="text"
                                    id="username"
                                    name="_username"
                                    class="form-control"
-                                   style="font-weight: 200; font-size: 18px"
+                                   style="font-weight: 200; font-size: 14px"
                                    value="{{ last_username }}"
                                    placeholder="Der von dir gewählte Benutzername" required autofocus>
                             <br>
-                            <label for="password" style="width: 100px; font-weight: 200; font-size: 21px">{{ 'security.login.password'|trans }}</label>
+                            <label for="password" style="width: 100px; font-weight: 200; font-size: 16px">{{ 'security.login.password'|trans }}</label>
                             <input type="password" id="password" name="_password" class="form-control"
                                    required="required"
-                                   style="font-weight: 200; font-size: 18px"
+                                   style="font-weight: 200; font-size: 14px"
                                    placeholder="********"/>
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" value="remember-me">
-                                    <span style="width: 100px; font-weight: 200; font-size: 16px">Remember me</span>
+                                    <span style="width: 100px; font-weight: 200; font-size: 14px">Remember me</span>
                                 </label>
                             </div>
                             <br><br><br>
                             <input type="submit"
-                                   class="btn btn-default btn-lg"
+                                   class="btn btn-default btn-sm"
                                    id="_submit"
                                    name="_submit"
                                    value="einloggen"/>
@@ -51,8 +61,9 @@
             </div>
             <div class="col-md-6">
                 <div class="feeltext">
-                <p align="justify">Wenn du dich anmeldest, kannst du gleich mit deinem oder einem deiner Projekte fortfahren. Solltest du noch gar kein Projekt haben, kannst du dann natürlich eines anlegen.<br><br>
-                Solltest du dich noch gar nicht registriert haben, kannst du das oben mit einem Klick auf "Registrieren" nachholen.</p>
+                    <br>
+                <span align="justify"; style="font-size: 18px; font-weight: 200">Wenn du dich anmeldest, kannst du gleich mit deinem oder einem deiner Projekte fortfahren. Solltest du noch gar kein Projekt haben, kannst du dann natürlich eines anlegen.<br><br>
+                Solltest du dich noch gar nicht registriert haben, kannst du das oben mit einem Klick auf "Registrieren" nachholen.</span>
                 <br><br>
                 </div>
             </div>

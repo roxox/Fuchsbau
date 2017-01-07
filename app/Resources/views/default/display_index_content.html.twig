@@ -1,4 +1,6 @@
+
 <div>
+
     <span style="font-size: small; color: #61625d" align="justify">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <div>
@@ -6,10 +8,12 @@
 
         </div>
                 {% else %}
+        {% include "default/subnav_start.html.twig" %}
         {# AUGELOGGT #}
+
         <div class="jumbotron">
             {#<div>#}
-            <div class="container">
+            {#<div class="container">#}
                 <br>
                 {#<span style="font-size: 42px; font-weight: 200">fuchsbau Hausbauplanung</span>#}
                 <br><hr><br>
@@ -76,7 +80,7 @@
                     <p><a class="btn btn-default btn-mini" href="#" role="button">Anzeigen</a></p>
                 </div>
             </div>
-        </div> <!-- /container -->
+        {#</div> <!-- /container -->#}
     {% endif %}
                     </span>
 </div>

@@ -5,13 +5,23 @@
 <span style="font-size: small; color: #61625d">
 <div class="feeltext">
     <div class="row">
-        <br><br>
-        <h2># Dann lass uns erst mal ein Profil anlegen</h2>
+        {#<br><br>#}
+    <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">
+        Dann lass uns erst mal ein Profil anlegen
+    </h4>
+
+    <br>
         <div class="col-lg-4">
             <br><br>
             <div>
                 <div class="text">
-                    <span style="font-weight: 200; font-size: 21px">
+                    <span style="font-weight: 200; font-size: 16px">
                     {{ form_start(form) }}
                         {{ form_row(form.username) }}
                         {{ form_row(form.email) }}
@@ -21,7 +31,7 @@
                     <div>
                         <br>
                         <br>
-                        <input type="submit" class="btn btn-default btn-lg" value="Benutzer anlegen">
+                        <input type="submit" class="btn btn-default btn-sm" value="Benutzer anlegen">
                     </div>
                     {{ form_end(form) }}
                 </div>
@@ -32,10 +42,11 @@
             <div class="feeltext">
             {#<h4>Benutzer</h4>#}
                 <div class="text">
-                <p align="justify">Wir fangen klein an, zunächst einmal legen wir dir einen Benutzer an. Such dir einen
+                    <br>
+                <span align="justify" style="font-weight: 200; font-size: 18px">Wir fangen klein an, zunächst einmal legen wir dir einen Benutzer an. Such dir einen
                     <b>Benutzernamen</b> aus, wähle deine lieblings <b>Emailadresse</b> und gib dem ganzen ein
                     <b>Passwort</b>. Vorsichtshalber gibst du dein PAsswort noch ein zweites mal mit an, damit du
-                    sichergehen kannst, dass du dich beim ersten mal nicht vertippt hast.</p>
+                    sichergehen kannst, dass du dich beim ersten mal nicht vertippt hast.</span>
             </div>
 
         </div><!-- /.col-lg-4 -->
@@ -46,3 +57,5 @@
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 </div>
+</div>
+</span>
