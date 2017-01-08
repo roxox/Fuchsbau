@@ -30,11 +30,11 @@
                             <p style="font-size: x-small">{{ email.getPrivatGeschaeft().getName() }}</p>
                         {% endif %}
                     </td>
-                    <td style="width: 40%;" align="right">
+                    <td style="width: 50%;" align="right">
 
                         {% if email.getEmailadresse != user.getEmail %}
                             <!-- Button Edit -->
-                            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                            <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align"
                                     href="{{ path('edit_email_by_current_person', {'emailId': email.getId()}) }}"
                                     data-toggle="modal"
                                     data-target="#editEmailPopup">
@@ -42,7 +42,7 @@
                             </button>
 
                             <!-- Button Delete -->
-                            <a class="btn btn-linkfxred btn-xs"
+                            <a class="btn btn-link-fx-redred btn-xs"
                                href="{{ path('remove_email_by_current_person', {'emailId': email.getId()}) }}">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
                         {% endif %}
@@ -64,11 +64,11 @@
     <tr style="border: hidden">
         <td colspan="3" align="right">
             <!-- Trigger the modal with a button -->
-            <a class="btn btn-fx-brightblue btn-xs"
+            <a class="btn btn-link-fx-greyred btn-xs"
                href="{{ path('add_email_by_current_person') }}" data-toggle="modal"
                data-target="#addEmailPopup"
                role="button">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Emailadresse
+                <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Emailadresse
                 Hinzufügen </a></td>
 
     </tr>

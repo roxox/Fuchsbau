@@ -30,6 +30,13 @@ class Mehrwertsteuer  extends AbstractBasicEntity
     private $inklusive = false;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $ohneMwSt = false;
+
+    /**
      * @return string
      */
     public function getBezeichnung()
@@ -75,6 +82,22 @@ class Mehrwertsteuer  extends AbstractBasicEntity
     public function setInklusive($inklusive)
     {
         $this->inklusive = $inklusive;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isOhneMwSt()
+    {
+        return $this->ohneMwSt;
+    }
+
+    /**
+     * @param boolean $inklusive
+     */
+    public function setOhneMwSt($ohneMwSt)
+    {
+        $this->ohneMwSt = $ohneMwSt;
     }
 
 

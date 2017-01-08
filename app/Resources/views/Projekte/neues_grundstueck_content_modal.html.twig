@@ -6,95 +6,138 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Grundstück hinzufügen</h4>
+            {#<button type="button" class="close" data-dismiss="modal">&times;</button>#}
+
+            <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">
+                Ein Grundstueck sollte man zum Projekt hinzufuegen
+            </h4>
+            <br>
+            <div align="center" style="font-weight: 200; font-size: 14px">Lass doch gleich mal ein par Informationen zu deinem künftigen Wohnort da.</div>
+            {#<br>#}
         </div>
         <div class="modal-body">
-            <div class="text">
-                <p>Umgezogen? Zweitwohnung? Oder doch ein neues Haus? Wie ist denn die neuen Adresse.</p><br>
-            </div>
-            <div class="text">
-                {{ form_start(form, {'action': path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()})}) }}
-                <table>
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td style="width: 70%">
-                                        {{ form_row(form.strasse) }}
-                                    </td>
-                                    <td style="width: 30%">
-                                        {{ form_row(form.hausnummer) }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100%">
-                            {{ form_row(form.zusatz) }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td style="width: 30%">
-                                        {{ form_row(form.postleitzahl) }}
-                                    </td>
-                                    <td style="width: 70%">
-                                        {{ form_row(form.ort) }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100%">
+            {#<div class="text">#}
+            {{ form_start(form, {'action': path('add_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId()})}) }}
 
-                            <table>
-                                <tr>
-                                    <td style="width: 100%">
-                                        {{ form_row(form.bundesland) }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100%">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 58%">
+                        <table>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td style="width: 68%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.strasse) }}
+                                            </td>
+                                            <td style="width: 4%">
+                                            </td>
+                                            <td style="width: 28%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.hausnummer) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%; font-weight: 100; font-size: 12px">
+                                    {{ form_row(form.zusatz) }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td style="width: 28%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.postleitzahl) }}
+                                            </td>
+                                            <td style="width: 4%">
+                                            </td>
+                                            <td style="width: 68%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.ort) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
 
-                            <table>
-                                <tr>
-                                    <td style="width: 30%">
-                                        {{ form_row(form.groesse) }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td style="width: 50%">
-                                        {{ form_row(form.kaufpreis) }}
-                                    </td>
-                                    <td style="width: 50%">
-                                        {{ form_row(form.erschiessungskostenanteil) }}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <div>
-                    <br>
-                    <input type="submit" class="btn btn-default btn-sm" value="hinzufügen">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                {{ form_end(form) }}
+                                    <table>
+                                        <tr>
+                                            <td style="width: 100%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.bundesland) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td style="width: 40%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.groesse) }}
+                                            </td>
+                                            <td style="width: 60%; font-weight: 100; font-size: 12px">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td style="width: 38%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.kaufpreis) }}
+                                            </td>
+                                            <td style="width: 4%; font-weight: 100; font-size: 12px">
+                                            </td>
+                                            <td style="width: 58%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.erschiessungskostenanteil) }}
+                                            </td>
+                                            <td style="width: 0%; font-weight: 100; font-size: 12px">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            </td>
+                        </table>
+                    </td>
+                    <td style="width: 2%; border-right: 1px solid #b6b6b6;"></td>
+                    <td style="width: 2%"></td>
+                    <td style="width: 38%">
+                        <table >
+                            <tr>
+                                <td style="font-size: 16px; font-weight: 200">
+                                    Hinweise:
+                                    <span style="font-size: 14px; font-weight: 200">
+                                    <br><br>
+                                    Die Auswahl des Bundeslandes ist wichtig zur Ermittlung der korrekten Grunderwerbssteuer. Der Steuersatz ist von Bundesand zu Bundesland unterschiedlich.
+                                    <br><br>
+                                    Wird Baugrund von der Gemeidne erworben, setzt sich der zu bezahlende Betrag pro m2 aus zwei Teilen zusammen, den tatsächlichen Kaufpreis und einen Erschließungskostenanteil. Zwar muss beides bezahlt werden, jedoch gibt es einen entscheidenen Unterschied, die Grunderwerbssteuer wird lediglich auf den Kaufpreis, jedoch nicht auch den Erschließungskostenanteil fällig. Sollte der Erschließungskostenanteil nicht bekannt sein, am besten erstmal alles als Kaufpreis betrachten.
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <hr>
+                <input type="submit" class="btn btn-default btn-sm" value="hinzufügen">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            {{ form_end(form) }}
+            {#</div>#}
         </div>
     </div>
 

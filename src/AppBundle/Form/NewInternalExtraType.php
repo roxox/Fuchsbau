@@ -20,28 +20,32 @@ class NewInternalExtraType extends AbstractType
                     'label' => 'Name',
                     'required' => false
                 ]
+            )
+            ->add('anzahl', TextType::class)
+            ->add('kosten_ist', TextType::class)
+            ->add('kosten_plan', TextType::class)
+            ->add(
+                'einheit',
+                EntityType::class,
+                [
+                    'class' => 'AppBundle:Einheit',
+                    'choice_label' => 'bezeichnung',
+                    'label' => 'Einheit',
+                    'placeholder' => '',
+                    'attr' => ['data-cat-form-read-only' => false]
+                ]
+            )
+            ->add(
+                'mehrwertsteuer',
+                EntityType::class,
+                [
+                    'class' => 'AppBundle:Mehrwertsteuer',
+                    'choice_label' => 'bezeichnung',
+                    'label' => 'Mehrwertsteuer',
+                    'placeholder' => '',
+                    'attr' => ['data-cat-form-read-only' => false]
+                ]
             );
-//            ->add(
-//                'kosten',
-//                NumberType::class,
-//                [
-//                    'grouping' => true,
-//                    'scale' => 2,
-//                    'label' => 'Kosten',
-//                    'required' => false
-//                ]
-//            )
-//            ->add(
-//                'mehrwertsteuer',
-//                EntityType::class,
-//                [
-//                    'class' => 'AppBundle:Mehrwertsteuer',
-//                    'choice_label' => 'bezeichnung',
-//                    'label' => 'Mehrwertsteuer',
-//                    'placeholder' => '',
-//                    'attr' => ['data-cat-form-read-only' => false]
-//                ]
-//            );
     }
 
     public function configureOptions(OptionsResolver $resolver)

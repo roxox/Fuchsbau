@@ -48,16 +48,14 @@
                 <td align="right" style="font-weight: 200; font-size: 14px">
 
                     <!-- Trigger the modal with a button -->
-                    <a class="btn btn-linkfx btn-xs"
-                       style="font-weight: 400; font-size: 12px"
+                    <a class="btn btn-link-fx-greyred btn-xs"
                        href="{{ path('edit_haus_to_current_projekt_modal', {'projektId': projekt.getId, 'hausId': projekt.getHaus.getId}) }}"
                        data-toggle="modal"
                        data-target="#editHausPopup"
                        role="button">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten </a>
                     {#<br>#}
-                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align"
-                            style="font-weight: 400; font-size: 12px">
+                    <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Entfernen
                     </button>
                 </td>

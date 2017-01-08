@@ -8,12 +8,6 @@
         font-size: 33px;
         border-radius: 3px"
     id="zusammenfassung">
-    {#<span class="glyphicon glyphicon-list-alt"#}
-          {#style="   font-size: 16px;#}
-                    {#/*color: #d94a37;*/#}
-                    {#color: #61625d;"#}
-          {#aria-hidden="true">#}
-    {#</span> #}
     Zusammenfassung
 </h4>
 
@@ -84,7 +78,7 @@ vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden)
                 {{ rolle.getName }}
             {% endfor %}
         </td>
-        <td style="width: 20%">
+        <td style="width: 15%">
 
             <b>{{ projekt.getGesamtpreis()|number_format(2, ',', '.') }} (inkl MwSt.)</b><br>
             <span style="font-size: x-small">
@@ -94,9 +88,13 @@ vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden)
                 {% endif %}
                 {% if projekt.getHaus %}
                     Haus {{ projekt.getHauskaufpreis|number_format(2, ',', '.') }}
-                    Euro (inkl MwSt.)<br>+
+                    Euro (inkl MwSt.)<br>
                 {% endif %}
-                Nebenkosten {{ projekt.getGesamtKostenInklMwstByKurzname('I')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
+
+                {#Nebenkosten {{ projekt.getGesamtKostenInklMwstByKurzname('I')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>#}
+                {% if projekt.getGesamtKostenInklMwstByKurzname('N') != 0 %}
+                    + Nebenkosten {{ projekt.getGesamtKostenInklMwstByKurzname('G')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
+                {% endif %}
                 {% if projekt.getGesamtKostenInklMwstByKurzname('G') != 0 %}
                             - Gutschriften {{ projekt.getGesamtKostenInklMwstByKurzname('G')|number_format(2, ',', '.') }} Euro (inkl MwSt.)<br>
                 {% endif %}
@@ -108,12 +106,11 @@ vergeben)<b>, Bauort, Haus- bzw. Häusertypen, Bauträger</b> (sofern vorhanden)
                 {% endif %}
             </span>
         </td>
-        <td style="width: 25%" align="right">
-            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
+        <td style="width: 30%" align="right">
+            <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align">
                 <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
             </button>
-            <br>
-            <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
+            <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
             </button>
         </td>

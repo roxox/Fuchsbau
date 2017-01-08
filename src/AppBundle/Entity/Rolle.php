@@ -196,7 +196,8 @@ class Rolle extends AbstractBasicEntity
     public
     function setMehrwertsteuer(
         Mehrwertsteuer $mehrwertsteuer = null
-    ) {
+    )
+    {
         $this->mehrwertsteuer = $mehrwertsteuer;
         return $this;
     }
@@ -239,8 +240,12 @@ class Rolle extends AbstractBasicEntity
     public function getKostenInklMwsT($kosten)
     {
         if ($this->mehrwertsteuer && $kosten) {
-            return $this->mehrwertsteuer->isInklusive() ?
-                $kosten : $kosten * (($this->mehrwertsteuer->getWert() / 100) + 1);
+            if ($this->mehrwertsteuer->isOhneMwSt()) {
+                return $kosten;
+            } else {
+                return $this->mehrwertsteuer->isInklusive() ?
+                    $kosten : $kosten * (($this->mehrwertsteuer->getWert() / 100) + 1);
+            }
         }
         return 0;
     }
@@ -251,8 +256,12 @@ class Rolle extends AbstractBasicEntity
     public function getKostenExklMwsT($kosten)
     {
         if ($this->mehrwertsteuer && $kosten) {
-            return $this->mehrwertsteuer->isInklusive() ?
-                $kosten / (($this->mehrwertsteuer->getWert() / 100) + 1) : $kosten;
+            if ($this->mehrwertsteuer->isOhneMwSt()) {
+                return $kosten;
+            } else {
+                return $this->mehrwertsteuer->isInklusive() ?
+                    $kosten / (($this->mehrwertsteuer->getWert() / 100) + 1) : $kosten;
+            }
         }
         return 0;
     }

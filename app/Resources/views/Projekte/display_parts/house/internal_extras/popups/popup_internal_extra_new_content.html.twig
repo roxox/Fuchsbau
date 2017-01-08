@@ -6,67 +6,143 @@
     <div class="modal-content">
 
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-
             <div class="text">
-                <h3>Was für ein Extra hast du dir denn ausgesucht.</h3><br><br>
+                <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+                border: 1px solid #b6b6b6;
+                font-family: 'CANDYINC';
+                color: #61625d;
+                /*color: #d94a37;*/
+                font-size: 33px;
+                border-radius: 3px">
+                    Was fuer ein Extra hast du dir denn ausgesucht
+                </h4>
+                <br>
+                <div align="center">
+                    <span>
+                    Als interenes Extra verstehe ich (und damit die Software) ein Extra, das nicht in dem Standardhaus eines Bauträges enthalten ist, jedoch auch beim Bauträger gekauft wurden und an diesen bezahlt werden. Z.B. verklinkerte Giebelwände im Obergeschoss.
+                    </span><br>
+                </div>
             </div>
         </div>
         <div class="modal-body">
-            <div class="text">
-                An dieser Stelle werden wir erst mal ein internes Extra anlegen. Mehr als einen Namen dafür brauchen wir
-                erstmal nicht.
-                Weitere Daten wir Kosten, etc. kommen auf der Detailseite (wird nach der Anlage geöffnet).
-                {{ form_start(form, {'action': path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()})}) }}
-                <hr>
-                <table width="100%">
-                    <tr>
-                        <td style="width: 100%">
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="width: 100%" colspan="2">
-                                        <h4>Internes Extra
-                                            <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-                                                    data-target="#collapseInfoHaus">
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                                Hinweis ein-/ausblenden
-                                            </button>
-                                        </h4>
-                                        {# Hauspreishinweis #}
-                                        <div class="collapse out" id="collapseInfoHaus"><br>
-                                            <div class="alert alert-warning fade in">
-                                                <left>
-                                                    Als interenes Extra verstehe ich (und damit die Software) ein Extra, das nicht in dem Standardhaus eines
-                                                    Bauträges enthalten ist, jedoch auch direkt beim Bauträger gekauft wurden und an diesen bezahlt werden.
-                                                    <br>
-                                                    Z.B. verklinkerte Giebelwände im Obergeschoss.
-                                                    <br><br>
-                                                    Im Gegensatz dazu gibt es die Extras, die die Bauherrin oder der Bauherr direkt mit den ausführenden Gewerken verhandelt.
-                                                    <br><br>
-                                                </left>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 70%">
-                                        {{ form_row(form.name) }}
-                                    </td>
-                                    <td style="width: 30%"></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <hr>
-                <div>
-                    <br>
-                    <input type="submit" class="btn btn-default btn-sm" value="hinzufügen">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                {{ form_end(form) }}
-            </div>
+            {{ form_start(form, {'action': path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()})}) }}
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 68%">
+                        <table width="100%">
+                            <tr>
+                                <td style="width: 100%">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 100%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.name) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 28%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.anzahl) }}
+                                            </td>
+                                            <td style="width: 4%">
+                                            </td>
+                                            <td style="width: 33%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.einheit) }}
+                                            </td>
+                                            <td style="width: 4%">
+                                            </td>
+                                            <td style="width: 33%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.mehrwertsteuer) }}
+                                            </td>
+                                            <td style="width: 30%"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 100%; font-size: 14px; font-weight: 200; border-bottom: 1px solid #e6e6e6;">
+                                                Plan-Daten
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table style="width: 60%">
+                                        <tr>
+                                            <td style="width: 100%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.kosten_plan) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 100%; font-size: 14px; font-weight: 200; border-bottom: 1px solid #E6E6E6;">
+                                                Ist-Daten
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table style="width: 60%">
+                                        <tr>
+                                            <td style="width: 100%; font-size: 12px; font-weight: 200">
+                                                {{ form_row(form.kosten_ist) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    <td style="width: 2%; border-right: 1px solid #b6b6b6;"></td>
+                    <td style="width: 2%"></td>
+                    <td style="width: 38%">
+                        <table>
+                            <tr>
+                                <td style="font-size: 16px; font-weight: 200">
+                                    Hinweise:
+                                    <span style="font-size: 14px; font-weight: 200">
+                                    <br><br>
+                                    Die Emailadresse von der Registrierung wurde automatisch hinzugefügt.
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <br>
+            <input type="submit" class="btn btn-default btn-sm" value="hinzufügen">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
+        {{ form_end(form) }}
     </div>
+</div>
+</div>
 
 </div>

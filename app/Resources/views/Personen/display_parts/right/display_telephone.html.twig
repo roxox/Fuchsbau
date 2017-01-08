@@ -24,16 +24,15 @@
             <div align="right">
                 {#<table>#}
                 <tr>
-                    <td style="width: 60%;">
+                    <td style="width: 50%;">
                         <p> {{ telefonnummer.getTelefonTyp().getKurzname() }}
-                            : {{ telefonnummer.getVorwahl() }}
-                            /{{ telefonnummer.getTelefonnummer() }}{{ telefonnummer.getDurchwahl() ? '-' : '' }}{{ telefonnummer.getDurchwahl() }}</p>
+                            : {{ telefonnummer.getVorwahl() }}/{{ telefonnummer.getTelefonnummer() }}{{ telefonnummer.getDurchwahl() ? '-' : '' }}{{ telefonnummer.getDurchwahl() }}</p>
                         <p style="font-size: x-small">{{ telefonnummer.getPrivatGeschaeft().getName() }}</p>
                     </td>
-                    <td style="width: 40%;" align="right">
+                    <td style="width: 50%;" align="right">
 
                         <!-- Button Edit -->
-                        <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                        <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align"
                                 href="{{ path('edit_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}"
                                 data-toggle="modal"
                                 data-target="#editAddressPopup">
@@ -41,7 +40,7 @@
                         </button>
 
                         <!-- Button Delete -->
-                        <a class="btn btn-linkfxred btn-xs"
+                        <a class="btn btn-link-fx-redred btn-xs"
                            href="{{ path('remove_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
 
@@ -64,11 +63,11 @@
     <tr style="border: hidden">
         <td colspan="3" align="right">
             <!-- Trigger the modal with a button -->
-            <a class="btn btn-fx-brightblue btn-xs"
+            <a class="btn btn-link-fx-greyred btn-xs"
                href="{{ path('add_telephone_by_current_person') }}" data-toggle="modal"
                data-target="#addAddressPopup"
                role="button">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Telefonnummer
+                <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Telefonnummer
                 Hinzufügen </a>
         </td>
     </tr>

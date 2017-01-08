@@ -63,6 +63,7 @@ class LoadUserData implements FixtureInterface
 
         $mwst19inkl = new Mehrwertsteuer();
         $mwst19inkl->setInklusive(true);
+        $mwst19inkl->setOhneMwSt(false);
         $mwst19inkl->setWert(19);
         $mwst19inkl->setBezeichnung('inkl. 19% MwSt.');
         $manager->persist($mwst19inkl);
@@ -70,12 +71,14 @@ class LoadUserData implements FixtureInterface
         $mwst19exkl = new Mehrwertsteuer();
         $mwst19exkl->setInklusive(false);
         $mwst19exkl->setWert(19);
+        $mwst19inkl->setOhneMwSt(false);
         $mwst19exkl->setBezeichnung('exkl. 19% MwSt.');
         $manager->persist($mwst19exkl);
 
         $mwst0inkl = new Mehrwertsteuer();
         $mwst0inkl->setInklusive(true);
         $mwst0inkl->setWert(0);
+        $mwst0inkl->setOhneMwSt(true);
         $mwst0inkl->setBezeichnung('MwSt. entfällt');
         $manager->persist($mwst0inkl);
 

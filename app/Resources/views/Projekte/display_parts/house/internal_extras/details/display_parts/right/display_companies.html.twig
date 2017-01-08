@@ -12,20 +12,11 @@
 </h4>
 
 <br>
-    {#<sup><button type="button" class="btn btn-linkfxbrt btn-xs" data-toggle="collapse"#}
-            {#href="{{ path('homepage') }}"#}
-            {#style="font-weight: 200; font-size: 12px"#}
-            {#role="button">#}
-                 {#data-target="#collapseInfoFirmen"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Hinweis ein-/ausblenden </button></sup>#}
-{#</span>#}
-{#<br><br>#}
 <div class="collapse in" id="collapseInfoFirmen">
-    {#<div class="alert alert-warning fade in">#}
         <left>
             <p style="font-size: 14px; font-weight: 200">
                 Hier werden die Firmen angezeigt, die sich um dieses Extra bzw. einen Unterpunkt dieses Extras kümmern.</p>
         </left>
-    {#</div>#}
 </div>
 <br>
 <div>
@@ -34,7 +25,6 @@
         {% if person.getTelefonnummern() != null %}
             {% for telefonnummer in person.getTelefonnummern() %}
                 <div align="right">
-                    {#<table>#}
                     <tr>
                         <td style="width: 60%;">
                             <p> {{ telefonnummer.getTelefonTyp().getKurzname() }}
@@ -45,7 +35,7 @@
                         <td style="width: 40%;" align="right">
 
                             <!-- Button Edit -->
-                            <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                            <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align"
                                     href="{{ path('edit_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}"
                                     data-toggle="modal"
                                     data-target="#editAddressPopup">
@@ -53,7 +43,7 @@
                             </button>
 
                             <!-- Button Delete -->
-                            <a class="btn btn-linkfxred btn-xs"
+                            <a class="btn btn-link-fx-redred btn-xs"
                                href="{{ path('remove_telephone_by_current_person', {'telephoneId': telefonnummer.getId()}) }}">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
 
@@ -76,9 +66,8 @@
         <tr style="border: hidden">
             <td colspan="3" align="right">
                 <!-- Trigger the modal with a button -->
-                <a class="btn btn-link-fx-brightblue btn-xs"
+                <a class="btn btn-link-fx-greyred btn-xs"
                    href="{{ path('add_telephone_by_current_person') }}" data-toggle="modal"
-                   style="font-weight: 200; font-size: 14px"
                    data-target="#addAddressPopup"
                    role="button">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Firma

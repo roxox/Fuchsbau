@@ -28,7 +28,11 @@ class GrundstueckType extends AbstractType
                     'attr' => ['data-cat-form-read-only' => false]
                 ]
             )
-            ->add('strasse', TextType::class)
+            ->add('strasse', TextType::class,
+                [
+                    'required' => false,
+                    'label' => 'Straße'
+                ])
             ->add('hausnummer', TextType::class)
             ->add(
                 'zusatz',
@@ -43,21 +47,24 @@ class GrundstueckType extends AbstractType
                 'groesse',
                 TextType::class,
                 [
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Größe'
                 ]
             )
             ->add(
                 'kaufpreis',
                 TextType::class,
                 [
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Kaufpreis je m2'
                 ]
             )
             ->add(
                 'erschiessungskostenanteil',
                 TextType::class,
                 [
-                    'required' => false
+                    'required' => false,
+                    'label' => 'Erschließungskostenanteil je m2'
                 ]
             );
     }

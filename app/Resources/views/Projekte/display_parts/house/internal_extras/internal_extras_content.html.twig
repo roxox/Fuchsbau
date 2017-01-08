@@ -1,22 +1,40 @@
 <tr>
     <td colspan="7"
         style="font-weight: 200; font-size: 14px">
-        <table class="table table-condensed" style="border: hidden">
-            <tr>
-                <th colspan="5" style="font-weight: 400">interne Extrakosten</th>
+        <table class="table table-condensed" style="border-top: hidden">
+            <tr style="border-bottom: hidden">
+                <th colspan="5" style="font-weight: 400; font-size: 18px" >Interne Extrakosten</th>
                 <td align="right">
 
                     <!-- Trigger the modal with a button -->
-                    <a class="btn btn-link-fx-brightblue btn-xs"
-                       style="font-weight: 400; font-size: 12px"
+                    <a class="btn btn-link-fx-greyred btn-xs"
                        href="{{ path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()}) }}"
                        data-toggle="modal"
                        data-target="#addInternalExtraPopup"
                        role="button">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Neues internes Extra </a>
+                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Neues internes Extra </a>
                 </td>
             </tr>
+
+            <tr>
+                <th style="width: 21%">
+                    Objekt
+                </th>
+                <th style="width: 18%">
+                    Ausführende Firma
+                </th>
+                <th style="width: 3%">Status</th>
+                <th style="width: 10%">
+                    Kosten
+                </th>
+                <th style="width: 14%">
+
+                    {#<span style="font-size: x-small">  inkl. MwSt.<br>(ohne Unterpunkte)</span>#}
+                </th>
+                <th style="width: 4%"></th>
+            </tr>
             {% for internalExtra in projekt.getRolleByTypKurzname('IE') %}
+
                 {% if internalExtra.parent == false %}
                     <tr style="border: hidden">
                         <td style="width: 20%">
@@ -44,19 +62,24 @@
                         <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
                             {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
                             €
-                            <span style="font-size: x-small">(inkl. MwSt.)</span>
+                            <span style="font-size: x-small">
+
+                            {% if internalExtra.mehrwertsteuer.isOhneMwSt %}
+                                (MwSt. wird nicht angewendet)
+                            {% else %}
+                                (inkl. MwSt.)
+                            {% endif %}
+                                </span>
+
                         </td>
-                        <td></td>
-                        <td align="right">
-                            <a class="btn btn-linkfx btn-xs"
-                               style="font-weight: 400; font-size: 12px"
+                        <td colspan="2" align="right">
+                            <a class="btn btn-link-fx-greyred btn-xs"
                                href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
                                role="button">
                                 <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
                                 Details
                             </a>
-                            <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align"
-                                    style="font-weight: 400; font-size: 12px">
+                            <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 Entfernen
                             </button>
@@ -70,8 +93,8 @@
                 {% set disabled = "false" %}
             {% endif %}
             <tr style="border: hidden">
-                <td colspan="4" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
-                <td style="font-weight: 400">
+                <td colspan="3" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
+                <td colspan="2" style="font-weight: 400">
                     {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
                         +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
                         <span style="font-size: x-small">(inkl. MwSt.)</span></b>
@@ -79,17 +102,16 @@
                         <div align="right">Es sind keine weiteren Kosten angefallen</div>
                     {% endif %}</td>
                 <td align="right">
-                    <a class="btn btn-linkfx btn-xs"
-                       href="#"
-                       aria-disabled="true"
-                       style="font-weight: 600; font-size: 12px"
-                       role="button"
-                            {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
-                                disabled
-                            {% endif %}
-                    >
-                        <span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist
-                        Vergleich </a>
+                    {#<a class="btn btn-link-fx-greyred btn-xs"#}
+                       {#href="#"#}
+                       {#aria-disabled="true"#}
+                       {#role="button"#}
+                            {#{% if projekt.getRolleByTypKurzname('IE')|length < 1 %}#}
+                                {#disabled#}
+                            {#{% endif %}#}
+                    {#>#}
+                        {#<span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist#}
+                        {#Vergleich </a>#}
                 </td>
             </tr>
         </table>

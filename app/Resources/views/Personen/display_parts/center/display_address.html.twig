@@ -22,15 +22,15 @@
         {% for adresse in adressen %}
             <div align="right">
                 <tr>
-                    <td style="width: 60%;">
+                    <td style="width: 50%;">
                         <p>{{ adresse.getStrasse() }} {{ adresse.getHausnummer() }}<br>
                             {{ adresse.getPostleitzahl() }} {{ adresse.getOrt() }}</p>
                         <p style="font-size: x-small">{{ adresse.getPrivatGeschaeft().getName() }}</p>
                     </td>
-                    <td style="font-size: small; width: 40%" align="right">
+                    <td style="font-size: small; width: 50%" align="right">
 
                         <!-- Button Edit -->
-                        <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align"
+                        <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align"
                                 href="{{ path('edit_address_by_current_person', {'addressId': adresse.getId()}) }}"
                                 data-toggle="modal"
                                 data-target="#editAddressPopup">
@@ -38,7 +38,7 @@
                         </button>
 
                         <!-- Button Delete -->
-                        <a class="btn btn-linkfxred btn-xs"
+                        <a class="btn btn-link-fx-redred btn-xs"
                            href="{{ path('remove_address_by_current_person', {'addressId': adresse.getId()}) }}">
                             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen</a>
 
@@ -60,11 +60,11 @@
         <td colspan="3" align="right">
 
             <!-- Button New -->
-            <a class="btn btn-link-fx-brightblue btn-xs"
+            <a class="btn btn-link-fx-greyred btn-xs"
                href="{{ path('add_address_by_current_person') }}" data-toggle="modal"
                data-target="#addAddressPopup"
                role="button">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adresse Hinzufügen
+                <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Adresse Hinzufügen
             </a>
 
         </td>

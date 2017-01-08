@@ -336,14 +336,24 @@ class ProjekteController extends Controller
         }
         $rolleTypRepo = $this->getDoctrine()->getRepository('AppBundle:Rolletyp');
         /** @var Rolletyp $rolleTyp */
-        $rolleTyp = $rolleTypRepo->findOneBy(array('name' => 'InternExtra'));
+        $rolleTyp = $rolleTypRepo->findOneBy(array('name' => 'Internes Extra'));
         $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
+        $einheitRepo = $this->getDoctrine()->getRepository('AppBundle:Einheit');
+        $einheitStueck = $einheitRepo->findOneBy(array('name' => 'Stück'));
+        $mehrwertsteuerRepo = $this->getDoctrine()->getRepository('AppBundle:Mehrwertsteuer');
+        $mehrwertsteuer = $mehrwertsteuerRepo->findOneBy(array('wert' => '19'));
         /** @var Projekt $projekt */
         $projekt = $projektRepo->find($projektId);
         /** @var Person $person */
         $person = $user->getPerson();
         $internalExtra = new Rolle();
         $internalExtra->setRolletyp($rolleTyp);
+        if ($internalExtra->getEinheit() === null) {
+            $internalExtra->setEinheit($einheitStueck);
+        }
+        if ($internalExtra->getMehrwertsteuer() === null) {
+            $internalExtra->setMehrwertsteuer($mehrwertsteuer);
+        }
         $form = $this->createForm(NewInternalExtraType::class, $internalExtra);
 
         // 2) handle the submit (will only happen on POST)

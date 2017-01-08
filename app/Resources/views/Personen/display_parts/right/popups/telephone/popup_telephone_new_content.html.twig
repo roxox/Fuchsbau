@@ -4,82 +4,96 @@
     <!-- Modal content-->
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Telefonnummer hinzufügen</h4>
+            <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">
+                Telefonnummer bearbeiten
+            </h4>
+            <br>
+            <div align="center">
+                <span>Telefonnummern kann man nie genug haben, gut, dass du noch eine hinzufügen möchtest.</span><br>
+            </div>
         </div>
         <div class="modal-body">
-            <div class="text">
-                <p>Telefonnummern kann man nie genug haben, gut, dass du noch eine hinzufügen möchtest.</p><br>
-            </div>
             {{ form_start(form, {'action': path('add_telephone_by_current_person')}) }}
-            <table style="width: 70%">
+            <table style="width: 100%">
                 <tr>
-                    <td style="width: 100%">
-                        <table style="width: 40%">
-                            <tr>
-                                <td style="width: 40%">
-                                    {{ form_row(form.telefonTyp) }}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 100%">
-                        <table style="width: 100%">
-                            <tr>
-                                <td style="width: 18%">
-                                    {{ form_row(form.vorwahl) }}
-                                </td>
-                                <td style="width: 4%">
-
-                                </td>
-                                <td style="width: 56%">
-                                    {{ form_row(form.telefonnummer) }}
-                                </td>
-                                <td style="width: 4%">
-
-                                </td>
-                                <td style="width: 18%">
-                                    {{ form_row(form.durchwahl) }}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 100%">
-                        <table style="width: 40%">
+                    <td style="width: 68%">
+                        <table>
                             <tr>
                                 <td style="width: 100%">
-                                    {{ form_row(form.privatGeschaeft) }}
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 48%">
+                                                {{ form_row(form.telefonTyp) }}
+                                            </td>
+                                            <td style="width: 4%"></td>
+                                            <td style="width: 48%">
+                                                {{ form_row(form.privatGeschaeft) }}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 100%">
-                        <hr>
-                        <table style="width: 100%">
                             <tr>
-                                <td align="left">
-                                    <button type="submit" class="btn-linkfx btn-xs">
-                                        <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
-                                        Hinzufügen
-                                    </button>
+                                <td style="width: 100%">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 25%">
+                                                {{ form_row(form.vorwahl) }}
+                                            </td>
+                                            <td style="width: 4%">
 
-                                    <button type="button" class="btn-linkfxred btn-xs">
-                                        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-                                        Schließen
-                                    </button>
+                                            </td>
+                                            <td style="width: 44%">
+                                                {{ form_row(form.telefonnummer) }}
+                                            </td>
+                                            <td style="width: 4%">
 
+                                            </td>
+                                            <td style="width: 23%">
+                                                {{ form_row(form.durchwahl) }}
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
+                    <td style="width: 2%; border-right: 1px solid #b6b6b6;"></td>
+                    <td style="width: 2%"></td>
+                    <td style="width: 38%">
+                        <table>
+                            <tr>
+                                <td style="font-size: 16px; font-weight: 200">
+                                    Hinweise:
+                                    <span style="font-size: 14px; font-weight: 200">
+                                    <br><br>
+                                    Die Durchwahl ist kein Pflichtfeld und somit nur notwendig, wenn tatsächlich eine Durchwahl existiert.
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
             </table>
+            <div>
+                <hr>
+                <button type="submit" class="btn-link-fx-greyred btn-xs">
+                    {#<span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>#}
+                    Speichern
+                </button>
+
+                <button type="submit" class="btn-link-fx-redred btn-xs">
+                    Abbrechen
+                </button>
+
+                <button type="button" class="close " data-dismiss="modal">&times;</button>
+            </div>
             {{ form_end(form) }}
         </div>
     </div>

@@ -14,6 +14,7 @@ class AdresseType extends AbstractType
         $builder
             ->add('strasse', TextType::class)
             ->add('hausnummer', TextType::class)
+            ->add('zusatz', TextType::class)
             ->add('postleitzahl', TextType::class)
             ->add('ort', TextType::class)
             ->add('privatGeschaeft', EntityType::class,
