@@ -144,7 +144,56 @@ class ProjekteController extends Controller
                 'projektId' => $projektId,
                 'user' => $user)
         );
+    } /**
+ */
+    public function editGrundstueckAction(Request $request, $projektId, $grundstueckId)
+    {
+        // 1) build the form
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+        $grundstueckRepo = $this->getDoctrine()->getRepository('AppBundle:Grundstueck');
+
+        $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
+        /** @var Projekt $projekt */
+        $projekt = $projektRepo->find($projektId);
+        /** @var Person $person */
+        $person = $user->getPerson();
+
+        $grundstueck = $grundstueckRepo->find($grundstueckId);
+        $form = $this->createForm(GrundstueckType::class, $grundstueck);
+
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 4) save the User!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($grundstueck);
+            $em->flush();
+
+
+            return $this->redirectToRoute(
+                'display_project_by_project_id',
+                array('projektId' => $projektId)
+            );
+        }
+
+        return $this->render(
+            'Projekte/edit_grundstueck_content_modal.html.twig',
+            array('adressen' => $person->getAdressen(),
+                'form' => $form->createView(),
+                'telefonnummern' => $person->getTelefonnummern(),
+                'emails' => $person->getEmailadressen(),
+                'person' => $person,
+                'headline' => 'Personendaten bearbeiten',
+                'projekt' => $projekt,
+                'projektId' => $projektId,
+                'user' => $user)
+        );
     }
+
+
 
     public function addProjektAction(Request $request)
     {

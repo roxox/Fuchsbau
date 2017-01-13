@@ -8,158 +8,181 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-            <div class="text">
-                <h3>Was wollen wir ändern?</h3><br><br>
+            <h4 align="center" style="background: rgba(249, 249, 249, 0.5);
+        border: 1px solid #b6b6b6;
+        font-family: 'CANDYINC';
+        color: #61625d;
+        /*color: #d94a37;*/
+        font-size: 33px;
+        border-radius: 3px">
+                Dann such dir mal ein Haus aus
+            </h4>
+            <br>
+            <div align="center" style="font-weight: 200; font-size: 14px">
+                So lange das Haus nicht gebaut ist, kann sicher noch das ein oder andere verändert werden.
             </div>
         </div>
         <div class="modal-body">
-            <div class="text">
-                So lange das Haus nicht gebaut ist, kann sicher noch das ein oder andere verändert werden.
-                {{ form_start(form, {'action': path('edit_haus_to_current_projekt_modal', {'projektId': projekt.getId(), 'hausId': projekt.getHaus.getId})}) }}
-                <hr>
-                <table width="100%">
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td colspan="2">
-                                        <h4>Haus
-                                            <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-                                                    data-target="#collapseInfoHaus">
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                                Hinweis ein-/ausblenden
-                                            </button>
-                                        </h4>
-                                        {# Hauspreishinweis #}
-                                        <div class="collapse out" id="collapseInfoHaus"><br>
-                                            <div class="alert alert-warning fade in">
-                                                <left>
-                                                    Egal ob Einfamilien- oder Friesenhaus, Stadthausvilla oder doch
-                                                    irgendwas ganz anderes, suche dir hier aus, was für ein Haus du
-                                                    bauen
-                                                    möchtest.
-                                                </left>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">
-                                        {{ form_row(form.haustyp) }}
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-                <hr>
-                <table width="100%">
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td colspan="4">
-                                        <h4>Wohnfläche
-                                            <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-                                                    data-target="#collapseInfoFlaeche">
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                                Hinweis ein-/ausblenden
-                                            </button>
-                                        </h4>
-                                        {# Hauspreishinweis #}
-                                        <div class="collapse out" id="collapseInfoFlaeche"><br>
-                                            <div class="alert alert-warning fade in">
-                                                <left>
-                                                    Im Prinzip ist es an dieser Stelle nicht wichtig, ob die
-                                                    <strong><i><u>Wohnfläche nach WoFiv</u></i></strong>,
-                                                    <strong><i><u>nach Din</u></i></strong> oder beides eingetragenwird.
-                                                    Wichtig
-                                                    ist die Berücksichtigung, dass es unterschiedliche Berechnungen
-                                                    gibt, bei dem Vergleich von Häusern unterschiedlicher Bauträger.
-                                                    Es gitl: im gleichen Haus hat die Wohnfläche nach Din einen größeren
-                                                    Wert
-                                                    als Wohnfläche nach WoFiv.
-                                                </left>
-                                            </div>
-                                        </div>
+            {{ form_start(form, {'action': path('edit_haus_to_current_projekt_modal', {'projektId': projekt.getId(), 'hausId': projekt.getHaus.getId})}) }}
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 58%">
+                        <table>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td colspan="2">
+                                                {# Hauspreishinweis #}
+                                                <div class="collapse out" id="collapseInfoHaus"><br>
+                                                    <div class="alert alert-warning fade in">
+                                                        <left>
+                                                            Egal ob Einfamilien- oder Friesenhaus, Stadthausvilla oder
+                                                            doch
+                                                            irgendwas ganz anderes, suche dir hier aus, was für ein Haus
+                                                            du
+                                                            bauen
+                                                            möchtest.
+                                                        </left>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 100%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.haustyp) }}
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <table width="100%">
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td colspan="4">
+                                                {# Hauspreishinweis #}
+                                                <div class="collapse out" id="collapseInfoFlaeche"><br>
+                                                    <div class="alert alert-warning fade in">
+                                                        <left>
+                                                            Im Prinzip ist es an dieser Stelle nicht wichtig, ob die
+                                                            <strong><i><u>Wohnfläche nach WoFiv</u></i></strong>,
+                                                            <strong><i><u>nach Din</u></i></strong> oder beides
+                                                            eingetragenwird.
+                                                            Wichtig
+                                                            ist die Berücksichtigung, dass es unterschiedliche
+                                                            Berechnungen
+                                                            gibt, bei dem Vergleich von Häusern unterschiedlicher
+                                                            Bauträger.
+                                                            Es gitl: im gleichen Haus hat die Wohnfläche nach Din einen
+                                                            größeren
+                                                            Wert
+                                                            als Wohnfläche nach WoFiv.
+                                                        </left>
+                                                    </div>
+                                                </div>
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 38%">
-                                        {{ form_row(form.wohnflaecheWoFiv) }}
-                                    </td>
-                                    <td style="width: 4%"></td>
-                                    <td style="width: 38%">
-                                        {{ form_row(form.wohnflaecheDin) }}
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 48%; font-weight: 200; font-size: 12px">
+                                                {{ form_row(form.wohnflaecheWoFiv) }}
+                                            </td>
+                                            <td style="width: 4%"></td>
+                                            <td style="width: 48%; font-weight: 200; font-size: 12px">
+                                                {{ form_row(form.wohnflaecheDin) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <table>
+                            <tr>
+                                <td style="width: 100%">
+                                    <table>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="collapse out" id="collapseInfoPreis"><br>
+                                                    <div class="alert alert-warning fade in">
+                                                        <left>
+                                                            Bau <strong><i><u>mit</u></i> Bauträger /
+                                                                Generalunternehmer:</strong>
+                                                            Wenn du ein Haus bei einem
+                                                            Bauträger oder
+                                                            Generalunternehmer kaufst, dann bekommst du einen Preis
+                                                            genannt,
+                                                            den das
+                                                            Unternehmen gerne für
+                                                            dein Haus überwiesen bekommen möchte. Diesen Betrag solltest
+                                                            du
+                                                            hier
+                                                            eintragen. <br><br>
+
+                                                            Bau <strong><i><u>ohne</u></i> Bauträger /
+                                                                Generalunternehmer:</strong>
+                                                            In diesem Fall wirst du keinen Kaufpreis haben, der Preis
+                                                            des
+                                                            Hauses
+                                                            wird ausschließlich über die Einzelkosten der auszuführenden
+                                                            Tätigkeiten
+                                                            <span style="font-size: x-small">(kommt etwas weiter unten, wenn dein Haus angelegt wurde)</span>
+                                                            ermittelt.
+                                                        </left>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 100%; font-weight: 100; font-size: 12px">
+                                                {{ form_row(form.kaufpreis) }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td style="width: 2%; border-right: 1px solid #b6b6b6;"></td>
+                    <td style="width: 2%"></td>
+                    <td style="width: 38%">
+                        <table>
+                            <tr>
+                                <td style="font-size: 16px; font-weight: 200">
+                                    Hinweise:
+                                    <span style="font-size: 14px; font-weight: 200">
+                                    <br><br>
+                                    Im Prinzip ist es an dieser Stelle nicht wichtig, ob die
+                                    <strong><i><u>Wohnfläche nach WoFiv</u></i></strong>,
+                                    <strong><i><u>nach Din</u></i></strong> oder beides
+                                    eingetragenwird.
+                                    Wichtig
+                                    ist die Berücksichtigung, dass es unterschiedliche
+                                    Berechnungen
+                                    gibt, bei dem Vergleich von Häusern unterschiedlicher
+                                    Bauträger.
+                                    Es gitl: im gleichen Haus hat die Wohnfläche nach Din einen
+                                    größeren
+                                    Wert
+                                    als Wohnfläche nach WoFiv.</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div>
                 <hr>
-                <table>
-                    <tr>
-                        <td style="width: 100%">
-                            <table>
-                                <tr>
-                                    <td colspan="2">
-                                        <h4>Kosten
-                                            <button type="button" class="btn btn-link btn-xs" data-toggle="collapse"
-                                                    data-target="#collapseInfoPreis">
-                                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                                Hinweis ein-/ausblenden
-                                            </button>
-                                        </h4>
-                                        {# Hauspreishinweis #}
-                                        <div class="collapse out" id="collapseInfoPreis"><br>
-                                            <div class="alert alert-warning fade in">
-                                                <left>
-                                                    Bau <strong><i><u>mit</u></i> Bauträger /
-                                                        Generalunternehmer:</strong>
-                                                    Wenn du ein Haus bei einem
-                                                    Bauträger oder
-                                                    Generalunternehmer kaufst, dann bekommst du einen Preis genannt,
-                                                    den das
-                                                    Unternehmen gerne für
-                                                    dein Haus überwiesen bekommen möchte. Diesen Betrag solltest du
-                                                    hier
-                                                    eintragen. <br><br>
-
-                                                    Bau <strong><i><u>ohne</u></i> Bauträger /
-                                                        Generalunternehmer:</strong>
-                                                    In diesem Fall wirst du keinen Kaufpreis haben, der Preis des
-                                                    Hauses
-                                                    wird ausschließlich über die Einzelkosten der auszuführenden
-                                                    Tätigkeiten
-                                                    <span style="font-size: x-small">(kommt etwas weiter unten, wenn dein Haus angelegt wurde)</span>
-                                                    ermittelt.
-                                                </left>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">
-                                        {{ form_row(form.kaufpreis) }}
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                </table>
-                <div>
-                    <br>
-                    <input type="submit" class="btn btn-default btn-sm" value="Ändern">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                {{ form_end(form) }}
+                <input type="submit" class="btn btn-default btn-sm" value="speichern">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            {{ form_end(form) }}
         </div>
     </div>
 

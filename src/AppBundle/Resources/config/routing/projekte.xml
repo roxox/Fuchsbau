@@ -14,6 +14,9 @@
     <route id="add_grundstueck_to_current_projekt_modal" path="/{projektId}/add_grundstueck_to_projekt" methods="GET POST">
         <default key="_controller">AppBundle:Projekte:addGrundstueck</default>
     </route>
+    <route id="edit_grundstueck_to_current_projekt_modal" path="/{projektId}/{grundstueckId}/edit_grundstueck_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:editGrunstueck</default>
+    </route>
     <route id="add_haus_to_current_projekt_modal" path="/{projektId}/add_haus_to_projekt" methods="GET POST">
         <default key="_controller">AppBundle:Projekte:addHaus</default>
     </route>

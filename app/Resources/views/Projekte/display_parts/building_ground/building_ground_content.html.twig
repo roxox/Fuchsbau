@@ -76,12 +76,15 @@
                         Euro (inkl MwSt.)</b>
                 </td>
                 <td style="font-size: small" align="right">
-                    <button type="button" class="btn btn-linkfx btn-xs" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
-                    </button>
-                    <br>
-                    <button type="button" class="btn btn-linkfxred btn-xs" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Löschen
+                    <a class="btn btn-link-fx-greyred btn-xs"
+                       href="{{ path('edit_grundstueck_to_current_projekt_modal', {'projektId': projekt.getId, 'grundstueckId': projekt.getGrundstueck.getId}) }}"
+                       data-toggle="modal"
+                       data-target="#editGrundstueckPopup"
+                       role="button">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten </a>
+                    {#<br>#}
+                    <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Entfernen
                     </button>
                 </td>
             </tr>
