@@ -18,22 +18,22 @@ class Termin  extends AbstractBasicEntity
     private $bezeichnung;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable="true")
      */
     private $datumStartIst;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable="true")
      */
     private $datumEndeIst;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable="true")
      */
     private $datumStartPlan;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable="true")
      */
     private $datumEndePlan;
 
