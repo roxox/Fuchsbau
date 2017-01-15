@@ -21,6 +21,8 @@ use AppBundle\Entity\Rolle;
 use AppBundle\Entity\Rolletyp;
 use AppBundle\Entity\Telefonnummer;
 use AppBundle\Entity\TelefonTyp;
+use AppBundle\Entity\Termin;
+use AppBundle\Entity\TerminTyp;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use AppBundle\Entity\User;
@@ -383,6 +385,19 @@ class LoadUserData implements FixtureInterface
         # TEST #
         ########
 
+        ##########
+        # TERMIN #
+        ##########
+
+
+        $start = "12.12.1984";
+        $ende = "12.12.2017";
+        $newTermin = new Termin();
+        $newTermin->setBezeichnung('Geburtstag');
+        $newTermin->setDatumStartIst(new \DateTime($start));
+        $newTermin->setDatumEndeIst(new \DateTime($ende));
+        $manager->persist($newTermin);
+
         $newRolle = new Rolle();
         $newRolle->setName('Showerboard');
         $newRolle->setRolletyp($rolletypInternExtra);
@@ -390,7 +405,9 @@ class LoadUserData implements FixtureInterface
         $newRolle->setKostenPlan(700.95);
         $newRolle->setParent($internesExtra);
         $internesExtra->addChild($newRolle);
+        $internesExtra->addTermin($newTermin);
         $manager->persist($newRolle);
+
 
         $manager->flush();
     }

@@ -87,12 +87,20 @@ class Rolle extends AbstractBasicEntity
     private $children;
 
     /**
+     * @var ArrayCollection|Termin[]
+     *
+     * @ORM\OneToMany(targetEntity="Termin", mappedBy="rolle", cascade={"remove", "persist"})
+     */
+    private $termine;
+
+    /**
      * Rolle constructor.
      */
     public function __construct()
     {
         $this->firmen = new ArrayCollection();
         $this->children = new ArrayCollection();
+        $this->termine = new ArrayCollection();
     }
 
     /**
@@ -386,6 +394,32 @@ class Rolle extends AbstractBasicEntity
     public function hasChildren()
     {
         return count($this->children) != 0 ? true : false;
+    }
+
+    /**
+     * @return Termin[]|ArrayCollection
+     */
+    public function getTermine()
+    {
+        return $this->termine;
+    }
+
+    /**
+     * Set feature
+     *
+     * @param Termin $termin
+     * @return Rolle
+     */
+    public function addTermin(Termin $termin)
+    {
+        $this->termine->add($termin);
+        $termin->setRolle($this);
+        return $this;
+    }
+
+    public function hasTermine()
+    {
+        return count($this->termine) != 0 ? true : false;
     }
 
 }

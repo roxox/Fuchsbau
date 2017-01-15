@@ -15,7 +15,7 @@
                 <ul class="nav navbar-nav pull-right">
 
                     <li>
-                        <a href="#zweitens">
+                        <a href="{{ path('homepage') }}">
                             <span style="width: 100px; font-weight: 200; font-size: 16px"> Home </span>
                             {#<br>#}
                             {#<span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>#}
@@ -24,7 +24,7 @@
 
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li>
-                            <a href="{{ path('homepage') }}">
+                            <a href="{{ path('projekte') }}">
                                 <span style="width: 100px; font-weight: 200; font-size: 16px"> Projekte </span>
                             </a>
                         {% if user is defined %}

@@ -50,4 +50,42 @@ class DefaultController extends Controller
                 array('user' => $user));
         }
     }
+
+    /**
+     * @Route("/projekte", name="projekte")
+     */
+    public function showProjekteAction(Request $request)
+    {
+        // 1) build the form
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            return $this->render('default/display_projekte.html.twig');
+        }
+
+        /** @var Person $person */
+        if ($user->getPerson()) {
+            $person = $user->getPerson();
+            $projekte = $user->getProjekte();
+            $numberOfProjects = count($projekte);
+
+            /** @var Projekt $projekt */
+            $lastOpenedProject = $user->getLastOpenedProject();
+
+
+            return $this->render('default/display_projekte.html.twig',
+                array('person' => $person,
+                    'projekte' => $projekte,
+                    'numberOfProjects' => $numberOfProjects,
+                    'lastOpenedProject' => $lastOpenedProject,
+                    //                   'meineRollen' => $person->getPersonenRollen(),
+//                    'headline' => 'Willkommen (zurück) ' . $person->getVorname() . '!',
+                    'headline' => '# Projekte mit meiner Beteiligung',
+                    'user' => $user));
+        } else {
+            return $this->render('default/default_display_projekteprojekte.html.twig',
+                array('user' => $user));
+        }
+    }
 }

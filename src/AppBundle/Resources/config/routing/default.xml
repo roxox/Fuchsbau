@@ -8,5 +8,8 @@
     <route id="display_impressum" path="/impressum" methods="GET">
         <default key="_controller">AppBundle:About:showImpressum</default>
     </route>
+    <!--<route id="display_impressum" path="/impressum" methods="GET">-->
+        <!--<default key="_controller">AppBundle:About:showImpressum</default>-->
+    <!--</route>-->
 
 </routes>
