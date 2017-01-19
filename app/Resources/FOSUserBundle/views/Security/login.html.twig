@@ -2,9 +2,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
 <span style="font-size: small; color: #61625d">
     <div class="feeltext">
@@ -60,12 +57,18 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="feeltext">
-                    <br>
-                <span align="justify"; style="font-size: 18px; font-weight: 200">Wenn du dich anmeldest, kannst du gleich mit deinem oder einem deiner Projekte fortfahren. Solltest du noch gar kein Projekt haben, kannst du dann natürlich eines anlegen.<br><br>
+<br><br><br>
+    {% if error %}
+
+        <div class="alert alert-danger" style="font-size: 18px; font-weight: 200">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% else %}
+        <span align="justify"; style="font-size: 18px; font-weight: 200">
+            Wenn du dich anmeldest, kannst du gleich mit deinem oder einem deiner Projekte fortfahren. Solltest du noch gar kein Projekt haben, kannst du dann natürlich eines anlegen.<br><br>
                 Solltest du dich noch gar nicht registriert haben, kannst du das oben mit einem Klick auf "Registrieren" nachholen.</span>
-                <br><br>
-                </div>
+        <br><br>
+    {% endif %}
+
+
             </div>
         </div>
     </div> <!-- /container -->
