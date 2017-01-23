@@ -158,7 +158,11 @@ class Projekt extends AbstractBasicEntity
         $gesamt = 0;
         /** @var Rolle $rolle */
         foreach ($rollen as $rolle) {
-            $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenPlan()) * $rolle->getAnzahl();
+            if ($rolle->getKostenIst() !== null){
+                $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenIst()) * $rolle->getAnzahl();
+            } else {
+                $gesamt = $gesamt + $rolle->getKostenInklMwsT($rolle->getKostenPlan()) * $rolle->getAnzahl();
+            }
         }
         return $gesamt;
     }
