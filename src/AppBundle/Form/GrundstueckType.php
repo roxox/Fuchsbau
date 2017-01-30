@@ -74,7 +74,13 @@ class GrundstueckType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'AppBundle\Entity\Grundstueck',
+                'allow_extra_fields' => true
             )
         );
+    }
+
+    public function getExtrafield()
+    {
+        return 'extra_user_profile';
     }
 }

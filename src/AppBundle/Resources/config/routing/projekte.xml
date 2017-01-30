@@ -28,8 +28,8 @@
     </route>
 
     <!-- Internal Extra -->
-    <route id="add_internal_extra_to_current_projekt" path="/{projektId}/add_internal_extra_to_projekt" methods="GET POST">
-        <default key="_controller">AppBundle:Projekte:addInternalExtra</default>
+    <route id="add_rolle_to_current_projekt" path="/{projektId}/{rolletyp}/add_rolle_to_projekt" methods="GET POST">
+        <default key="_controller">AppBundle:Projekte:addRolle</default>
     </route>
     <route id="display_internal_extra" path="/{projektId}/{internalExtraId}/display_internal_extra" methods="GET POST">
         <default key="_controller">AppBundle:Projekte:displayInternalExtra</default>

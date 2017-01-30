@@ -119,10 +119,16 @@ class ProjekteController extends Controller
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            echo $grundstueck->getOrt();
+            $firstname = $request->get('firstname');
+            echo $firstname;
             $projekt->setGrundstueck($grundstueck);
+            $person2 = new Person();
+            $person2->setNachname($firstname);
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
             $em->persist($projekt);
+            $em->persist($person2);
             $em->flush();
 
 
@@ -376,7 +382,7 @@ class ProjekteController extends Controller
 
     /**
      */
-    public function addInternalExtraAction(Request $request, $projektId)
+    public function addRolleAction(Request $request, $projektId, $rolletyp)
     {
         // 1) build the form
         $user = $this->getUser();
@@ -407,7 +413,7 @@ class ProjekteController extends Controller
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $projekt->addRolle($internalExtra);
             // 4) save the User!
             $em = $this->getDoctrine()->getManager();
@@ -428,7 +434,6 @@ class ProjekteController extends Controller
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
                 'person' => $person,
-                'headline' => 'Personendaten bearbeiten',
                 'projekt' => $projekt,
                 'projektId' => $projektId,
                 'headline' => "# Projektinfos",
