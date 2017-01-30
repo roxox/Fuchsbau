@@ -16,12 +16,20 @@
 
                     <li>
                         <a href="{{ path('homepage') }}">
-                            <span style="width: 100px; font-weight: 200; font-size: 16px"> Home </span>
+                            <span style="width: 100px; font-weight: 200; font-size: 16px"> Startseite </span>
                             {#<br>#}
                             {#<span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>#}
 
                         </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('homepage') }}">
+                            <span style="width: 100px; font-weight: 200; font-size: 16px"> Rund um den Hausbau </span>
+                            {#<br>#}
+                            {#<span style="width: 100px; font-weight: 200; font-size: 12px">Social, Mail & Impressum </span>#}
 
+                        </a>
+                    </li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                         <li>
                             <a href="{{ path('projekte') }}">
