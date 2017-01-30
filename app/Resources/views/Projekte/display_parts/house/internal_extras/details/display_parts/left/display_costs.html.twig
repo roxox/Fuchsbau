@@ -269,9 +269,9 @@
             <td colspan="6" align="right">
                 <!-- Button Edit -->
                 <button type="button" class="btn btn-link-fx-greyred btn-xs" aria-label="Left Align"
-                        href="{{ path('edit_current_person') }}"
+                        href="{{ path('add_internal_extra_to_current_projekt', {'projektId': projekt.getId()}) }}"
                         data-toggle="modal"
-                        data-target="#editPersonPopup">
+                        data-target="#editInternalExtraPopup">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Bearbeiten
                 </button>
         </tr>
@@ -286,5 +286,6 @@
 
 <div>
     <!-- Popups -->
-    {% include "Personen/display_parts/left/popups/person/popup_person_edit.html.twig" %}
+
+    {% include "Projekte/display_parts/house/internal_extras/popups/popup_internal_extra_edit.html.twig" %}
 </div>
