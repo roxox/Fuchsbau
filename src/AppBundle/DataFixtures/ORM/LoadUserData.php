@@ -143,12 +143,159 @@ class LoadUserData implements FixtureInterface
         $rolletypAussenanlagen->setKurzname('G');
         $manager->persist($rolletypAussenanlagen);
 
-        $internesExtra = new Rolle();
-        $internesExtra->setName('Bodentiefe Dusche');
-        $internesExtra->setRolletyp($rolletypInternExtra);
-        $internesExtra->setMehrwertsteuer($mwst19inkl);
-        $internesExtra->setKostenPlan(1100.50);
-        $manager->persist($internesExtra);
+//        Beispielprojekt
+
+        $sampleprojekt = new Projekt();
+        $sampleprojekt->setName('Beispiel Fuchsbau');
+        $sampleprojekt->setEinladungscode('xxx');
+        $manager->persist($sampleprojekt);
+
+        $interneExtras = [
+            "Dreiecksfenster",
+            "Giebel massiv",
+            "8cm Untersohlendämmung",
+            "14cm Wanddämmung",
+            "88mm Fensterrahmen",
+            "oben massiv",
+            "Fußbodenheizung",
+            "Belüftungssystem",
+            "Dachfreigebinde mit Flugsparren Haus",
+            "Dachfreigebinde mit Flugsparren Kap",
+            "doppelte Haustür",
+            "Sprossen Fenster",
+            "Spitzboden Fußboden",
+            "Dusche Aufpreis",
+            "extra Fenster",
+            "Glasauschnitt Wohnzimmertür",
+            "Einbaustrahler unten",
+            "Vergrößerung Wohnfläche",
+            "Außenstromk. von innen schaltbar",
+            "Außensteckd. von innen schaltbar",
+            "Handtuchhalterheizung",
+            "Zuleitung Handtuchheiz. aus Wand",
+            "T-Wand für Badezimmer",
+            "Extra Zimmer ",
+            "Anschluss Belüftung",
+            "Einbaustrahler oben",
+            "Abgehängte Decke",
+            "Giebelrohren",
+            "Zusätzliche Außenbeleuchtung",
+            "1/2 Treppe",
+            "Standard -> Terrassenelement",
+            "Standard -> größer",
+            "Kehlbalken 10cm höher",
+            "Dachflächenfenster",
+            "Sprossen im Glasausschnitt",
+            "andere Badewanne",
+            "andere Waschbecken",
+            "Stärkere Sohle (Statik)",
+            "Rollläden mechanisch",
+            "Rollladenanpassung 2,01m x 1,38m",
+            "Rollladenanpassung 2,01m x 2,40m",
+            "Motoren Rollläden"
+        ];
+
+        $interneExtrasKosten = [
+            700.00,
+            5200.00,
+            2000.00,
+            1600.00,
+            3200.00,
+            1300.00,
+            3600.00,
+            7800.00,
+            2900.00,
+            900.00,
+            1100.00,
+            1100.00,
+            1000.00,
+            1000.00,
+            450.00,
+            100.00,
+            120.00,
+            0.00,
+            100.00,
+            85.00,
+            350.00,
+            70.00,
+            930.00,
+            1200.00,
+            300.00,
+            65.00,
+            90.00,
+            0.00,
+            80.00,
+            500.00,
+            450.00,
+            250.00,
+            350.00,
+            860.00,
+            240.00,
+            700.00,
+            400.00,
+            560.00,
+            2900.00,
+            150.00,
+            250.00,
+            250.00,
+        ];
+
+        $interneExtrasAnzahl = [
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            6,
+            0,
+            2,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            6,
+            1,
+            2,
+            1,
+            1,
+            2,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            6
+
+        ];
+
+        foreach (array_values($interneExtras) as $i => $name) {
+            $internesExtra = new Rolle();
+            $internesExtra->setName($name);
+            $internesExtra->setRolletyp($rolletypInternExtra);
+            $internesExtra->setMehrwertsteuer($mwst19inkl);
+            $internesExtra->setKostenIst($interneExtrasKosten[$i]);
+            $internesExtra->setProjekt($sampleprojekt);
+            $internesExtra->setAnzahl($interneExtrasAnzahl[$i]);
+            $manager->persist($internesExtra);
+        }
 
 
         ########

@@ -214,7 +214,7 @@
 
         {# Hausbaukosten #}
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <!--suppress CssNoGenericFontName -->
                 <h4 align="center"
                     style="background: rgba(249, 249, 249, 0.5); border: 1px solid #b6b6b6; font-family: 'CANDYINC'; color: #61625d; font-size: 36px; border-radius: 3px"
@@ -246,7 +246,7 @@
                                 Fangen wir mit dem an, was man direkt bei dem Bauträger kauft:</span><br><br>
                                 <span style="font-size: 12px; font-weight: 200">
                                 <table width="100%">
-                                    <tr style="border-bottom: solid 1px #8d8d8d">
+                                    <tr style="border-bottom: solid 1px #cfcfcf">
                                     <th>Titel</th>
                                     <th>Einzelkosten</th>
                                     <th>Anzahl</th>
@@ -260,20 +260,29 @@
                                         <td width="15%">129.000,00 Euro</td>
                                         <td width="40%">Preis des Hauses, so wie er im Katalog steht</td>
                                     </tr>
-                                    <tr>
-                                        <td width="20%" align="left">Bodentiefe Fenster</td>
-                                        <td width="15%" align="top">1.000,00 Euro</td>
-                                        <td width="10%">5</td>
-                                        <td width="15%">1.000,00 Euro</td>
-                                        <td width="40%">Preis des Hauses, so wie er im Katalog steht</td>
-                                    </tr>
-                                    <tr style="border-top: solid 1px #8d8d8d; border-bottom: double 1px #8d8d8d">
+                                    {% for internalExtra in sampleproject.getRolleByTypKurzname('IE') %}
+                                        <tr>
+                                        <td width="20%" align="left">{{ internalExtra.getName }}</td>
+                                        <td width="15%" align="top">{{ internalExtra.getKostenIst|number_format(2, ',', '.') }} Euro </td>
+                                        <td width="10%">{{ internalExtra.getAnzahl}}</td>
+                                        <td width="15%">{{ (internalExtra.getKostenIst * internalExtra.getAnzahl)|number_format(2, ',', '.')}} Euro</td>
+                                        <td width="40%"></td>
+                                        </tr>
+                                    {%  endfor %}
+                                    {#<tr>#}
+                                        {#<td width="20%" align="left">Bodentiefe Fenster</td>#}
+                                        {#<td width="15%" align="top">1.000,00 Euro</td>#}
+                                        {#<td width="10%">5</td>#}
+                                        {#<td width="15%">1.000,00 Euro</td>#}
+                                        {#<td width="40%">Preis des Hauses, so wie er im Katalog steht</td>#}
+                                    {#</tr>#}
+                                    <tr style="border-top: solid 1px #cfcfcf; border-bottom: double 1px #cfcfcf">
                                         <td width="20%" align="left" colspan="3"><b>Gesamt:</b></td>
-                                        <td width="15%" colspan="2" align="left"><b>1.000,00 Euro</b></td>
+                                        <td width="15%" colspan="2" align="left"><b>{{ (129000 + sampleproject.getGesamtKostenInklMwstByKurzname('IE'))|number_format(2, ',', '.') }} Euro</b></td>
                                     </tr>
                                 </table><br>
                                     <span style="font-size: 14px; font-weight: 200">
-                                        Damit starten wir mit Kosten von <b>xxx.xxx,xx Euro</b>, die ausschließlich an den Bauträger überwiesen werden.<br>
+                                        Damit starten wir mit Kosten von <b>{{ (129000 + sampleproject.getGesamtKostenInklMwstByKurzname('IE'))|number_format(2, ',', '.') }} Euro</b>, die ausschließlich an den Bauträger überwiesen werden.<br>
                                         Und kommen zu ein paar Sachen, die direkt mit dem Handwerker vereinbart werden können:
                                     </span><br><br>
                                 <table width="100%">

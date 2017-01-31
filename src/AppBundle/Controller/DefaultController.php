@@ -22,8 +22,14 @@ class DefaultController extends Controller
         /** @var User $user */
         $user = $this->getUser();
 
+
+        $projektRepo = $this->getDoctrine()->getRepository('AppBundle:Projekt');
+        /** @var Projekt $projekt */
+        $sampleprojekt = $projektRepo->find(1);
+
         if (!is_object($user) || !$user instanceof UserInterface) {
-            return $this->render('default/display_index.html.twig');
+            return $this->render('default/display_index.html.twig',
+                array('sampleproject' =>$sampleprojekt ));
         }
 
         /** @var Person $person */
@@ -41,6 +47,7 @@ class DefaultController extends Controller
                     'projekte' => $projekte,
                     'numberOfProjects' => $numberOfProjects,
                     'lastOpenedProject' => $lastOpenedProject,
+                    'sampleproject' =>$sampleprojekt,
  //                   'meineRollen' => $person->getPersonenRollen(),
 //                    'headline' => 'Willkommen (zurück) ' . $person->getVorname() . '!',
                     'headline' => '# Projekte mit meiner Beteiligung',
