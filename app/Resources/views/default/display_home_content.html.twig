@@ -247,26 +247,45 @@
                                 <span style="font-size: 12px; font-weight: 200">
                                 <table width="100%">
                                     <tr style="border-bottom: solid 1px #cfcfcf">
-                                    <th>Titel</th>
-                                    <th>Einzelkosten</th>
-                                    <th>Anzahl</th>
-                                    <th>Kosten</th>
-                                    <th>Bemerkung</th>
+                                    <th><div align="left">Titel</div></th>
+                                    <th><div align="right">Einzelkosten</div></th>
+                                    <th><div align="right">Anzahl</div></th>
+                                    <th><div align="right">Kosten</div></th>
+                                    <th><div align="right"></div></th>
+                                    <th><div align="left">Bemerkung</div></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" colspan="5"><b>Haus</b></td>
                                     </tr>
                                     <tr>
                                         <td width="20%" align="left" style="vertical-align: top">Kataloghaus</td>
-                                        <td width="15%">129.000,00 Euro</td>
-                                        <td width="10%">1</td>
-                                        <td width="15%">129.000,00 Euro</td>
-                                        <td width="40%">Preis des Hauses, so wie er im Katalog steht</td>
+                                        <td width="10%" align="right">129.000,00 Euro</td>
+                                        <td width="5%" align="right">1</td>
+                                        <td width="10%" align="right">129.000,00 Euro</td>
+                                        <td width="5%" align="right"></td>
+                                        <td width="50%" align="left">Preis des Hauses, so wie er im Katalog steht</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" colspan="5"><b>Extras</b></td>
                                     </tr>
                                     {% for internalExtra in sampleproject.getRolleByTypKurzname('IE') %}
                                         <tr>
                                         <td width="20%" align="left">{{ internalExtra.getName }}</td>
-                                        <td width="15%" align="top">{{ internalExtra.getKostenIst|number_format(2, ',', '.') }} Euro </td>
-                                        <td width="10%">{{ internalExtra.getAnzahl}}</td>
-                                        <td width="15%">{{ (internalExtra.getKostenIst * internalExtra.getAnzahl)|number_format(2, ',', '.')}} Euro</td>
-                                        <td width="40%"></td>
+                                        <td width="15%" align="right">{{ internalExtra.getKostenIst|number_format(2, ',', '.') }} Euro </td>
+                                        <td width="5%" align="right">{{ internalExtra.getAnzahl}}</td>
+                                        <td width="10%" align="right">{{ (internalExtra.getKostenIst * internalExtra.getAnzahl)|number_format(2, ',', '.')}} Euro</td>
+                                        <td width="5%" align="right"></td>
+                                        <td width="50%" align="left"></td>
                                         </tr>
                                     {%  endfor %}
                                     {#<tr>#}
@@ -276,9 +295,15 @@
                                         {#<td width="15%">1.000,00 Euro</td>#}
                                         {#<td width="40%">Preis des Hauses, so wie er im Katalog steht</td>#}
                                     {#</tr>#}
+                                    <tr>
+                                        <td colspan="5">
+                                            <br>
+                                        </td>
+                                    </tr>
                                     <tr style="border-top: solid 1px #cfcfcf; border-bottom: double 1px #cfcfcf">
                                         <td width="20%" align="left" colspan="3"><b>Gesamt:</b></td>
-                                        <td width="15%" colspan="2" align="left"><b>{{ (129000 + sampleproject.getGesamtKostenInklMwstByKurzname('IE'))|number_format(2, ',', '.') }} Euro</b></td>
+                                        <td width="15%" colspan="1" align="right"><b>{{ (129000 + sampleproject.getGesamtKostenInklMwstByKurzname('IE'))|number_format(2, ',', '.') }} Euro</b></td>
+                                        <td colspan="2"></td>
                                     </tr>
                                 </table><br>
                                     <span style="font-size: 14px; font-weight: 200">
