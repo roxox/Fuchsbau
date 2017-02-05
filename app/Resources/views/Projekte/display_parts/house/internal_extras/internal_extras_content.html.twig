@@ -28,55 +28,139 @@
         </table>
 
         {% for group in projekt.getRollenGroups %}
-            {{ group.getName() }}
-        <div class="panel-group" id="accordion_{{ group.getId() }}" role="tablist" aria-multiselectable="true">
-
-            {% for extra in group.getRollen %}
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne{{ extra.getId() }}">
-                    <h5 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{ extra.getId() }}" aria-expanded="true" aria-controls="collapseOne_{{ extra.getId() }}">
-                            {{ extra.getName }}
-                        </a>
-                    </h5>
-                </div>
-                <div id="collapseOne_{{ extra.getId() }}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne_{{ extra.getId() }}">
-                    <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
+            <div class="container">
+            {#<div class="group_fx">#}
+            <div class="row group_fx">
+                <div class="col-lg-12">
+                    {{ group.getName() }}
                 </div>
             </div>
-            {% endfor %}
+            {#</div>#}
+            <div class="row group_heading_fx">
+                <div class="col-lg-4">
+                    Objekt
+                </div>
+                <div class="col-lg-2" align="right">
+                    Einzelpreis
+                </div>
+                <div class="col-lg-2" align="right">
+                    Anzahl und Einheit
+                </div>
+                <div class="col-lg-1">
+                    Status
+                </div>
+                <div class="col-lg-2" align="right">
+                    Kosten
+                </div>
+                <div class="col-lg-1">
+                </div>
+            </div></div>
+            <div class="panel-group" id="accordion_{{ group.getId() }}" role="tablist" aria-multiselectable="true">
 
-            {#<div class="panel panel-default">#}
+                {% for extra in group.getRollen %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne{{ extra.getId() }}">
+                            <h5 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseOne_{{ extra.getId() }}" aria-expanded="true"
+                                   aria-controls="collapseOne_{{ extra.getId() }}">
+
+                                    <div class="row">
+                                    <div class="col-lg-4">
+                                        {{ extra.getName }}
+                                    </div>
+                                    <div class="col-lg-2" align="right">
+                                        {% if extra.getKostenIst != null %}
+                                            {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                                        {% else %}
+                                            {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                                        {% endif %}
+                                        €
+                                        <span style="font-size: x-small">
+
+                                        {% if extra.mehrwertsteuer.isOhneMwSt %}
+                                            (MwSt. wird nicht angewendet)
+                                        {% else %}
+                                            (inkl. MwSt.)
+                                        {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-2" align="right">
+                                        {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
+                                    </div>
+                                    <div class="col-lg-1">
+                                        {% if extra.getKostenIst != null %}
+                                            Ist
+                                        {% else %}
+                                            Plan
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-lg-2" align="right">
+                                        {% if extra.getKostenIst != null %}
+                                            {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                                        {% else %}
+                                            {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                                        {% endif %}
+                                        €
+                                        <span style="font-size: x-small">
+
+                            {% if extra.mehrwertsteuer.isOhneMwSt %}
+                                (MwSt. wird nicht angewendet)
+                            {% else %}
+                                (inkl. MwSt.)
+                            {% endif %}
+                                </span>
+                                    </div>
+                                    <div class="col-lg-1">
+                                    </div>
+                                    </div>
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseOne_{{ extra.getId() }}" class="panel-collapse collapse out" role="tabpanel"
+                             aria-labelledby="headingOne_{{ extra.getId() }}">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it
+                                squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+                                craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+                                butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
+                                nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {#<div class="panel panel-default">#}
                 {#<div class="panel-heading" role="tab" id="headingTwo">#}
-                    {#<h4 class="panel-title">#}
-                        {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseTwo_{{ group.getId() }}">#}
-                            {#Collapsible Group Item #2#}
-                        {#</a>#}
-                    {#</h4>#}
+                {#<h4 class="panel-title">#}
+                {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseTwo_{{ group.getId() }}">#}
+                {#Collapsible Group Item #2#}
+                {#</a>#}
+                {#</h4>#}
                 {#</div>#}
                 {#<div id="collapseTwo_{{ group.getId() }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_{{ group.getId() }}">#}
-                    {#<div class="panel-body">#}
-                        {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
-                    {#</div>#}
+                {#<div class="panel-body">#}
+                {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
                 {#</div>#}
-            {#</div>#}
-            {#<div class="panel panel-default">#}
+                {#</div>#}
+                {#</div>#}
+                {#<div class="panel panel-default">#}
                 {#<div class="panel-heading" role="tab" id="headingThree_{{ group.getId() }}">#}
-                    {#<h4 class="panel-title">#}
-                        {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseThree_{{ group.getId() }}">#}
-                            {#Collapsible Group Item #3#}
-                        {#</a>#}
-                    {#</h4>#}
+                {#<h4 class="panel-title">#}
+                {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseThree_{{ group.getId() }}">#}
+                {#Collapsible Group Item #3#}
+                {#</a>#}
+                {#</h4>#}
                 {#</div>#}
                 {#<div id="collapseThree_{{ group.getId() }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_{{ group.getId() }}">#}
-                    {#<div class="panel-body">#}
-                        {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
-                    {#</div>#}
+                {#<div class="panel-body">#}
+                {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
                 {#</div>#}
-            {#</div>#}
-        </div>
+                {#</div>#}
+                {#</div>#}
+            </div>
         {% endfor %}
         {% for group in projekt.getRollenGroups %}
         <table class="table table-condensed" style="border-top: solid 1px #dbdbdb">
