@@ -18,6 +18,7 @@ use AppBundle\Entity\PersonTyp;
 use AppBundle\Entity\PrivatGeschaeft;
 use AppBundle\Entity\Projekt;
 use AppBundle\Entity\Rolle;
+use AppBundle\Entity\RollenGroup;
 use AppBundle\Entity\Rolletyp;
 use AppBundle\Entity\Telefonnummer;
 use AppBundle\Entity\TelefonTyp;
@@ -100,8 +101,8 @@ class LoadUserData implements FixtureInterface
         $manager->persist($einheit);
         $einheit = new Einheit('m³', 'Kubikmeter');
         $manager->persist($einheit);
-        $einheit = new Einheit('Stück', 'Stück');
-        $manager->persist($einheit);
+        $einheitStueck = new Einheit('Stück', 'Stück');
+        $manager->persist($einheitStueck);
         $einheit = new Einheit('Tag', 'Tag');
         $manager->persist($einheit);
         $einheit = new Einheit('Woche', 'Woche');
@@ -144,7 +145,6 @@ class LoadUserData implements FixtureInterface
         $manager->persist($rolletypAussenanlagen);
 
 //        Beispielprojekt
-
         $sampleprojekt = new Projekt();
         $sampleprojekt->setName('Beispiel Fuchsbau');
         $sampleprojekt->setEinladungscode('xxx');
@@ -286,16 +286,27 @@ class LoadUserData implements FixtureInterface
 
         ];
 
+
+
+        $rollenGroup = new RollenGroup();
+        $rollenGroup->setName('interne Extras');
+        $rollenGroup->setProjekt($sampleprojekt);
+        $manager->persist($rollenGroup);
+
         foreach (array_values($interneExtras) as $i => $name) {
             $internesExtra = new Rolle();
             $internesExtra->setName($name);
             $internesExtra->setRolletyp($rolletypInternExtra);
             $internesExtra->setMehrwertsteuer($mwst19inkl);
+            $internesExtra->setKostenPlan($interneExtrasKosten[$i]);
             $internesExtra->setKostenIst($interneExtrasKosten[$i]);
             $internesExtra->setProjekt($sampleprojekt);
             $internesExtra->setAnzahl($interneExtrasAnzahl[$i]);
+            $internesExtra->setEinheit($einheitStueck);
+            $internesExtra->setRollenGroup($rollenGroup);
             $manager->persist($internesExtra);
         }
+
 
 
         ########

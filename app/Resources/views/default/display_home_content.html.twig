@@ -275,26 +275,27 @@
                                             <br>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td align="left" colspan="5"><b>Extras</b></td>
-                                    </tr>
-                                    {% for internalExtra in sampleproject.getRolleByTypKurzname('IE') %}
+                                    {% for group in sampleproject.getRollenGroups %}
+
                                         <tr>
-                                        <td width="20%" align="left">{{ internalExtra.getName }}</td>
-                                        <td width="15%" align="right">{{ internalExtra.getKostenIst|number_format(2, ',', '.') }} Euro </td>
-                                        <td width="5%" align="right">{{ internalExtra.getAnzahl}}</td>
-                                        <td width="10%" align="right">{{ (internalExtra.getKostenIst * internalExtra.getAnzahl)|number_format(2, ',', '.')}} Euro</td>
-                                        <td width="5%" align="right"></td>
-                                        <td width="50%" align="left"></td>
+                                        <td width="20%" align="left" colspan="6"><b>{{ group.getName }}</b></td>
                                         </tr>
+                                        {% for internalExtra in group.getRollen %}
+                                        <tr>
+                                    <td width="20%" align="left">{{ internalExtra.getName }}</td>
+                                    <td width="15%" align="right">{{ internalExtra.getKostenIst|number_format(2, ',', '.') }} Euro </td>
+                                    <td width="5%" align="right">{{ internalExtra.getAnzahl}}</td>
+                                    <td width="10%" align="right">{{ (internalExtra.getKostenIst * internalExtra.getAnzahl)|number_format(2, ',', '.')}} Euro</td>
+                                    <td width="5%" align="right"></td>
+                                    <td width="50%" align="left"></td>
+                                    </tr>
                                     {%  endfor %}
-                                    {#<tr>#}
-                                        {#<td width="20%" align="left">Bodentiefe Fenster</td>#}
-                                        {#<td width="15%" align="top">1.000,00 Euro</td>#}
-                                        {#<td width="10%">5</td>#}
-                                        {#<td width="15%">1.000,00 Euro</td>#}
-                                        {#<td width="40%">Preis des Hauses, so wie er im Katalog steht</td>#}
-                                    {#</tr>#}
+                                        <tr>
+                                        <td colspan="6">
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    {%  endfor %}
                                     <tr>
                                         <td colspan="5">
                                             <br>

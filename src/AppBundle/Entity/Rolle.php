@@ -37,6 +37,14 @@ class Rolle extends AbstractBasicEntity
     private $projekt;
 
     /**
+     * @var RollenGroup
+     *
+     * @ORM\ManyToOne(targetEntity="RollenGroup", inversedBy="rollen", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="rollen_group_id", referencedColumnName="id", onDelete="set null")
+     */
+    private $rollenGroup;
+
+    /**
      * @var Rolletyp
      * @ORM\ManyToOne(targetEntity="Rolletyp")
      */
@@ -167,6 +175,25 @@ class Rolle extends AbstractBasicEntity
         $this->projekt = $projekt;
         if (!$projekt->hasRolle($this)) {
             $projekt->addRolle($this);
+        }
+    }
+
+    /**
+     * @return RollenGroup
+     */
+    public function getRollenGroup()
+    {
+        return $this->rollenGroup;
+    }
+
+    /**
+     * @param RollenGroup $rollenGroup
+     */
+    public function setRollenGroup($rollenGroup)
+    {
+        $this->rollenGroup = $rollenGroup;
+        if (!$rollenGroup->hasRolle($this)) {
+            $rollenGroup->addRolle($this);
         }
     }
 

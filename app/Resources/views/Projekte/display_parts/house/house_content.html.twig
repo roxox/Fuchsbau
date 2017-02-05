@@ -13,11 +13,12 @@
     <br>
 
 </div>
+<div align="center" style="font-weight: 200">
 Hier gibt es nun die nötigten Infos wie <span style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem Traumhaus. Desweiteren
 wird hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den jeweiligen
 Detailansichten können Elemente hinzugefügt werden, dort habe ich auch praktische Beispiele aufgelistet, so dass
 sich die Nutzung von selbst erklären sollte.
-
+</div>
 <br><br>
 {# Collapsable div #}
 <div class="collapse in" id="collapseHaus">
@@ -53,7 +54,7 @@ sich die Nutzung von selbst erklären sollte.
             {% include "Projekte/display_parts/house/internal_extras/internal_extras_content.html.twig" %}
 
             {# external extras #}
-            {% include "Projekte/display_parts/house/external_extras/external_extras_content.html.twig" %}
+            {#{% include "Projekte/display_parts/house/external_extras/external_extras_content.html.twig" %}#}
 
             {# work #}
             {% include "Projekte/display_parts/house/work/work_content.html.twig" %}

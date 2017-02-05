@@ -41,15 +41,12 @@ class DefaultController extends Controller
             /** @var Projekt $projekt */
             $lastOpenedProject = $user->getLastOpenedProject();
 
-
             return $this->render('default/display_index.html.twig',
                 array('person' => $person,
                     'projekte' => $projekte,
                     'numberOfProjects' => $numberOfProjects,
                     'lastOpenedProject' => $lastOpenedProject,
                     'sampleproject' =>$sampleprojekt,
- //                   'meineRollen' => $person->getPersonenRollen(),
-//                    'headline' => 'Willkommen (zurück) ' . $person->getVorname() . '!',
                     'headline' => '# Projekte mit meiner Beteiligung',
                     'user' => $user));
         } else {

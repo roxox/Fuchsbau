@@ -3,8 +3,17 @@
         style="font-weight: 200; font-size: 14px">
         <table class="table table-condensed" style="border-top: hidden">
             <tr style="border-bottom: hidden">
-                <th colspan="5" style="font-weight: 400; font-size: 18px" >Interne Extrakosten</th>
-                <td align="right">
+                <th colspan="7" style="font-weight: 400; font-size: 18px">Weitere Hauskosten und Extras</th>
+            </tr>
+            <tr>
+                <td colspan="7" align="center" style="font-weight: 200; border: hidden">
+                    Die weiteren Kosten werden hier überwiegend durch Extras dargestellt, die unmittelbar mit dem Haus
+                    zu tun haben. Z.B. wäre ein solches Extra weitere Steckdosen, die zum einen (wahrscheinlich) beim
+                    Bauträger mitbestellt werden können, oder aber direkt mit dem Elektriker vereinbart werden.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" align="right">
 
                     <!-- Trigger the modal with a button -->
                     <a class="btn btn-link-fx-greyred btn-xs"
@@ -12,10 +21,18 @@
                        data-toggle="modal"
                        data-target="#addInternalExtraPopup"
                        role="button">
-                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Neues internes Extra </a>
+                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Neues
+                        internes Extra </a>
                 </td>
             </tr>
-
+        </table>
+        {% for group in projekt.getRollenGroups %}
+        <table class="table table-condensed" style="border-top: solid 1px #dbdbdb">
+            <tr style="border-bottom: double 1px #cfcfcf; background-color: #f6f6f6">
+                <th colspan="7" style="font-size: 14px; font-weight: 400">
+                    {{ group.getName() }}
+                </th>
+            </tr>
             <tr style="border-bottom: solid 1px #cfcfcf">
                 <th style="width: 21%">
                     Objekt
@@ -35,58 +52,27 @@
                 </th>
                 <th style="width: 14%">
 
-                    {#<span style="font-size: x-small">  inkl. MwSt.<br>(ohne Unterpunkte)</span>#}
                 </th>
                 <th style="width: 4%"></th>
             </tr>
-            {% for internalExtra in projekt.getRolleByTypKurzname('IE') %}
+            {% for internalExtra in group.getRollen %}
+                {#{% for internalExtra in projekt.getRolleByTypKurzname('IE') %}#}
+                {#{% if internalExtra.parent == false %}#}
+                <tr id="extra_{{ internalExtra.getId() }}">
+                    <td style="width: 20%">
 
-                {% if internalExtra.parent == false %}
-                    <tr style="border: hidden">
-                        <td style="width: 20%">
-
-                            <a class="btn btn-linkfx btn-xs"
-                               style="font-weight: 400; font-size: 12px"
-                               href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
-                               role="button">{{ internalExtra.getName }}
-                            </a>
-                        </td>
-                        <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
-                            {% if internalExtra.getKostenIst != null %}
-                                {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenIst) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
-                            {%  else %}
-                                {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
-                            {% endif %}
-                            €
-                            <span style="font-size: x-small">
-
-                            {% if internalExtra.mehrwertsteuer.isOhneMwSt %}
-                                (MwSt. wird nicht angewendet)
-                            {% else %}
-                                (inkl. MwSt.)
-                            {% endif %}
-                                </span>
-
-                        </td>
-                        <td align="right" style="width: 5%; font-weight: 200; font-size: 12px">
-                            {{ internalExtra.getAnzahl }} {{ internalExtra.getEinheit.getBezeichnung }}
-                        </td>
-                        <td style="width: 5%" align="center">
-                            {% if internalExtra.getKostenIst != null %}
-                                Ist
-                            {%  else %}
-                                Plan
-                            {% endif %}
-
-                        </td>
-                        <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
-                            {% if internalExtra.getKostenIst != null %}
+                            <span style="font-weight: 200; font-size: 12px">
+                                {{ internalExtra.getName }}
+                            </span>
+                    </td>
+                    <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
+                        {% if internalExtra.getKostenIst != null %}
                             {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenIst) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
-                            {%  else %}
+                        {% else %}
                             {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
-                            {% endif %}
-                            €
-                            <span style="font-size: x-small">
+                        {% endif %}
+                        €
+                        <span style="font-size: x-small">
 
                             {% if internalExtra.mehrwertsteuer.isOhneMwSt %}
                                 (MwSt. wird nicht angewendet)
@@ -95,29 +81,155 @@
                             {% endif %}
                                 </span>
 
-                        </td>
-                        <td colspan="2" align="right">
-                            <a class="btn btn-link-fx-greyred btn-xs"
-                               href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"
-                               role="button">
-                                <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                                Details
-                            </a>
-                            <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </td>
+                    <td align="right" style="width: 5%; font-weight: 200; font-size: 12px">
+                        {{ internalExtra.getAnzahl }} {{ internalExtra.getEinheit.getBezeichnung }}
+                    </td>
+                    <td style="width: 5%" align="center">
+                        {% if internalExtra.getKostenIst != null %}
+                            Ist
+                        {% else %}
+                            Plan
+                        {% endif %}
 
-                            </button>
-                        </td>
-                    </tr>
-                {% endif %}
+                    </td>
+                    <td style="width: 15%; font-weight: 200; font-size: 12px" align="right">
+                        {% if internalExtra.getKostenIst != null %}
+                            {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenIst) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
+                        {% else %}
+                            {{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}
+                        {% endif %}
+                        €
+                        <span style="font-size: x-small">
+
+                            {% if internalExtra.mehrwertsteuer.isOhneMwSt %}
+                                (MwSt. wird nicht angewendet)
+                            {% else %}
+                                (inkl. MwSt.)
+                            {% endif %}
+                                </span>
+
+                    </td>
+                    <td colspan="2" align="right">
+                        {#<a class="btn btn-link-fx-greyred btn-xs"#}
+                        {#href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"#}
+                        {#role="button">#}
+                        {#<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#}
+                        {#Details#}
+                        {#</a>#}
+                        <button type="button" class="btn btn-link-fx-greyred btn-xs" data-toggle="collapse"
+                                data-target="#xxx_{{ internalExtra.getId() }}"><span
+                                    class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> Details
+                        </button>
+
+                        <button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            Löschen
+                        </button>
+                        {#<button type="button" class="btn btn-link-fx-redred_inversed btn-xs" aria-label="Left Align">#}
+                        {#<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>#}
+                        {#Löschen#}
+                        {#</button>#}
+                    </td>
+                </tr>
+                <tr id="xxx_{{ internalExtra.getId() }}" class="collapse {{ 1==2 ? 'in' : 'out' }}">
+                    <td colspan="7">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                        enim ad minim
+                                        veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat.
+                                        <a class="btn btn-link-fx-greyred btn-xs"
+                                           href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"
+                                           data-toggle="modal"
+                                           data-target="#addInternalExtraPopup"
+                                           role="button">
+                                        <span class="glyphicon glyphicon-plus" style="font-size: 10px"
+                                              aria-hidden="true"></span> Neues internes Extra </a>
+                                    </div>
+                                <td>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                                        enim ad minim
+                                        veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat.
+                                        <a class="btn btn-link-fx-greyred btn-xs"
+                                           href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"
+                                           data-toggle="modal"
+                                           data-target="#addInternalExtraPopup"
+                                           role="button">
+                                        <span class="glyphicon glyphicon-plus" style="font-size: 10px"
+                                              aria-hidden="true"></span> Neues internes Extra </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                {#{% endif %}#}
             {% endfor %}
-            {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
-                {% set disabled = "true" %}
-            {% else %}
-                {% set disabled = "false" %}
-            {% endif %}
+            {% endfor %}
+        </table>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Collapsible Group 1</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                            Collapsible Group 2</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                            Collapsible Group 3</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
+            {% set disabled = "true" %}
+        {% else %}
+            {% set disabled = "false" %}
+        {% endif %}
+        <table>
             <tr style="border: hidden">
-                <td colspan="3" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
+                <td colspan="4" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
                 <td colspan="1" style="font-weight: 400" align="right">
                     {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
                         +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
@@ -127,15 +239,15 @@
                     {% endif %}</td>
                 <td align="right">
                     {#<a class="btn btn-link-fx-greyred btn-xs"#}
-                       {#href="#"#}
-                       {#aria-disabled="true"#}
-                       {#role="button"#}
-                            {#{% if projekt.getRolleByTypKurzname('IE')|length < 1 %}#}
-                                {#disabled#}
-                            {#{% endif %}#}
+                    {#href="#"#}
+                    {#aria-disabled="true"#}
+                    {#role="button"#}
+                    {#{% if projekt.getRolleByTypKurzname('IE')|length < 1 %}#}
+                    {#disabled#}
+                    {#{% endif %}#}
                     {#>#}
-                        {#<span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist#}
-                        {#Vergleich </a>#}
+                    {#<span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist#}
+                    {#Vergleich </a>#}
                 </td>
             </tr>
         </table>

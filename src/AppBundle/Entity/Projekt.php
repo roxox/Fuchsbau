@@ -22,10 +22,16 @@ class Projekt extends AbstractBasicEntity
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Rolle", inversedBy="projekte", cascade={"remove", "persist"})
-     * @ORM\JoinTable(name="projekte_rollen")
+     * @ORM\OneToMany(targetEntity="Rolle", mappedBy="projekt", cascade={"remove", "persist"})
      */
     private $rollen;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="RollenGroup", mappedBy="projekt", cascade={"remove", "persist"})
+     */
+    private $rollenGroups;
 
     /**
      * @var ArrayCollection
@@ -80,6 +86,7 @@ class Projekt extends AbstractBasicEntity
     public function __construct()
     {
         $this->rollen = new ArrayCollection();
+        $this->rollenGroups = new ArrayCollection();
         $this->firmen = new ArrayCollection();
         $this->personen = new ArrayCollection();
         $this->users = new ArrayCollection();
@@ -129,7 +136,7 @@ class Projekt extends AbstractBasicEntity
         return array_unique(array_merge([], $personenArr));
     }
 
-    public function getRolleByTypKurzname(string $kurzname)
+    public function getRolleByTypKurzname($kurzname)
     {
         $rolleArr = [];
         foreach ($this->getRollen() as $rolle) {
@@ -141,7 +148,7 @@ class Projekt extends AbstractBasicEntity
         return $rolleArr;
     }
 
-    public function getGesamtKostenByKurzname(string $kurzname)
+    public function getGesamtKostenByKurzname($kurzname)
     {
         $rollen = $this->getRolleByTypKurzname($kurzname);
         $gesamt = 0;
@@ -152,7 +159,7 @@ class Projekt extends AbstractBasicEntity
         return $gesamt;
     }
 
-    public function getGesamtKostenInklMwstByKurzname(string $kurzname)
+    public function getGesamtKostenInklMwstByKurzname($kurzname)
     {
         $rollen = $this->getRolleByTypKurzname($kurzname);
         $gesamt = 0;
@@ -167,7 +174,7 @@ class Projekt extends AbstractBasicEntity
         return $gesamt;
     }
 
-    public function getGesamtKostenExklMwstByKurzname(string $kurzname)
+    public function getGesamtKostenExklMwstByKurzname($kurzname)
     {
         $rollen = $this->getRolleByTypKurzname($kurzname);
         $gesamt = 0;
@@ -261,7 +268,36 @@ class Projekt extends AbstractBasicEntity
     }
 
     /**
-     * @return ArrayCollection
+     * @return array|RollenGroup[]
+     */
+    public function getRollenGroups()
+    {
+        return $this->rollenGroups->toArray();
+    }
+
+    /**
+     * @param RollenGroup $rollenGroup
+     * @return self
+     */
+    public function addRollenGroup(RollenGroup $rollenGroup)
+    {
+        $this->rollenGroups->add($rollenGroup);
+        $rollenGroup->setProjekt($this);
+
+        return $this;
+    }
+
+    /**
+     * @param RollenGroup $rollenGroup
+     * @return bool
+     */
+    public function hasRollenGroup(RollenGroup $rollenGroup)
+    {
+        return $this->rollenGroups->contains($rollenGroup);
+    }
+
+    /**
+     * @return array|User[]
      */
     public function getUsers()
     {
