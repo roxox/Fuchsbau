@@ -1,83 +1,86 @@
-<tr>
-    <td colspan="7"
-        style="font-weight: 200; font-size: 14px">
-        <table class="table table-condensed" style="border-top: hidden">
-            <tr style="border-bottom: hidden">
-                <th colspan="7" style="font-weight: 400; font-size: 18px">Weitere Hauskosten und Extras</th>
-            </tr>
-            <tr>
-                <td colspan="7" align="center" style="font-weight: 200; border: hidden">
-                    Die weiteren Kosten werden hier überwiegend durch Extras dargestellt, die unmittelbar mit dem Haus
-                    zu tun haben. Z.B. wäre ein solches Extra weitere Steckdosen, die zum einen (wahrscheinlich) beim
-                    Bauträger mitbestellt werden können, oder aber direkt mit dem Elektriker vereinbart werden.
-                </td>
-            </tr>
-            <tr>
-                <td colspan="7" align="right">
+<table class="table table-condensed" style="border-top: hidden">
+    <tr style="border-bottom: hidden">
+        <th colspan="7" style="font-weight: 400; font-size: 18px">Weitere Hauskosten und Extras</th>
+    </tr>
+    <tr>
+        <td colspan="7" align="center" style="font-weight: 200; border: hidden">
+            Die weiteren Kosten werden hier überwiegend durch Extras dargestellt, die unmittelbar mit dem Haus
+            zu tun haben. Z.B. wäre ein solches Extra weitere Steckdosen, die zum einen (wahrscheinlich) beim
+            Bauträger mitbestellt werden können, oder aber direkt mit dem Elektriker vereinbart werden.
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7" align="right">
 
-                    <!-- Trigger the modal with a button -->
-                    <a class="btn btn-link-fx-greyred btn-xs"
-                       href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"
-                       data-toggle="modal"
-                       data-target="#addInternalExtraPopup"
-                       role="button">
-                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Neues
-                        internes Extra </a>
-                </td>
-            </tr>
-        </table>
+            <!-- Trigger the modal with a button -->
+            <a class="btn btn-link-fx-greyred btn-xs"
+               href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"
+               data-toggle="modal"
+               data-target="#addInternalExtraPopup"
+               role="button">
+                <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Neues
+                internes Extra </a>
+        </td>
+    </tr>
+</table>
 
-        {% for group in projekt.getRollenGroups %}
-        <div class="container">
-            {#<div class="group_fx">#}
-            <div class="row group_fx">
-                <div class="col-lg-12">
-                    {{ group.getName() }}
-                </div>
-            </div>
-            {#</div>#}
-            <div class="row group_heading_fx">
-                <div class="col-lg-4">
-                    Objekt
-                </div>
-                <div class="col-lg-2" align="right">
-                    Einzelpreis
-                </div>
-                <div class="col-lg-2" align="right">
-                    Anzahl und Einheit
-                </div>
-                <div class="col-lg-1">
-                    Status
-                </div>
-                <div class="col-lg-2" align="right">
-                    Kosten
-                </div>
-                <div class="col-lg-1">
-                </div>
-            </div>
+{% for group in projekt.getRollenGroups %}
+<div class="container">
+    {#<div class="group_fx">#}
+    <div class="row group_fx">
+        <div class="col-lg-10">
+            {{ group.getName() }} [enthält 13 Elemente]
         </div>
-        <div class="panel-group" id="accordion_{{ group.getId() }}" role="tablist" aria-multiselectable="true">
+        <div class="col-lg-2" align="right">
 
-            {% for extra in group.getRollen %}
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne{{ extra.getId() }}">
-                    <h5 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion"
-                           href="#collapseOne_{{ extra.getId() }}" aria-expanded="true"
-                           aria-controls="collapseOne_{{ extra.getId() }}">
 
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    {{ extra.getName }}
-                                </div>
-                                <div class="col-lg-2" align="right">
-                                    {% if extra.getKostenIst != null %}
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    {% else %}
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    {% endif %}
-                                    €
-                                    <span style="font-size: x-small">
+        </div>
+    </div>
+    {#</div>#}
+    <div class="row group_heading_fx">
+        <div class="col-lg-4">
+            Objekt
+        </div>
+        <div class="col-lg-2" align="right">
+            Einzelpreis
+        </div>
+        <div class="col-lg-2" align="right">
+            Anzahl und Einheit
+        </div>
+        <div class="col-lg-1">
+            Status
+        </div>
+        <div class="col-lg-2" align="right">
+            Kosten
+        </div>
+        <div class="col-lg-1">
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group" id="accordion_{{ group.getId() }}" role="tablist" aria-multiselectable="true">
+
+    {% for extra in group.getRollen %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne{{ extra.getId() }}">
+            <h5 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                   href="#extra_{{ extra.getId() }}" aria-expanded="true"
+                   aria-controls="extra_{{ extra.getId() }}">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {{ extra.getName }}
+                        </div>
+                        <div class="col-lg-2" align="right">
+                            {% if extra.getKostenIst != null %}
+                                {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            {% else %}
+                                {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            {% endif %}
+                            €
+                            <span style="font-size: x-small">
 
                                         {% if extra.mehrwertsteuer.isOhneMwSt %}
                                             (MwSt. wird nicht angewendet)
@@ -85,25 +88,25 @@
                                             (inkl. MwSt.)
                                         {% endif %}
                                         </span>
-                                </div>
-                                <div class="col-lg-2" align="right">
-                                    {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
-                                </div>
-                                <div class="col-lg-1">
-                                    {% if extra.getKostenIst != null %}
-                                        Ist
-                                    {% else %}
-                                        Plan
-                                    {% endif %}
-                                </div>
-                                <div class="col-lg-2" align="right">
-                                    {% if extra.getKostenIst != null %}
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    {% else %}
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    {% endif %}
-                                    €
-                                    <span style="font-size: x-small">
+                        </div>
+                        <div class="col-lg-2" align="right">
+                            {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
+                        </div>
+                        <div class="col-lg-1">
+                            {% if extra.getKostenIst != null %}
+                                Ist
+                            {% else %}
+                                Plan
+                            {% endif %}
+                        </div>
+                        <div class="col-lg-2" align="right">
+                            {% if extra.getKostenIst != null %}
+                                {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            {% else %}
+                                {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            {% endif %}
+                            €
+                            <span style="font-size: x-small">
 
                             {% if extra.mehrwertsteuer.isOhneMwSt %}
                                 (MwSt. wird nicht angewendet)
@@ -111,402 +114,215 @@
                                 (inkl. MwSt.)
                             {% endif %}
                                 </span>
-                                </div>
-                                <div class="col-lg-1" align="right">
-                                </div>
-                            </div>
-                        </a>
-                    </h5>
-                </div>
-                <div id="collapseOne_{{ extra.getId() }}" class="panel-collapse collapse out" role="tabpanel"
-                     aria-labelledby="headingOne_{{ extra.getId() }}">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-0">
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-2" align="left">
-                                        <b>Details zu: </b> {{ extra.getName() }}
-                                    </div>
-                                    <div class="col-lg-2" align="right">
-                                        <b>Beschreibung</b> (wenn nötig)<b>:</b>
-                                    </div>
-                                    <div class="col-lg-6" align="left">
-                                        Hier könnte jede Menge Beschriebung zu dem Punkt stehen. Manchmal ist es gar
-                                        nicht notwendig, aber hin und wieder kann man mal einen Kommentar gebrauchen.
-                                    </div>
-                                    <div class="col-lg-2" align="right">
-                                        <button type="button" class="btn btn-link-fx-greyred btn-xs"
-                                                data-toggle="collapse"
-                                                data-target="#xxx_{{ extra.getId() }}"><span
-                                                    class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                                            Bearbeiten
-                                        </button>
-                                        <button type="button" class="btn btn-link-fx-redred btn-xs"
-                                                aria-label="Left Align">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        </button>
-
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-lg-3" align="left">
-                                        <b>Kostenverantwortliche Firma:</b>
-                                    </div>
-                                    <div class="col-lg-9" align="left">
-                                        Team Massivhaus
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-lg-3" align="left">
-                                        <b>Ausführende Firma</b> (wenn vorhanden)<b>:</b>
-                                    </div>
-                                    <div class="col-lg-9" align="left">
-                                        Thies Friederichs Baugeschäft GmbH
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-lg-5" align="left">
-                                        <b>Kosten</b>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Status</span>
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        <span style="font-weight: 500">Einzelpreis</span>
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        <span style="font-weight: 500">Anzahl</span>
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        <span style="font-weight: 500">Kosten</span>
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        <span style="font-weight: 500">MwSt</span>
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Bezahlt am</span>
-                                    </div>
-                                    <div class="col-lg-2" align="left">
-                                        <span style="font-weight: 500">Rg.-Nummer</span>
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Kommentar</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        Plan
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        19%
-                                    </div>
-                                    <div class="col-lg-1" align="center" style="background-color: #f1f1f1">
-                                        <br>
-                                    </div>
-                                    <div class="col-lg-2" align="center" style="background-color: #F1F1F1">
-                                        <br>
-                                    </div>
-                                    <div class="col-lg-4" align="right">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        Ist
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
-                                    </div>
-                                    <div class="col-lg-1" align="right">
-                                        19%
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        25.02.2017
-                                    </div>
-                                    <div class="col-lg-2" align="right">
-                                        2017-02-05-317
-                                    </div>
-                                    <div class="col-lg-4" align="right">
-
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-lg-12" align="left">
-                                        <b>Termine:</b>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Status</span>
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Start</span>
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Ende</span>
-                                    </div>
-                                    <div class="col-lg-2" align="center">
-                                        <span style="font-weight: 500">Dauer in Tagen (errechnet)</span>
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        <span style="font-weight: 500">Kommentar</span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        Plan
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        01.01.2017
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        31.01.2017
-                                    </div>
-                                    <div class="col-lg-2" align="center">
-                                        22/31 (exkl. / inkl. Wochenende)
-                                    </div>
-                                    <div class="col-lg-7" align="left">
-                                        -
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-1" align="left">
-                                        Ist
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        01.01.2017
-                                    </div>
-                                    <div class="col-lg-1" align="left">
-                                        31.01.2017
-                                    </div>
-                                    <div class="col-lg-2" align="center">
-                                        22/31 (exkl. / inkl. Wochenende)
-                                    </div>
-                                    <div class="col-lg-7" align="left">
-                                        -
-                                    </div>
-                                </div>
-                                <div class="row" style="border-bottom: solid 1px #d7d7d7">
-                                    <div class="col-lg-12" align="left">
-                                        <br>
-                                    </div>
-                                </div>
-
-                            </div>
+                        </div>
+                        <div class="col-lg-1" align="right">
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                <div class="container">
-                    <div class="row group_fx">
-                        <div class="col-lg-12">
-                            Gesamtkosten für Gruppe {{ group.getName() }}:
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {#{% for group in projekt.getRollenGroups %}#}
-            {#<table class="table table-condensed" style="border-top: solid 1px #dbdbdb">#}
-            {#<tr style="border-bottom: double 1px #cfcfcf; background-color: #f6f6f6">#}
-            {#<th colspan="7" style="font-size: 14px; font-weight: 400">#}
-            {#{{ group.getName() }}#}
-            {#</th>#}
-            {#</tr>#}
-            {#<tr style="border-bottom: solid 1px #cfcfcf">#}
-            {#<th style="width: 21%">#}
-            {#Objekt#}
-            {#</th>#}
-            {#<th style="width: 18%">#}
-            {#<div align="right">Einzelpreis</div>#}
-            {#</th>#}
-            {#<th style="width: 18%">#}
-            {#<div align="right">Anzahl und Einheit</div>#}
-            {#</th>#}
-            {#<th style="width: 3%">#}
-            {#<div align="center">Status</div>#}
-
-            {#</th>#}
-            {#<th style="width: 10%" align="right">#}
-            {#<div align="right">Kosten</div>#}
-            {#</th>#}
-            {#<th style="width: 14%">#}
-
-            {#</th>#}
-            {#<th style="width: 4%"></th>#}
-            {#</tr>#}
-            {#{% for internalExtra in group.getRollen %}#}
-            {#{% for internalExtra in projekt.getRolleByTypKurzname('IE') %}#}
-            {#{% if internalExtra.parent == false %}#}
-            {#<tr id="extra_{{ internalExtra.getId() }}">#}
-            {#<td style="width: 20%">#}
-
-            {#<span style="font-weight: 200; font-size: 12px">#}
-            {#{{ internalExtra.getName }}#}
-            {#</span>#}
-            {#</td>#}
-            {#<td style="width: 15%; font-weight: 200; font-size: 12px" align="right">#}
-            {#{% if internalExtra.getKostenIst != null %}#}
-            {#{{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenIst) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}#}
-            {#{% else %}#}
-            {#{{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}#}
-            {#{% endif %}#}
-            {#€#}
-            {#<span style="font-size: x-small">#}
-
-            {#{% if internalExtra.mehrwertsteuer.isOhneMwSt %}#}
-            {#(MwSt. wird nicht angewendet)#}
-            {#{% else %}#}
-            {#(inkl. MwSt.)#}
-            {#{% endif %}#}
-            {#</span>#}
-
-            {#</td>#}
-            {#<td align="right" style="width: 5%; font-weight: 200; font-size: 12px">#}
-            {#{{ internalExtra.getAnzahl }} {{ internalExtra.getEinheit.getBezeichnung }}#}
-            {#</td>#}
-            {#<td style="width: 5%" align="center">#}
-            {#{% if internalExtra.getKostenIst != null %}#}
-            {#Ist#}
-            {#{% else %}#}
-            {#Plan#}
-            {#{% endif %}#}
-
-            {#</td>#}
-            {#<td style="width: 15%; font-weight: 200; font-size: 12px" align="right">#}
-            {#{% if internalExtra.getKostenIst != null %}#}
-            {#{{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenIst) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}#}
-            {#{% else %}#}
-            {#{{ (internalExtra.getKostenInklMwsT(internalExtra.getKostenPlan) * internalExtra.getAnzahl)|number_format(2, ',', '.') }}#}
-            {#{% endif %}#}
-            {#€#}
-            {#<span style="font-size: x-small">#}
-
-            {#{% if internalExtra.mehrwertsteuer.isOhneMwSt %}#}
-            {#(MwSt. wird nicht angewendet)#}
-            {#{% else %}#}
-            {#(inkl. MwSt.)#}
-            {#{% endif %}#}
-            {#</span>#}
-
-            {#</td>#}
-            {#<td colspan="2" align="right">#}
-            {#<a class="btn btn-link-fx-greyred btn-xs"#}
-            {#href="{{ path('display_internal_extra', {'projektId': projekt.getId(), 'internalExtraId': internalExtra.getId()}) }}"#}
-            {#role="button">#}
-            {#<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>#}
-            {#Details#}
-            {#</a>#}
-            {#<button type="button" class="btn btn-link-fx-greyred btn-xs" data-toggle="collapse"#}
-            {#data-target="#xxx_{{ internalExtra.getId() }}"><span#}
-            {#class="glyphicon glyphicon-align-justify" aria-hidden="true"></span> Details#}
-            {#</button>#}
-
-            {#<button type="button" class="btn btn-link-fx-redred btn-xs" aria-label="Left Align">#}
-            {#<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>#}
-            {#Löschen#}
-            {#</button>#}
-            {#<button type="button" class="btn btn-link-fx-redred_inversed btn-xs" aria-label="Left Align">#}
-            {#<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>#}
-            {#Löschen#}
-            {#</button>#}
-            {#</td>#}
-            {#</tr>#}
-            {#<tr id="xxx_{{ internalExtra.getId() }}" class="collapse {{ 1==2 ? 'in' : 'out' }}">#}
-            {#<td colspan="7">#}
-            {#<table>#}
-            {#<tr>#}
-            {#<td>#}
-            {#<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit,#}
-            {#sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut#}
-            {#enim ad minim#}
-            {#veniam,#}
-            {#quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo#}
-            {#consequat.#}
-            {#<a class="btn btn-link-fx-greyred btn-xs"#}
-            {#href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"#}
-            {#data-toggle="modal"#}
-            {#data-target="#addInternalExtraPopup"#}
-            {#role="button">#}
-            {#<span class="glyphicon glyphicon-plus" style="font-size: 10px"#}
-            {#aria-hidden="true"></span> Neues internes Extra </a>#}
-            {#</div>#}
-            {#<td>#}
-            {#<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit,#}
-            {#sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut#}
-            {#enim ad minim#}
-            {#veniam,#}
-            {#quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo#}
-            {#consequat.#}
-            {#<a class="btn btn-link-fx-greyred btn-xs"#}
-            {#href="{{ path('add_rolle_to_current_projekt', {'projektId': projekt.getId(), 'rolletyp': 'xxx'}) }}"#}
-            {#data-toggle="modal"#}
-            {#data-target="#addInternalExtraPopup"#}
-            {#role="button">#}
-            {#<span class="glyphicon glyphicon-plus" style="font-size: 10px"#}
-            {#aria-hidden="true"></span> Neues internes Extra </a>#}
-            {#</div>#}
-            {#</td>#}
-            {#</tr>#}
-            {#</table>#}
-            {#</td>#}
-            {#</tr>#}
-            {#{% endif %}#}
-            {#{% endfor %}#}
-            {#{% endfor %}#}
-            {#</table>#}
-
-            {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
-                {% set disabled = "true" %}
-            {% else %}
-                {% set disabled = "false" %}
-            {% endif %}
-            <table>
-                <tr style="border: hidden">
-                    <td colspan="4" style="width: 60%; font-weight: 400">Summe interne Extrakosten:</td>
-                    <td colspan="1" style="font-weight: 400" align="right">
-                        {% if projekt.getGesamtKostenInklMwstByKurzname('IE') != 0 %}
-                            +{{ projekt.getGesamtKostenInklMwstByKurzname('IE')|number_format(2, ',', '.') }} €
-                            <span style="font-size: x-small">(inkl. MwSt.)</span>
-                        {% else %}
-                            <div align="right">Es sind keine weiteren Kosten angefallen</div>
-                        {% endif %}</td>
-                    <td align="right">
-                        {#<a class="btn btn-link-fx-greyred btn-xs"#}
-                        {#href="#"#}
-                        {#aria-disabled="true"#}
-                        {#role="button"#}
-                        {#{% if projekt.getRolleByTypKurzname('IE')|length < 1 %}#}
-                        {#disabled#}
-                        {#{% endif %}#}
-                        {#>#}
-                        {#<span class="glyphicon glyphicon-refresh" aria-hidden="true" disabled="true"></span> Plan / Ist#}
-                        {#Vergleich </a>#}
-                    </td>
-                </tr>
-            </table>
+                </a>
+            </h5>
         </div>
+        <div id="extra_{{ extra.getId() }}" class="panel-collapse collapse out" role="tabpanel"
+             aria-labelledby="headingOne_{{ extra.getId() }}">
+            <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-2" align="left">
+                                <b>Details zu: </b> {{ extra.getName() }}
+                            </div>
+                            <div class="col-lg-2" align="right">
+                                <b>Beschreibung</b> (wenn nötig)<b>:</b>
+                            </div>
+                            <div class="col-lg-6" align="left">
+                                Hier könnte jede Menge Beschriebung zu dem Punkt stehen. Manchmal ist es gar
+                                nicht notwendig, aber hin und wieder kann man mal einen Kommentar gebrauchen.
+                            </div>
+                            <div class="col-lg-2" align="right">
+                                <button type="button" class="btn btn-link-fx-greyred btn-xs"
+                                        data-toggle="collapse"
+                                        data-target="#xxx_{{ extra.getId() }}"><span
+                                            class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                    Bearbeiten
+                                </button>
+                                <button type="button" class="btn btn-link-fx-redred btn-xs"
+                                        aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3" align="left">
+                                <b>Kostenverantwortliche Firma:</b>
+                            </div>
+                            <div class="col-lg-9" align="left">
+                                Team Massivhaus
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3" align="left">
+                                <b>Ausführende Firma</b> (wenn vorhanden)<b>:</b>
+                            </div>
+                            <div class="col-lg-9" align="left">
+                                Thies Friederichs Baugeschäft GmbH
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-5" align="left">
+                                <b>Kosten</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Status</span>
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                <span style="font-weight: 500">Einzelpreis</span>
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                <span style="font-weight: 500">Anzahl</span>
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                <span style="font-weight: 500">Kosten</span>
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                <span style="font-weight: 500">MwSt</span>
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Bezahlt am</span>
+                            </div>
+                            <div class="col-lg-2" align="left">
+                                <span style="font-weight: 500">Rg.-Nummer</span>
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Kommentar</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                Plan
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                19%
+                            </div>
+                            <div class="col-lg-1" align="center" style="background-color: #f1f1f1">
+                                <br>
+                            </div>
+                            <div class="col-lg-2" align="center" style="background-color: #F1F1F1">
+                                <br>
+                            </div>
+                            <div class="col-lg-4" align="right">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                Ist
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ (extra.getKostenInklMwsT(extra.getKostenIst) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ extra.getAnzahl }} {{ extra.getEinheit.getBezeichnung }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                {{ (extra.getKostenInklMwsT(extra.getKostenPlan) * extra.getAnzahl)|number_format(2, ',', '.') }}
+                            </div>
+                            <div class="col-lg-1" align="right">
+                                19%
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                25.02.2017
+                            </div>
+                            <div class="col-lg-2" align="right">
+                                2017-02-05-317
+                            </div>
+                            <div class="col-lg-4" align="right">
+
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-12" align="left">
+                                <b>Termine:</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Status</span>
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Start</span>
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Ende</span>
+                            </div>
+                            <div class="col-lg-2" align="center">
+                                <span style="font-weight: 500">Dauer in Tagen (errechnet)</span>
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                <span style="font-weight: 500">Kommentar</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                Plan
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                01.01.2017
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                31.01.2017
+                            </div>
+                            <div class="col-lg-2" align="center">
+                                22/31 (exkl. / inkl. Wochenende)
+                            </div>
+                            <div class="col-lg-7" align="left">
+                                -
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1" align="left">
+                                Ist
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                01.01.2017
+                            </div>
+                            <div class="col-lg-1" align="left">
+                                31.01.2017
+                            </div>
+                            <div class="col-lg-2" align="center">
+                                22/31 (exkl. / inkl. Wochenende)
+                            </div>
+                            <div class="col-lg-7" align="left">
+                                -
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        {#<div class="group_fx">#}
+        <div class="row group_footer_fx">
+            <div class="col-lg-12">
+                Zwischensummer für {{ group.getName() }}
+            </div>
+        </div>
+        {#</div>#}
+    </div>
+    <br>
+    {% endfor %}
+
+</div>

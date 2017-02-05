@@ -8,6 +8,7 @@ use AppBundle\Entity\Haus;
 use AppBundle\Entity\Person;
 use AppBundle\Entity\Projekt;
 use AppBundle\Entity\Rolle;
+use AppBundle\Entity\RollenGroup;
 use AppBundle\Entity\Rolletyp;
 use AppBundle\Entity\User;
 use AppBundle\Repository\RolletypRepository;
@@ -409,6 +410,10 @@ class ProjekteController extends Controller
         if ($internalExtra->getMehrwertsteuer() === null) {
             $internalExtra->setMehrwertsteuer($mehrwertsteuer);
         }
+        $rollenGroupRepo = $this->getDoctrine()->getRepository('AppBundle:RollenGroup');
+        /** @var RollenGroup $rollenGroupRepo */
+        $rollenGroup = $rollenGroupRepo->findOneBy(array('name' => 'Sanitär Extras'));
+        $internalExtra->setRollenGroup($rollenGroup);
         $form = $this->createForm(NewInternalExtraType::class, $internalExtra);
 
         // 2) handle the submit (will only happen on POST)
@@ -421,11 +426,24 @@ class ProjekteController extends Controller
             $em->flush();
 
 
-            return $this->redirectToRoute(
-                'display_internal_extra',
-                array('projektId' => $projektId, 'internalExtraId' => $internalExtra->getId())
+            return $this->render(
+                'Projekte/display_project.html.twig',
+                array('adressen' => $person->getAdressen(),
+                    'projekt' => $projekt,
+                    'meineRollen' => $person->getPersonenRollenByProjekt($projekt),
+                    'telefonnummern' => $person->getTelefonnummern(),
+                    'emails' => $person->getEmailadressen(),
+                    'person' => $person,
+                    'headline' => "# Projektinformationen",
+//                    'gesamtkosten' => $gesamtkosten,
+//                    'interneKosten' => $kostenInterneExtras,
+//                    'hauskosten' => $hauskosten,
+//                    'boldheadline' => "für: " . $currentProjekt->getName(),
+                    'user' => $user)
             );
         }
+
+
 
         return $this->render(
             'Projekte/display_parts/house/internal_extras/popups/popup_internal_extra_new_content.html.twig',

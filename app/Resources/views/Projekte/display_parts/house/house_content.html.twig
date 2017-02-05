@@ -14,10 +14,11 @@
 
 </div>
 <div align="center" style="font-weight: 200">
-Hier gibt es nun die nötigten Infos wie <span style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem Traumhaus. Desweiteren
-wird hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den jeweiligen
-Detailansichten können Elemente hinzugefügt werden, dort habe ich auch praktische Beispiele aufgelistet, so dass
-sich die Nutzung von selbst erklären sollte.
+    Hier gibt es nun die nötigten Infos wie <span style="font-weight: 400">Haustyp, Größe, Preis, etc.</span> zu dem
+    Traumhaus. Desweiteren
+    wird hier eine Liste sämtlicher Extras aufgeführt und eine Liste der auszuführenden Tätigkeiten. In den jeweiligen
+    Detailansichten können Elemente hinzugefügt werden, dort habe ich auch praktische Beispiele aufgelistet, so dass
+    sich die Nutzung von selbst erklären sollte.
 </div>
 <br><br>
 {# Collapsable div #}
@@ -51,7 +52,12 @@ sich die Nutzung von selbst erklären sollte.
             {% include "Projekte/display_parts/house/house_base/house_base_content.html.twig" %}
 
             {# internal extras #}
-            {% include "Projekte/display_parts/house/internal_extras/internal_extras_content.html.twig" %}
+            <tr>
+            <td colspan="7"
+                style="font-weight: 200; font-size: 14px">
+                {% include "Projekte/display_parts/house/internal_extras/internal_extras_content.html.twig" %}
+            </td>
+            </tr>
 
             {# external extras #}
             {#{% include "Projekte/display_parts/house/external_extras/external_extras_content.html.twig" %}#}
@@ -85,7 +91,8 @@ sich die Nutzung von selbst erklären sollte.
                        data-toggle="modal"
                        data-target="#addHausPopup"
                        role="button">
-                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Haus hinzufügen </a>
+                        <span class="glyphicon glyphicon-plus" style="font-size: 10px" aria-hidden="true"></span> Haus
+                        hinzufügen </a>
                     <br><br>
                 </td>
             </tr>
