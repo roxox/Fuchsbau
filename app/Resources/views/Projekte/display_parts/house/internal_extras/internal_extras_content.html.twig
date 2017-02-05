@@ -26,6 +26,58 @@
                 </td>
             </tr>
         </table>
+
+        {% for group in projekt.getRollenGroups %}
+            {{ group.getName() }}
+        <div class="panel-group" id="accordion_{{ group.getId() }}" role="tablist" aria-multiselectable="true">
+
+            {% for extra in group.getRollen %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne{{ extra.getId() }}">
+                    <h5 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_{{ extra.getId() }}" aria-expanded="true" aria-controls="collapseOne_{{ extra.getId() }}">
+                            {{ extra.getName }}
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseOne_{{ extra.getId() }}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne_{{ extra.getId() }}">
+                    <div class="panel-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {#<div class="panel panel-default">#}
+                {#<div class="panel-heading" role="tab" id="headingTwo">#}
+                    {#<h4 class="panel-title">#}
+                        {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseTwo_{{ group.getId() }}">#}
+                            {#Collapsible Group Item #2#}
+                        {#</a>#}
+                    {#</h4>#}
+                {#</div>#}
+                {#<div id="collapseTwo_{{ group.getId() }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_{{ group.getId() }}">#}
+                    {#<div class="panel-body">#}
+                        {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="panel panel-default">#}
+                {#<div class="panel-heading" role="tab" id="headingThree_{{ group.getId() }}">#}
+                    {#<h4 class="panel-title">#}
+                        {#<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree_{{ group.getId() }}" aria-expanded="false" aria-controls="collapseThree_{{ group.getId() }}">#}
+                            {#Collapsible Group Item #3#}
+                        {#</a>#}
+                    {#</h4>#}
+                {#</div>#}
+                {#<div id="collapseThree_{{ group.getId() }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_{{ group.getId() }}">#}
+                    {#<div class="panel-body">#}
+                        {#Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        </div>
+        {% endfor %}
         {% for group in projekt.getRollenGroups %}
         <table class="table table-condensed" style="border-top: solid 1px #dbdbdb">
             <tr style="border-bottom: double 1px #cfcfcf; background-color: #f6f6f6">
@@ -175,53 +227,7 @@
             {% endfor %}
             {% endfor %}
         </table>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            Collapsible Group 1</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                            Collapsible Group 2</a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                            Collapsible Group 3</a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat.
-                    </div>
-                </div>
-            </div>
-        </div>
+
         {% if projekt.getRolleByTypKurzname('IE')|length < 1 %}
             {% set disabled = "true" %}
         {% else %}
