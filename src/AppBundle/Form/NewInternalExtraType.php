@@ -35,6 +35,16 @@ class NewInternalExtraType extends AbstractType
                     'attr' => ['data-cat-form-read-only' => false]
                 ]
             )
+            ->add('rollenGroup', EntityType::class,
+                [
+                    'class' => 'AppBundle:RollenGroup',
+                    'choice_label' => 'name',
+                    'label' => 'Gruppierung',
+                    'placeholder' => '',
+                    'required' => false,
+                    'attr' => ['data-cat-form-read-only' => true]
+                ]
+            )
             ->add(
                 'mehrwertsteuer',
                 EntityType::class,

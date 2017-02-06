@@ -412,7 +412,7 @@ class ProjekteController extends Controller
         }
         $rollenGroupRepo = $this->getDoctrine()->getRepository('AppBundle:RollenGroup');
         /** @var RollenGroup $rollenGroupRepo */
-        $rollenGroup = $rollenGroupRepo->findOneBy(array('name' => 'Sanitär Extras'));
+        $rollenGroup = $rollenGroupRepo->findOneBy(array('name' => 'ohne Gruppierung'));
         $internalExtra->setRollenGroup($rollenGroup);
         $form = $this->createForm(NewInternalExtraType::class, $internalExtra);
 
