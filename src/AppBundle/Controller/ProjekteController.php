@@ -85,6 +85,7 @@ class ProjekteController extends Controller
             'Projekte/display_project.html.twig',
             array('adressen' => $person->getAdressen(),
                 'projekt' => $currentProjekt,
+                'rolle' => null,
                 'meineRollen' => $person->getPersonenRollenByProjekt($currentProjekt),
                 'telefonnummern' => $person->getTelefonnummern(),
                 'emails' => $person->getEmailadressen(),
@@ -429,16 +430,13 @@ class ProjekteController extends Controller
             return $this->render(
                 'Projekte/display_project.html.twig',
                 array('adressen' => $person->getAdressen(),
+                    'rolle' => $internalExtra,
                     'projekt' => $projekt,
                     'meineRollen' => $person->getPersonenRollenByProjekt($projekt),
                     'telefonnummern' => $person->getTelefonnummern(),
                     'emails' => $person->getEmailadressen(),
                     'person' => $person,
                     'headline' => "# Projektinformationen",
-//                    'gesamtkosten' => $gesamtkosten,
-//                    'interneKosten' => $kostenInterneExtras,
-//                    'hauskosten' => $hauskosten,
-//                    'boldheadline' => "für: " . $currentProjekt->getName(),
                     'user' => $user)
             );
         }
