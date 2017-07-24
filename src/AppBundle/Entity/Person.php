@@ -1,7 +1,6 @@
 <?php
 
 namespace AppBundle\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -103,6 +102,7 @@ class Person extends AbstractBasicEntity
     ##############
 
     /**
+     * @param Projekt $projekt
      * @return Rolle[]|array
      */
     public function getPersonenRollenByProjekt(Projekt $projekt){
@@ -120,16 +120,16 @@ class Person extends AbstractBasicEntity
         return $rolleArr;
     }
 
-    public function getAlleRollenByProjekt(Projekt $projekt){
-        $rolleArr = [];
-        foreach ($this->firmen as $firma) {
-            /** @var Firma $firma */
-            foreach ($firma->getRollen() as $rolle) {
-                $rolleArr[] = $rolle;
-            }
-        }
-        return array_unique(array_merge([], ...$rolleArr));
-    }
+//    public function getAlleRollenByProjekt(Projekt $projekt){
+//        $rolleArr = [];
+//        foreach ($this->firmen as $firma) {
+//            /** @var Firma $firma */
+//            foreach ($firma->getRollen() as $rolle) {
+//                $rolleArr[] = $rolle;
+//            }
+//        }
+//        return array_unique(array_merge([], ...$rolleArr));
+//    }
 
     ###########################
     # Getter / Setter / Adder #
@@ -307,7 +307,7 @@ class Person extends AbstractBasicEntity
      */
     public function getFirmen()
     {
-        return $this->rollen->toArray();
+        return $this->firmen->toArray();
     }
 
     /**

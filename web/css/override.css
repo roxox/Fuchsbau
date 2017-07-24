@@ -12,8 +12,10 @@
 @font-face { font-family: 'Lobster';
     src: url('../../../Fuchsbau/web/misc/Lobster_1_4.otf') format('truetype'); }
 
+/*@font-face { font-family: 'CANDYINC';*/
+    /*src: url('../../../Fuchsbau/web/misc/CANDY___.otf') format('truetype'); }*/
 @font-face { font-family: 'CANDYINC';
-    src: url('../../../Fuchsbau/web/misc/CANDY___.otf') format('truetype'); }
+    src: url('/misc/CANDY___.otf') format('embedded-opentype'); }
 
 
 .navbar-form input, .form-inline input {
@@ -25,7 +27,7 @@
 }
 
 .subnav {
-    margin-top: 59px;
+    margin-top: 66px;
     top: 0px;
     z-index: 1020;
     background: rgba(217, 74, 55, 0.96);

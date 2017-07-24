@@ -26,13 +26,13 @@
     <br>
     <div align="center">
     <span style="font-weight: 200; font-size: 16px">Du bist aktuell an <b>
-            {% if numberOfProjects == 0 %}
-                keinem Projekt
-            {% elseif numberOfProjects == 1 %}
-                einem Projekt
-            {% else %}
-                {{ numberOfProjects }} Projekten
-            {% endif %}
+            {#{% if numberOfProjects == 0 %}#}
+                {#keinem Projekt#}
+            {#{% elseif numberOfProjects == 1 %}#}
+                {#einem Projekt#}
+            {#{% else %}#}
+                {#{{ numberOfProjects }} Projekten#}
+            {#{% endif %}#}
         </b> beteiligt, egal ob als Bauherr(in), Bauleiter, Handwerker oder nur als
         Beobachter. Proejktbesitzer können in dem geöffneten Projekt das Projekt löschen, alle anderen können das Projekt verlassen.
         </span>
@@ -100,6 +100,7 @@
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                             Projekt öffnen
                         </a>
+
 
 
                     </td>

@@ -2,48 +2,61 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\jsonContact;
-use AppBundle\Entity\Person;
-use AppBundle\Entity\Projekt;
+
 use AppBundle\Entity\User;
-use FOS\UserBundle\Model\UserInterface;
-use JsonMapper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class TestDefaultController extends Controller
 {
     /**
+     * @param Request $request
      * @Route("/testuser", name="testuser")
+     * @return Response
      */
     public function loginAction(Request $request)
     {
-        $echo = "test";
-        /** @var Response $response */
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
 
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        echo $request->getContent();
+        $decoded = json_decode($request->getContent(), true);
+        $username =  $decoded["username"];
+        $password =  $decoded["password"];
+
+
+
+        if (!$username || !$password) {
+            return 'login.input_missing';
+        }
 
         $user_manager = $this->get('fos_user.user_manager');
-                    if (!$request->request->has('username') || !$request->request->has('password')) {
-            return  new Response("hallo1");
-        }
-        
+
         /** @var User $user */
-        $user = $user_manager->findUserByUsernameOrEmail($request->request->get("username"));
+        $user = $user_manager->findUserByUsernameOrEmail($username);
         if ($user == null) {
-            return  new Response("hallo2");
+            return new Response("Wrong credentials");
         }
 
         $factory = $this->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
 
-        $bool = ($encoder->isPasswordValid($user->getPassword(), $request->request->get("password"), $user->getSalt())) ? true : false;
+        $bool = ($encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) ? true : false;
         if ($bool !== true) {
-            return  new Response("hallo3");
+            return 'login.invalid';
         }
 
-        return  new Response("hallo");
+        echo $serializer->serialize($user->getPerson(), 'json');
+
+        return  new Response($user->getEmail());
     }
 }

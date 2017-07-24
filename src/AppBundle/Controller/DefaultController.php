@@ -6,9 +6,11 @@ use AppBundle\Entity\Person;
 use AppBundle\Entity\Projekt;
 use AppBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class DefaultController extends Controller
