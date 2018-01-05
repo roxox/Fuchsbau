@@ -10,15 +10,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="/Fuchsbau/web/css/hoopies.css" rel="stylesheet">
     {#<link rel="icon" href="favicon.ico">#}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2"/>
+    {#<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2"/>#}
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="/Fuchsbau/web/css/all-stylesheet.css" rel="stylesheet">
+    {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">#}
+    {#<link href="/Fuchsbau/web/css/all-stylesheet.css" rel="stylesheet">#}
     <link href="/Fuchsbau/web/css/override.css" rel="stylesheet">
+    <link href="/Fuchsbau/web/css/hoopies.css" rel="stylesheet">
 
 
-    <title>{% block title %}Fuchsbau - Planung!{% endblock %}</title>
+    <title>{% block title %}Hoopies Advendskalender Rezepte{% endblock %}</title>
     <style type="text/css">
         @font-face { font-family: 'CANDYINC';
             src: url('/Fuchsbau/web/misc/CANDY___.otf') format('truetype'); }
@@ -26,9 +28,9 @@
 </head>
 <body>
 <div>
-    {% block topnav %}
-        {% include 'topnav.html.twig' %}
-    {% endblock %}
+    {#{% block topnav %}#}
+        {#{% include 'topnav.html.twig' %}#}
+    {#{% endblock %}#}
 </div>
 <br><br><br><br>
 
@@ -107,21 +109,5 @@
         {#</div>#}
     {#</div>#}
 {#</div>#}
-<div class="modal fade" id="loginPopup" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Email Adresse hinzufügen</h4>
-            </div>
-            <div class="modal-body">
-                <div class="text">
-                    Lade Formular
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>

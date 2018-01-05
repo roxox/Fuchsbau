@@ -17,6 +17,14 @@
 @font-face { font-family: 'CANDYINC';
     src: url('/misc/CANDY___.otf') format('embedded-opentype'); }
 
+html {
+    background: url(../../../Fuchsbau/web/img/background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
 
 .navbar-form input, .form-inline input {
     width: auto;
@@ -30,7 +38,7 @@
     margin-top: 66px;
     top: 0px;
     z-index: 1020;
-    background: rgba(217, 74, 55, 0.96);
+    background: rgba(148, 138, 84, 0.96);
     color: #fff;
     border-bottom: 2px solid #b6b6b6;
     padding: 2px 0px 0px 0px;

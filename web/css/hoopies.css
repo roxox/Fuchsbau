@@ -1,0 +1,69 @@
+html {
+background: url(../../../Fuchsbau/web/img/background.png) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background-attachment: fixed;
+}
+
+@font-face { font-family: 'Hello Kitty';
+    src: url('../../../Fuchsbau/web/misc/Hello_Kitty_Angel.ttf') format('truetype'); }
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+a:hover
+{
+    font-weight: bold;
+    color: #4c472b;
+}
+
+/* LINK FX BRIGHT*/
+.btn-linkfxbrt {
+    font-weight: 100;
+    color: #948a54;
+    cursor: pointer;
+    border-radius: 0;
+}
+
+.btn-linkfxbrt,
+.btn-linkfxbrt:active,
+.btn-linkfxbrt[disabled],
+fieldset[disabled] .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn-linkfxbrt,
+.btn-linkfxbrt:hover,
+.btn-linkfxbrt:focus,
+.btn-linkfxbrt:active {
+    border-color: #948a54;
+}
+
+.btn-linkfxbrt:hover,
+.btn-linkfxbrt:focus {
+    color: #ab453b;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.btn-linkfxbrt[disabled]:hover,
+fieldset[disabled] .btn-link:hover,
+.btn-linkfxbrt[disabled]:focus,
+fieldset[disabled] .btn-link:focus {
+    color: #999999;
+    text-decoration: none;
+}
